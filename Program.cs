@@ -1,9 +1,24 @@
+using Microsoft.EntityFrameworkCore;
+using Rocky.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+
+
+
+string? ConnectionString = builder.Configuration.GetConnectionString("Rockey");
+
+builder.Services.AddDbContext<ApplicationDBcontext>(options => options.UseSqlServer(ConnectionString));
+
+
+
 var app = builder.Build();
+
+
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
