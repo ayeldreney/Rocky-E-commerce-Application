@@ -8,17 +8,14 @@ namespace Rocky.Models
     {
 
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-
         [Required]
-        public string? Name { get; set; }
-
-        [DisplayName("DISPLAY ORDER")]
+        public string Name { get; set; }
+        [DisplayName("Display Order")]
         [Required]
-        [Range(1,int.MaxValue,ErrorMessage = "{0} out of Range")]
-        public int DisplayOrder { get; set; } 
- 
+        [Range(1, int.MaxValue, ErrorMessage = "Display Order for category must be greater than 0")]
+        public int DisplayOrder { get; set; }
+
 
 
 
