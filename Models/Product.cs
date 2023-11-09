@@ -6,6 +6,7 @@ namespace Rocky.Models
     public class Product
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
         [Required]
@@ -19,7 +20,7 @@ namespace Rocky.Models
         [Display(Name = "Category Type")]
         public int CategoryId { get; set; }
         [ForeignKey("CategoryId")]
-        public virtual Category Category { get; set; }
+        public virtual Category ? Category { get; set; }
 
 
 

@@ -5,6 +5,18 @@
       "PackagePath": "staticwebassets\\Rocky.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\Eldreney\\source\\repos\\Rocky\\Rocky\\wwwroot\\Images\\product\\7da97d6c-c409-48fa-8e4a-668fb8a7b124.jpg",
+      "PackagePath": "staticwebassets\\Images\\product\\7da97d6c-c409-48fa-8e4a-668fb8a7b124.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Eldreney\\source\\repos\\Rocky\\Rocky\\wwwroot\\Images\\product\\96492f30-386e-44ec-a9cb-034b0207ab92.jpg",
+      "PackagePath": "staticwebassets\\Images\\product\\96492f30-386e-44ec-a9cb-034b0207ab92.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Eldreney\\source\\repos\\Rocky\\Rocky\\wwwroot\\Images\\product\\cb4cb051-1d6a-45eb-b3f1-3305cca69ad7.jpg",
+      "PackagePath": "staticwebassets\\Images\\product\\cb4cb051-1d6a-45eb-b3f1-3305cca69ad7.jpg"
+    },
+    {
       "Id": "C:\\Users\\Eldreney\\source\\repos\\Rocky\\Rocky\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },

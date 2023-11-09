@@ -51,7 +51,7 @@ namespace Rocky.Controllers
 
             ProductViewModel productVM = new ProductViewModel()
             {
-                Product = new Product(),
+                Product = new Product() {Id=0},
                 CategorySelectList = _db.Category.Select(i => new SelectListItem
                 {
                     Text = i.Name,
@@ -87,7 +87,7 @@ namespace Rocky.Controllers
                 var files = HttpContext.Request.Form.Files;
                 string webRootPath = _webHostEnvironment.WebRootPath;
 
-                if (productVM.Product.Id == 0)
+                if (productVM.Product.Id != 0)
                 {
                     //Creating
                     string upload = webRootPath + WebConstants.ImagePath;
