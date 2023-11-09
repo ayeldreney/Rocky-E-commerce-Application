@@ -2,9 +2,12 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Rocky.Data;
-
+using Rocky.DTOs;
 using Rocky.Models;
 using Rocky.Models.ViewModels;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+using NuGet.Protocol;
 
 namespace Rocky.Controllers
 {
@@ -76,11 +79,9 @@ namespace Rocky.Controllers
         }
 
 
-
-
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult UpSert(ProductViewModel productVM)
+        public IActionResult UpSert(ProductDto productVM)
         {
             if (ModelState.IsValid)
             {
@@ -101,9 +102,20 @@ namespace Rocky.Controllers
 
                     productVM.Product.Image = fileName + extension;
 
-                    _db.Product.Add(productVM.Product);
-                }
-                else
+                    var newProd = new Product()
+                    {
+                        Id = productVM.Product.Id,
+                        Name = productVM.Product.Name,
+                        Description = productVM.Product.Description,
+                        Price = productVM.Product.Price,
+                        Image = productVM.Product.Image,
+                        CategoryId = productVM.Product.CategoryId,
+                    };
+		            _db.Product.Add(newProd);
+					_db.SaveChanges();
+					return RedirectToAction("Index");
+				}
+				else
                 {
                     //updating
                     var objFromDb = _db.Product.AsNoTracking().FirstOrDefault(u => u.Id == productVM.Product.Id);
@@ -132,18 +144,31 @@ namespace Rocky.Controllers
                     {
                         productVM.Product.Image = objFromDb.Image;
                     }
-                    _db.Product.Update(productVM.Product);
+					var newProd = new Product()
+					{
+						Id = productVM.Product.Id,
+						Name = productVM.Product.Name,
+						Description = productVM.Product.Description,
+						Price = productVM.Product.Price,
+						Image = productVM.Product.Image,
+						CategoryId = productVM.Product.CategoryId,
+					};
+					_db.Product.Update(newProd);
                 }
 
                 _db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            productVM.CategorySelectList = _db.Category.Select(i => new SelectListItem
-            {
-                Text = i.Name,
-                Value = i.Id.ToString()
-            });
-            return View(productVM);
+			ProductViewModel productvM = new ProductViewModel()
+			{
+				Product = new Product(),
+				CategorySelectList = _db.Category.Select(i => new SelectListItem
+				{
+					Text = i.Name,
+					Value = i.Id.ToString()
+				})
+			};
+			return View(productvM);
         }
 
         //GET - DELETE

@@ -9,65 +9,65 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Rocky
 build_property.RootNamespace = Rocky
-build_property.ProjectDir = C:\Users\Eldreney\source\repos\Rocky\Rocky\
+build_property.ProjectDir = E:\Project\Rocky-E-commerce-Application\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\Eldreney\source\repos\Rocky\Rocky
+build_property.MSBuildProjectDirectory = E:\Project\Rocky-E-commerce-Application
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/Eldreney/source/repos/Rocky/Rocky/Views/Category/Create.cshtml]
+[E:/Project/Rocky-E-commerce-Application/Views/Category/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Eldreney/source/repos/Rocky/Rocky/Views/Category/Delete.cshtml]
+[E:/Project/Rocky-E-commerce-Application/Views/Category/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Eldreney/source/repos/Rocky/Rocky/Views/Category/Edit.cshtml]
+[E:/Project/Rocky-E-commerce-Application/Views/Category/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Eldreney/source/repos/Rocky/Rocky/Views/Category/Index.cshtml]
+[E:/Project/Rocky-E-commerce-Application/Views/Category/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Eldreney/source/repos/Rocky/Rocky/Views/Home/Index.cshtml]
+[E:/Project/Rocky-E-commerce-Application/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Eldreney/source/repos/Rocky/Rocky/Views/Home/Privacy.cshtml]
+[E:/Project/Rocky-E-commerce-Application/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Eldreney/source/repos/Rocky/Rocky/Views/Product/Delete.cshtml]
+[E:/Project/Rocky-E-commerce-Application/Views/Product/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Eldreney/source/repos/Rocky/Rocky/Views/Product/Index.cshtml]
+[E:/Project/Rocky-E-commerce-Application/Views/Product/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Eldreney/source/repos/Rocky/Rocky/Views/Product/UpSert.cshtml]
+[E:/Project/Rocky-E-commerce-Application/Views/Product/UpSert.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxVcFNlcnQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Eldreney/source/repos/Rocky/Rocky/Views/Shared/Error.cshtml]
+[E:/Project/Rocky-E-commerce-Application/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Eldreney/source/repos/Rocky/Rocky/Views/Shared/_ValidationScriptsPartial.cshtml]
+[E:/Project/Rocky-E-commerce-Application/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Eldreney/source/repos/Rocky/Rocky/Views/_ViewImports.cshtml]
+[E:/Project/Rocky-E-commerce-Application/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Eldreney/source/repos/Rocky/Rocky/Views/_ViewStart.cshtml]
+[E:/Project/Rocky-E-commerce-Application/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Eldreney/source/repos/Rocky/Rocky/Views/Shared/_Layout.cshtml]
+[E:/Project/Rocky-E-commerce-Application/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-ek9lryqai4
