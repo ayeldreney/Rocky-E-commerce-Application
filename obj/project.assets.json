@@ -11109,19 +11109,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Eldreney\\.nuget\\packages\\": {}
+    "C:\\Users\\abdal\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Eldreney\\source\\repos\\Rocky\\Rocky\\Rocky.csproj",
+      "projectUniqueName": "E:\\Project\\Rocky-E-commerce-Application\\Rocky.csproj",
       "projectName": "Rocky",
-      "projectPath": "C:\\Users\\Eldreney\\source\\repos\\Rocky\\Rocky\\Rocky.csproj",
-      "packagesPath": "C:\\Users\\Eldreney\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Eldreney\\source\\repos\\Rocky\\Rocky\\obj\\",
+      "projectPath": "E:\\Project\\Rocky-E-commerce-Application\\Rocky.csproj",
+      "packagesPath": "C:\\Users\\abdal\\.nuget\\packages\\",
+      "outputPath": "E:\\Project\\Rocky-E-commerce-Application\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Eldreney\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\abdal\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -11129,8 +11134,9 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\sdk\\7.0.306\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
-        "https://api.nuget.org/v3/index.json": {}
+        "C:\\Program Files\\dotnet\\library-packs": {},
+        "https://api.nuget.org/v3/index.json": {},
+        "https://www.nuget.org/api/v2": {}
       },
       "frameworks": {
         "net6.0": {
@@ -11186,7 +11192,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.402\\RuntimeIdentifierGraph.json"
       }
     }
   }
