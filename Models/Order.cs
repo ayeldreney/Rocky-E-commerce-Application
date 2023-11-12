@@ -14,6 +14,6 @@ public class Order
 	[Timestamp]
 	public byte[] Timestamp { get; set; }
 
-	public virtual User User { get; set; }
+	public virtual AppUser User { get; set; }
 	public virtual IEnumerable<OrderLine> OrderLines { get; set; } = Enumerable.Empty<OrderLine>();
 }

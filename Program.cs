@@ -1,7 +1,11 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Rocky.Data;
+using Rocky.Helper;
 using Rocky.Models;
+using Rocky.Services;
+using System.Configuration;
 using System.Security.Claims;
 using System.Text;
 
@@ -36,13 +40,17 @@ builder.Services.AddAuthentication(options =>
 		ValidateAudience = true,
 	};
 });
+builder.Services.Configure<JWT>(builder.Configuration.GetSection("JWT"));
 
-builder.Services.AddIdentityCore<User>().AddEntityFrameworkStores<ApplicationDBcontext>();
+builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDBcontext>();
 
 builder.Services.AddAuthorization(options =>
 {
 	options.AddPolicy("AdminPolicy", p => p.RequireClaim(ClaimTypes.Role, "Admin"));
 });
+
+builder.Services.AddTransient<AuthService>();
+
 #endregion
 
 var app = builder.Build();
@@ -62,8 +70,9 @@ app.UseStaticFiles();
 app.UseRouting();
 
 #region Declare Using Authorization and Authentication 
-app.UseAuthorization();
+
 app.UseAuthentication();
+app.UseAuthorization();
 
 #endregion
 
