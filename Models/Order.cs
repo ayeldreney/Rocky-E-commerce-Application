@@ -12,7 +12,7 @@ public class Order
 	public int UserId { get; set; }
 
 	[Timestamp]
-	public required byte[] Timestamp { get; set; }
+	public byte[] Timestamp { get; set; }
 
 	public virtual User User { get; set; }
 	public virtual IEnumerable<OrderLine> OrderLines { get; set; } = Enumerable.Empty<OrderLine>();

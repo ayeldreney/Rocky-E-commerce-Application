@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Volga.Infrastructure.Enums;
 
 namespace Rocky.Models;
 
@@ -11,9 +10,6 @@ public class Cart
 
 	[Required, ForeignKey("User")]
 	public int UserId { get; set; }
-
-	[EnumDataType(typeof(CartStatus))]
-	public CartStatus Status { get; set; }
 
 	[Timestamp]
 	public int Timestamp { get; set; }
