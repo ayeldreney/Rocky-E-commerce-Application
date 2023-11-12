@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Rocky.Models;
+using Rocky.DTOs;
 
 namespace Rocky.Data;
 
-public class ApplicationDBcontext : IdentityDbContext<User>
+public class ApplicationDBcontext : IdentityDbContext<AppUser>
 {
 	public ApplicationDBcontext(DbContextOptions<ApplicationDBcontext> options):base(options) {}
 

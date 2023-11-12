@@ -16,5 +16,5 @@ public class Cart
 
 	public virtual IEnumerable<CartItem> Items { get; set; } = Enumerable.Empty<CartItem>();
 
-	public virtual User User { get; set; }
+	public virtual AppUser User { get; set; }
 }
