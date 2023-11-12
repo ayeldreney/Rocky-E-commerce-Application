@@ -21,8 +21,8 @@ namespace Rocky.Controllers
         public IActionResult Index()
         {
             HomeViewModel homeViewModel = new HomeViewModel() {
-                Products = _db.Product.Include(x => x.Category).ToList(),
-                Categories = _db.Category.ToList(), 
+                Products = _db.Products.Include(x => x.Category).ToList(),
+                Categories = _db.Categories.ToList(), 
             
             }; 
 

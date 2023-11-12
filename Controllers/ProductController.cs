@@ -24,7 +24,7 @@ namespace Rocky.Controllers
         public IActionResult Index()
         {
 
-            IEnumerable<Product> objList = _db.Product.Include(u => u.Category);
+            IEnumerable<Product> objList = _db.Products.Include(u => u.Category);
 
             //foreach(var obj in objList)
             //{
@@ -55,7 +55,7 @@ namespace Rocky.Controllers
             ProductViewModel productVM = new ProductViewModel()
             {
                 Product = new Product() {},
-                CategorySelectList = _db.Category.Select(i => new SelectListItem
+                CategorySelectList = _db.Categories.Select(i => new SelectListItem
                 {
                     Text = i.Name,
                     Value = i.Id.ToString()
@@ -69,7 +69,7 @@ namespace Rocky.Controllers
             }
             else
             {
-                productVM.Product = _db.Product.Find(id);
+                productVM.Product = _db.Products.Find(id);
                 if (productVM.Product == null)
                 {
                     return NotFound();
@@ -112,14 +112,14 @@ namespace Rocky.Controllers
                         Image = productVM.Product.Image,
                         CategoryId = productVM.Product.CategoryId,
                     };
-		            _db.Product.Add(newProd);
+		            _db.Products.Add(newProd);
 					_db.SaveChanges();
 					return RedirectToAction("Index");
 				}
 				else
                 {
                     //updating
-                    var objFromDb = _db.Product.AsNoTracking().FirstOrDefault(u => u.Id == productVM.Product.Id);
+                    var objFromDb = _db.Products.AsNoTracking().FirstOrDefault(u => u.Id == productVM.Product.Id);
 
                     if (files.Count > 0)
                     {
@@ -155,7 +155,7 @@ namespace Rocky.Controllers
 						Image = productVM.Product.Image,
 						CategoryId = productVM.Product.CategoryId,
 					};
-					_db.Product.Update(newProd);
+					_db.Products.Update(newProd);
                 }
 
                 _db.SaveChanges();
@@ -164,7 +164,7 @@ namespace Rocky.Controllers
 			ProductViewModel productvM = new ProductViewModel()
 			{
 				Product = new Product(),
-				CategorySelectList = _db.Category.Select(i => new SelectListItem
+				CategorySelectList = _db.Categories.Select(i => new SelectListItem
 				{
 					Text = i.Name,
 					Value = i.Id.ToString()
@@ -180,7 +180,7 @@ namespace Rocky.Controllers
             {
                 return NotFound();
             }
-            Product product = _db.Product.Include(u => u.Category).FirstOrDefault(u => u.Id == id);
+            Product product = _db.Products.Include(u => u.Category).FirstOrDefault(u => u.Id == id);
             //product.Category = _db.Category.Find(product.CategoryId);
             if (product == null)
             {
@@ -195,7 +195,7 @@ namespace Rocky.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeletePost(int? id)
         {
-            var obj = _db.Product.Find(id);
+            var obj = _db.Products.Find(id);
             if (obj == null)
             {
                 return NotFound();
@@ -210,7 +210,7 @@ namespace Rocky.Controllers
             }
 
 
-            _db.Product.Remove(obj);
+            _db.Products.Remove(obj);
             _db.SaveChanges();
             return RedirectToAction("Index");
 
