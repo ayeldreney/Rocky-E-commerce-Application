@@ -56,7 +56,7 @@ namespace Rocky.Controllers
                 return NotFound();  
             }
 
-            var obj = _context.Category.Find(id);
+            var obj = _context.Categories.Find(id);
 
             if (obj is null) {
                 return NotFound();
@@ -72,7 +72,7 @@ namespace Rocky.Controllers
         public IActionResult Edit(Category obj) {
 
             if (ModelState.IsValid) { 
-            _context.Category.Update(obj);
+            _context.Categories.Update(obj);
             _context.SaveChanges();
              return RedirectToAction("Index");    
             }
@@ -94,7 +94,7 @@ namespace Rocky.Controllers
                 return NotFound();
             }
 
-            var obj = _context.Category.Find(id);
+            var obj = _context.Categories.Find(id);
 
             if (obj is null)
             {
@@ -113,11 +113,11 @@ namespace Rocky.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeletePost(int? id)
         {
-            var obj = _context.Category.Find(id);
+            var obj = _context.Categories.Find(id);
          
             if(obj is null) return NotFound();  
 
-                _context.Category.Remove(obj);
+                _context.Categories.Remove(obj);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
           
