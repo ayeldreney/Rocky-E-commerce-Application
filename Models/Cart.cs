@@ -9,7 +9,7 @@ public class Cart
 	public int Id { get; set; }
 
 	[Required, ForeignKey("User")]
-	public int UserId { get; set; }
+	public string UserId { get; set; }
 
 	[Timestamp]
 	public int Timestamp { get; set; }
