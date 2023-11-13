@@ -1,0 +1,48 @@
+﻿@model LoginViewModel
+
+@{
+	ViewData["Title"] = "Login";
+	Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+<partial name="Breadcrumb" view-data="ViewData" render-mode="ServerPrerendered" />
+<main id="MainContent" class="content-for-layout">
+	<div class="login-page mt-5">
+		<div class="container">
+			<form asp-action="Login" class="login-form common-form mx-auto">
+				<div class="section-header mb-3">
+					<h2 class="section-heading text-center">Login</h2>
+				</div>
+				<div class="row">
+					<div asp-validation-summary="ModelOnly" class="col-12 text-danger"></div>
+				</div>
+				<div class="row">
+					<div class="col-12 my-2">
+						<div class="form-group">
+							<label asp-for="UserName" class="control-label"></label>
+							<input asp-for="UserName" class="form-control" />
+							<span asp-validation-for="UserName" class="text-danger"></span>
+						</div>
+					</div>
+					<div class="col-12 my-2">
+						<div class="form-group">
+							<label asp-for="Password" class="control-label"></label>
+							<input asp-for="Password" class="form-control" />
+							<span asp-validation-for="Password" class="text-danger"></span>
+						</div>
+					</div>
+					<div class="col-12 my-2">
+						<div class="form-check">
+							<input asp-for="RememberMe" class="form-check-input" />
+							<label asp-for="RememberMe" class="form-check-label"></label>
+						</div>
+					</div>
+					<div class="col-12 mt-3 my-2">
+						<a href="#" class="text_14">Forgot your password?</a>
+						<button type="submit" class="btn-primary d-block mt-4 btn-signin">SIGN IN</button>
+						<a rout href="@Url.Action("Register", "Account")" class="btn-secondary mt-2 btn-signin">CREATE AN ACCOUNT</a>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</main>
