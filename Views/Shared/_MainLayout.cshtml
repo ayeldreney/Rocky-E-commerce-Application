@@ -1,4 +1,10 @@
-﻿<!doctype html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<AppUser> UserManager
+@{
+	var currentUser = UserManager.GetUserAsync(User).Result;
+}
+
+<!doctype html>
 <html lang="en" class="no-js">
 
 <head>
@@ -15,11 +21,15 @@
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
 		  rel="stylesheet">
 	<!-- all css -->
-	<!--<link href="https://cdn.jsdelivr.xyz/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">-->
 	<link rel="stylesheet" href="~/assets/css/theme-default.css">
-	<link rel="stylesheet" href="~/assets/css/vendor.css">
-	@* <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"> *@
-	<link rel="stylesheet" href="~/assets/css/style.css">
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="~/lib/cn/css/slick.css">
+	<link rel="stylesheet" href="~/lib/cn/css/lineawesome.css">
+	<link rel="stylesheet" href="~/lib/cn/css/aos.css">
+	<link rel="stylesheet" href="~/lib/cn/css/animate.css">
+	<link rel="stylesheet" href="~/lib/cn/css/fancybox.css" />
+ 	<link rel="stylesheet" href="~/assets/css/style.css" />
+	<link rel="stylesheet" href="~/css/site.css" />
 </head>
 
 <body>
@@ -44,7 +54,7 @@
 						<div class="announcement-meta-wrapper d-flex align-items-center justify-content-end">
 							<div class="announcement-meta d-flex align-items-center">
 								<a class="announcement-login announcement-text text-white" href="@Url.Action("Login", "Account")">
-									<svg class="icon icon-user" width="10" height="11" viewBox="0 0 10 11" fill="none"
+									<svg class="icon icon-user" width="24" height="24" viewBox="0 0 10 11" fill="none"
 										 xmlns="http://www.w3.org/2000/svg">
 										<path d="M5 0C3.07227 0 1.5 1.57227 1.5 3.5C1.5 4.70508 2.11523 5.77539 3.04688 6.40625C1.26367 7.17188 0 8.94141 0 11H1C1 8.78516 2.78516 7 5 7C7.21484 7 9 8.78516 9 11H10C10 8.94141 8.73633 7.17188 6.95312 6.40625C7.88477 5.77539 8.5 4.70508 8.5 3.5C8.5 1.57227 6.92773 0 5 0ZM5 1C6.38672 1 7.5 2.11328 7.5 3.5C7.5 4.88672 6.38672 6 5 6C3.61328 6 2.5 4.88672 2.5 3.5C2.5 2.11328 3.61328 1 5 1Z"
 											  fill="#fff" />
@@ -111,6 +121,7 @@
 			</div>
 		</div>
 		<!-- announcement bar end -->
+
 		<!-- header start -->
 		<header class="sticky-header border-btm-black header-1">
 			<div class="header-bottom">
@@ -126,25 +137,25 @@
 						<div class="col-lg-6 d-lg-block d-none">
 							<nav class="site-navigation">
 								<ul class="main-menu list-unstyled justify-content-center">
-									<li class="menu-list-item nav-item has-dropdown active">
+									<li class="menu-list-item nav-item has-dropdown @((string?)ViewData["Active"] == "Index" ? "active" : "")">
 										<div class="mega-menu-header">
-											<a class="nav-link" href="index.html">
+											<a class="nav-link" href="@Url.Action("Index", "Home")">
 												Home
 											</a>
 										</div>
 									</li>
 
-									<li class="menu-list-item nav-item has-megamenu">
+									<li class="menu-list-item nav-item has-megamenu @((string?)ViewData["Active"] == "Login" ? "active" : "")">
 										<div class="mega-menu-header">
-											<a href="login.html" class="nav-link" href="@Url.Action("Login", "Account")">
+											<a class="nav-link" href="@Url.Action("Login", "Account")">
 												Login
 											</a>
 										</div>
 									</li>
 
-									<li class="menu-list-item nav-item has-dropdown">
+									<li class="menu-list-item nav-item has-dropdown @((string?)ViewData["Active"] == "Register" ? "active" : "")">
 										<div class="mega-menu-header">
-											<a class="nav-link" href="register.html">Register</a>
+											<a class="nav-link" href="@Url.Action("Register", "Account")">Register</a>
 
 										</div>
 									</li>
@@ -199,6 +210,32 @@
 										<line x1="3" y1="18" x2="21" y2="18"></line>
 									</svg>
 								</a>
+								@if (this.IsAuthenticated() && currentUser != null)
+								{
+									<div class="header-action-item ms-4 d-none d-lg-block dropdown">
+										<a href="#" class="" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+											<img class="icon" src="~/assets/img/icon/account.svg" />
+										</a>
+										<ul class="dropdown-menu dropdown-menu-account">
+											<p class="text-center p-3">Hello, @currentUser.FirstName</p>
+											<li><a class="dropdown-item p-3" href="@Url.Action("Profile", "Account")">Your Account</a></li>
+											<li><a class="dropdown-item p-3" href="@Url.Action("Index", "Orders")">Your Orders</a></li>
+											<li><a class="dropdown-item p-3" href="@Url.Action("Index", "Cart")">Your Cart</a></li>
+											<li><a class="dropdown-item p-3" href="@Url.Action("Index", "Wishlist")">Your Wishlist</a></li>
+											<li><a class="dropdown-item p-3" href="@Url.Action("Logout", "Account")">Sign Out</a></li>
+										</ul>
+									</div>
+								} else {
+									<div class="header-action-item ms-4 d-none d-lg-block dropdown">
+										<a href="@Url.Action("Login", "Account")" class="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+											<img class="icon" src="~/assets/img/icon/account.svg" />
+										</a>
+										<ul class="dropdown-menu dropdown-menu-account">
+											<li><a class="dropdown-item p-3" href="@Url.Action("Login", "Account")">Login</a></li>
+											<li><a class="dropdown-item p-3" href="@Url.Action("Register", "Account")">Register</a></li>
+										</ul>
+									</div>
+								}
 							</div>
 						</div>
 					</div>
@@ -398,9 +435,12 @@
 		<partial name="_MainDrawers" />
 
 		<!-- all js -->
-		<script src="~/assets/js/vendor.js"></script>
+		<script src="~/lib/jquery/dist/jquery.min.js"></script>
+		<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+		<script src="~/lib/cn/js/slick.min.js"></script>
+		<script src="~/lib/cn/js/aos.min.js"></script>
+		<script src="~/lib/cn/js/fancybox.umd.js"></script>
 		<script src="~/assets/js/main.js"></script>
-		@* <script src="https://cdn.jsdelivr.xyz/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script> *@
 		@await RenderSectionAsync("Scripts", required: false)
 	</div>
 </body>

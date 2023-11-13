@@ -8,6 +8,6 @@ public class AuthDto
     public List<string> Roles { get; set; } = new List<string>();
     public string Token { get; set; } = string.Empty;
     public DateTime ExpiresOn { get; set; }
-    public IEnumerable<string>? Errors { get; set; } = null;
+    public Dictionary<string, string>? Errors { get; set; } = null;
     public bool Succeed { get; set; } = false;
 }

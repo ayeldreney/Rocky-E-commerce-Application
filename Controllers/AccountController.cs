@@ -7,7 +7,7 @@ using Rocky.ViewModels;
 
 namespace Rocky.Controllers;
 
-public class AccountController : Controller
+public class AccountController : Controller,IDisposable
 {
 	AuthService authService;
 
@@ -16,9 +16,9 @@ public class AccountController : Controller
 		authService = _authService;
 	}
 
-	public IActionResult? Index()
+	public IActionResult Index()
 	{
-		return null;
+		return Content("");
 	}
 
 	[HttpGet]
@@ -30,22 +30,23 @@ public class AccountController : Controller
 
 	[HttpPost]
 	[AllowAnonymous]
-	public async Task<IActionResult> Register(RegisterDto register)
+	public async Task<IActionResult> Register(RegisterViewModel registerViewModel)
 	{
-		if (!ModelState.IsValid)
+        if (!ModelState.IsValid)
 		{
-			return View(register);
+            return View(registerViewModel);
 		}
+        RegisterDto registerDto = ObjectMapper.Map<RegisterViewModel, RegisterDto>(registerViewModel);
+        AuthDto registerResult = await authService.RegisterAsync(registerDto);
 
-		AuthDto registerResult = await authService.RegisterAsync(register);
 		if (registerResult.Succeed == false)
 		{
-			if (registerResult.Errors != null) 
-				foreach(var error in registerResult.Errors)
+            if (registerResult.Errors != null && registerResult.Errors.Count > 0)
+                foreach (KeyValuePair<string, string> error in registerResult.Errors)
 				{
-					ModelState.AddModelError("", error);
+					ModelState.AddModelError(error.Key, error.Value);
 				}
-			return View(register);
+            return View(registerViewModel);
 		}
 
 		return View("RegisterSuccess");
@@ -79,4 +80,31 @@ public class AccountController : Controller
 
         return View("LoginSuccess");
     }
+
+
+	[Authorize]
+	[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+	public IActionResult Logout()
+	{
+		authService.SignOut();
+		return RedirectToAction("Index", "Home");
+	}
+
+	[Authorize]
+	public IActionResult Profile()
+	{
+		var currentUser = authService.GetCurrentUser();
+		if (currentUser == null) return Unauthorized();
+
+		var model = new ViewModels.Account.ProfileViewModel();
+		model.Username = currentUser.UserName;
+		model.Password = "";
+		model.FirstName = currentUser.FirstName;
+		model.LastName = currentUser.LastName;
+		model.Address = currentUser.Address ?? "";
+		model.Email = currentUser.Email;
+		model.PhoneNumber = currentUser.PhoneNumber ?? string.Empty;
+
+		return View(model);
+	}
 }

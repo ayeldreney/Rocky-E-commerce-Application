@@ -3,6 +3,7 @@
 namespace Rocky.DAL.Models;
 public class AppUser : IdentityUser
 {
-    public string FirstName { get; internal set; }
-    public string LastName { get; internal set; }
+    public string FirstName { get; set; } = string.Empty;
+    public string LastName { get; set; } = string.Empty;
+    public string? Address { get; set; }
 }

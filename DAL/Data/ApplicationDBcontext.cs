@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Rocky.DAL.Models;
+using Rocky.ViewModels.Account;
 
 namespace Rocky.DAL.Data;
 
