@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using Rocky.Data;
-using Rocky.Helper;
-using Rocky.Models;
-using Rocky.Services;
+using Rocky.BLL.Helpers;
+using Rocky.BLL.Services;
+using Rocky.DAL.Data;
+using Rocky.DAL.Models;
 using System.Configuration;
 using System.Security.Claims;
 using System.Text;

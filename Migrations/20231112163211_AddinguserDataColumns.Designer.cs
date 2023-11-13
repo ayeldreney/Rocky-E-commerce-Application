@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Rocky.Data;
+using Rocky.DAL.Data;
 
 #nullable disable
 
@@ -158,7 +158,7 @@ namespace Rocky.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Rocky.Models.ApplicationType", b =>
+            modelBuilder.Entity("Rocky.DAL.Models.ApplicationType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -175,7 +175,7 @@ namespace Rocky.Migrations
                     b.ToTable("ApplicationType");
                 });
 
-            modelBuilder.Entity("Rocky.Models.Cart", b =>
+            modelBuilder.Entity("Rocky.DAL.Models.Cart", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -199,7 +199,7 @@ namespace Rocky.Migrations
                     b.ToTable("Carts");
                 });
 
-            modelBuilder.Entity("Rocky.Models.CartItem", b =>
+            modelBuilder.Entity("Rocky.DAL.Models.CartItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -225,7 +225,7 @@ namespace Rocky.Migrations
                     b.ToTable("CartItems");
                 });
 
-            modelBuilder.Entity("Rocky.Models.Category", b =>
+            modelBuilder.Entity("Rocky.DAL.Models.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -245,7 +245,7 @@ namespace Rocky.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("Rocky.Models.Order", b =>
+            modelBuilder.Entity("Rocky.DAL.Models.Order", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -270,7 +270,7 @@ namespace Rocky.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("Rocky.Models.OrderLine", b =>
+            modelBuilder.Entity("Rocky.DAL.Models.OrderLine", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -299,7 +299,7 @@ namespace Rocky.Migrations
                     b.ToTable("OrderLines");
                 });
 
-            modelBuilder.Entity("Rocky.Models.Product", b =>
+            modelBuilder.Entity("Rocky.DAL.Models.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -339,7 +339,7 @@ namespace Rocky.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("Rocky.Models.User", b =>
+            modelBuilder.Entity("Rocky.DAL.Models.User", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -412,7 +412,7 @@ namespace Rocky.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("Rocky.Models.UserReview", b =>
+            modelBuilder.Entity("Rocky.DAL.Models.UserReview", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -453,7 +453,7 @@ namespace Rocky.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Rocky.Models.User", null)
+                    b.HasOne("Rocky.DAL.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -462,7 +462,7 @@ namespace Rocky.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Rocky.Models.User", null)
+                    b.HasOne("Rocky.DAL.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -477,7 +477,7 @@ namespace Rocky.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Rocky.Models.User", null)
+                    b.HasOne("Rocky.DAL.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -486,16 +486,16 @@ namespace Rocky.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Rocky.Models.User", null)
+                    b.HasOne("Rocky.DAL.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Rocky.Models.Cart", b =>
+            modelBuilder.Entity("Rocky.DAL.Models.Cart", b =>
                 {
-                    b.HasOne("Rocky.Models.User", "User")
+                    b.HasOne("Rocky.DAL.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -504,15 +504,15 @@ namespace Rocky.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Rocky.Models.CartItem", b =>
+            modelBuilder.Entity("Rocky.DAL.Models.CartItem", b =>
                 {
-                    b.HasOne("Rocky.Models.Cart", "Cart")
+                    b.HasOne("Rocky.DAL.Models.Cart", "Cart")
                         .WithMany("Items")
                         .HasForeignKey("CartId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Rocky.Models.Product", "Product")
+                    b.HasOne("Rocky.DAL.Models.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -523,9 +523,9 @@ namespace Rocky.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("Rocky.Models.Order", b =>
+            modelBuilder.Entity("Rocky.DAL.Models.Order", b =>
                 {
-                    b.HasOne("Rocky.Models.User", "User")
+                    b.HasOne("Rocky.DAL.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -534,15 +534,15 @@ namespace Rocky.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Rocky.Models.OrderLine", b =>
+            modelBuilder.Entity("Rocky.DAL.Models.OrderLine", b =>
                 {
-                    b.HasOne("Rocky.Models.Order", "Order")
+                    b.HasOne("Rocky.DAL.Models.Order", "Order")
                         .WithMany("OrderLines")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Rocky.Models.Product", "Product")
+                    b.HasOne("Rocky.DAL.Models.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -553,9 +553,9 @@ namespace Rocky.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("Rocky.Models.Product", b =>
+            modelBuilder.Entity("Rocky.DAL.Models.Product", b =>
                 {
-                    b.HasOne("Rocky.Models.Category", "Category")
+                    b.HasOne("Rocky.DAL.Models.Category", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -564,12 +564,12 @@ namespace Rocky.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("Rocky.Models.Cart", b =>
+            modelBuilder.Entity("Rocky.DAL.Models.Cart", b =>
                 {
                     b.Navigation("Items");
                 });
 
-            modelBuilder.Entity("Rocky.Models.Order", b =>
+            modelBuilder.Entity("Rocky.DAL.Models.Order", b =>
                 {
                     b.Navigation("OrderLines");
                 });

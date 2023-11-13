@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Rocky.Data;
+using Rocky.DAL.Data;
 
 #nullable disable
 
@@ -24,7 +24,7 @@ namespace Rocky.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Rocky.Models.ApplicationType", b =>
+            modelBuilder.Entity("Rocky.DAL.Models.ApplicationType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -41,7 +41,7 @@ namespace Rocky.Migrations
                     b.ToTable("ApplicationType");
                 });
 
-            modelBuilder.Entity("Rocky.Models.Category", b =>
+            modelBuilder.Entity("Rocky.DAL.Models.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -61,7 +61,7 @@ namespace Rocky.Migrations
                     b.ToTable("Category");
                 });
 
-            modelBuilder.Entity("Rocky.Models.Product", b =>
+            modelBuilder.Entity("Rocky.DAL.Models.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -101,9 +101,9 @@ namespace Rocky.Migrations
                     b.ToTable("Product");
                 });
 
-            modelBuilder.Entity("Rocky.Models.Product", b =>
+            modelBuilder.Entity("Rocky.DAL.Models.Product", b =>
                 {
-                    b.HasOne("Rocky.Models.Category", "Category")
+                    b.HasOne("Rocky.DAL.Models.Category", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
