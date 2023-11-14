@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Rocky.Data;
-using Rocky.DTOs;
-using Rocky.Models;
-using Rocky.Models.ViewModels;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using NuGet.Protocol;
+using Rocky.ViewModels;
+using Rocky.DAL.Models;
+using Rocky.DAL.Data;
+using Rocky.BLL.DTOs;
 
 namespace Rocky.Controllers
 {
