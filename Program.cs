@@ -1,11 +1,14 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Rocky.BLL.Helpers;
+using Rocky.BLL.Middlewares;
 using Rocky.BLL.Services;
 using Rocky.DAL.Data;
 using Rocky.DAL.Models;
-using System.Configuration;
+using Rocky.Localizations;
+using System.Reflection;
 using System.Security.Claims;
 using System.Text;
 
@@ -17,6 +20,22 @@ builder.Services.AddControllersWithViews();
 #region Adding Db
 string? ConnectionString = builder.Configuration.GetConnectionString("Rockey");
 builder.Services.AddDbContext<ApplicationDBcontext>(options => options.UseSqlServer(ConnectionString));
+#endregion
+
+#region Localization
+builder.Services.AddLocalization(options => options.ResourcesPath = Rocky.BLL.Constants.General.LocalizationResourcesPath);
+
+builder.Services.AddMvc()
+	.AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+	.AddDataAnnotationsLocalization(options => {
+		options.DataAnnotationLocalizerProvider = (type, factory) =>
+		{
+			var assemblyName = new AssemblyName(typeof(Phrase).GetTypeInfo().Assembly.FullName!);
+			return factory.Create("DataAnnotations", assemblyName.Name!);
+		};
+	});
+builder.Services.AddSingleton<Phrase>();
+
 #endregion
 
 #region Adding Identity Service
@@ -68,6 +87,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseMiddleware<CultureMiddleware>();
 
 #region Declare Using Authorization and Authentication 
 

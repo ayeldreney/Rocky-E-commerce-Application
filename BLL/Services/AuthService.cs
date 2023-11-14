@@ -1,12 +1,11 @@
-﻿using Azure;
-using Azure.Core;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Rocky.BLL.Constants;
 using Rocky.BLL.DTOs;
 using Rocky.BLL.Helpers;
 using Rocky.DAL.Models;
+using Rocky.Localizations;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -19,12 +18,15 @@ public class AuthService
 	public SignInManager<AppUser> signInManager { get; set; }
 	public JWT _jwt { get; set; }
 	public IHttpContextAccessor accessor { get; set; }
-	public AuthService(UserManager<AppUser> _userManager, SignInManager<AppUser> _signInManager, IOptions<JWT> jwt, IHttpContextAccessor _accessor)
+	Phrase _phrase { get; set; }
+	public AuthService(UserManager<AppUser> _userManager, SignInManager<AppUser> _signInManager,
+		IOptions<JWT> jwt, IHttpContextAccessor _accessor, Phrase phrase)
 	{
 		userManager = _userManager;
 		signInManager = _signInManager;
 		_jwt = jwt.Value;
 		accessor = _accessor;
+		_phrase = phrase;
 	}
 
 	public async Task<bool> CheckEmailExistsAsync(string email)
@@ -44,8 +46,8 @@ public class AuthService
         if (emailExists || userNameExists)
         {
             auth.Errors = new Dictionary<string, string>();
-            if (emailExists) auth.Errors.Add("Email", "Email is already registered");
-            if (userNameExists) auth.Errors.Add("Username", "Username is already registered");
+            if (emailExists) auth.Errors.Add("Email", _phrase["Account", "emailAlreadyRegistered"]);
+            if (userNameExists) auth.Errors.Add("Username", _phrase["Account", "userAlreadyRegistered"]);
         }
 		return null;
     }

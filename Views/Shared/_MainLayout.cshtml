@@ -3,9 +3,8 @@
 @{
 	var currentUser = UserManager.GetUserAsync(User).Result;
 }
-
 <!doctype html>
-<html lang="en" class="no-js">
+<html lang="en" dir="@(Rocky.BLL.Constants.General.isRightToLeft == false ? "ltr" : "rtl")" class="no-js">
 
 <head>
 	<title>Construction Nation</title>
@@ -23,6 +22,10 @@
 	<!-- all css -->
 	<link rel="stylesheet" href="~/assets/css/theme-default.css">
 	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
+	@if (Rocky.BLL.Constants.General.isRightToLeft == true)
+	{
+		@:<link rel="stylesheet" href="~/lib/bootstrap//dist/css/bootstrap.rtl.min.css" />
+	}
 	<link rel="stylesheet" href="~/lib/cn/css/slick.css">
 	<link rel="stylesheet" href="~/lib/cn/css/lineawesome.css">
 	<link rel="stylesheet" href="~/lib/cn/css/aos.css">
@@ -41,13 +44,15 @@
 					<div class="col-lg-3 d-lg-block d-none">
 						<div class="announcement-call-wrapper">
 							<div class="announcement-call">
-								<a class="announcement-text text-white" href="tel:+1-078-2376">Call: +1 078 2376</a>
+								<a class="announcement-text text-white" href="tel:+1-078-2376">@_phrase["General", "callX", "+1 078 2376"]: </a>
 							</div>
 						</div>
 					</div>
 					<div class="col-lg-6 col-12">
 						<div class="announcement-text-wrapper d-flex align-items-center justify-content-center">
-							<p class="announcement-text text-white">New year sale - 30% off</p>
+							<p class="announcement-text text-white">
+								@_phrase["General", "blackFridaySale", "30"]
+								</p>
 						</div>
 					</div>
 					<div class="col-lg-3 d-lg-block d-none">
@@ -59,7 +64,7 @@
 										<path d="M5 0C3.07227 0 1.5 1.57227 1.5 3.5C1.5 4.70508 2.11523 5.77539 3.04688 6.40625C1.26367 7.17188 0 8.94141 0 11H1C1 8.78516 2.78516 7 5 7C7.21484 7 9 8.78516 9 11H10C10 8.94141 8.73633 7.17188 6.95312 6.40625C7.88477 5.77539 8.5 4.70508 8.5 3.5C8.5 1.57227 6.92773 0 5 0ZM5 1C6.38672 1 7.5 2.11328 7.5 3.5C7.5 4.88672 6.38672 6 5 6C3.61328 6 2.5 4.88672 2.5 3.5C2.5 2.11328 3.61328 1 5 1Z"
 											  fill="#fff" />
 									</svg>
-									<span>Login</span>
+									<span>@_phrase["General", "Login"]</span>
 								</a>
 								<span class="separator-login d-flex px-3">
 									<svg width="2" height="9" viewBox="0 0 2 9" fill="none"
@@ -71,7 +76,7 @@
 									<button type="button" class="currency-btn btn-reset text-white"
 											data-bs-toggle="dropdown" aria-expanded="false">
 										<img class="flag" src="~/assets/img/flag/usd.jpg" alt="img">
-										<span>USD</span>
+										<span>English US</span>
 										<span>
 											<svg class="icon icon-dropdown" xmlns="http://www.w3.org/2000/svg"
 												 width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff"
@@ -83,33 +88,15 @@
 
 									<ul class="currency-list dropdown-menu dropdown-menu-end px-2">
 										<li class="currency-list-item ">
-											<a class="currency-list-option" href="#" data-value="USD">
+											<a class="currency-list-option language-changer" href="#" data-value="en-US">
 												<img class="flag" src="~/assets/img/flag/usd.jpg" alt="img">
-												<span>USD</span>
+												<span>English US</span>
 											</a>
 										</li>
 										<li class="currency-list-item ">
-											<a class="currency-list-option" href="#" data-value="CAD">
+											<a class="currency-list-option language-changer" href="#" data-value="ar-EG">
 												<img class="flag" src="~/assets/img/flag/cad.jpg" alt="img">
-												<span>CAD</span>
-											</a>
-										</li>
-										<li class="currency-list-item ">
-											<a class="currency-list-option" href="#" data-value="EUR">
-												<img class="flag" src="~/assets/img/flag/eur.jpg" alt="img">
-												<span>EUR</span>
-											</a>
-										</li>
-										<li class="currency-list-item ">
-											<a class="currency-list-option" href="#" data-value="JPY">
-												<img class="flag" src="~/assets/img/flag/jpy.jpg" alt="img">
-												<span>JPY</span>
-											</a>
-										</li>
-										<li class="currency-list-item ">
-											<a class="currency-list-option" href="#" data-value="GBP">
-												<img class="flag" src="~/assets/img/flag/gbp.jpg" alt="img">
-												<span>GBP</span>
+												<span>Arabic EG</span>
 											</a>
 										</li>
 									</ul>
@@ -140,7 +127,7 @@
 									<li class="menu-list-item nav-item has-dropdown @((string?)ViewData["Active"] == "Index" ? "active" : "")">
 										<div class="mega-menu-header">
 											<a class="nav-link" href="@Url.Action("Index", "Home")">
-												Home
+												@_phrase["General","Home"]
 											</a>
 										</div>
 									</li>
@@ -148,14 +135,14 @@
 									<li class="menu-list-item nav-item has-megamenu @((string?)ViewData["Active"] == "Login" ? "active" : "")">
 										<div class="mega-menu-header">
 											<a class="nav-link" href="@Url.Action("Login", "Account")">
-												Login
+												@_phrase["General","Login"]
 											</a>
 										</div>
 									</li>
 
 									<li class="menu-list-item nav-item has-dropdown @((string?)ViewData["Active"] == "Register" ? "active" : "")">
 										<div class="mega-menu-header">
-											<a class="nav-link" href="@Url.Action("Register", "Account")">Register</a>
+											<a class="nav-link" href="@Url.Action("Register", "Account")">@_phrase["General","Register"]</a>
 
 										</div>
 									</li>
@@ -163,14 +150,14 @@
 									<li class="menu-list-item nav-item has-dropdown">
 										<div class="mega-menu-header">
 											<a class="nav-link" href="about-us.html">
-												About Us
+												@_phrase["General","AboutUs"]
 											</a>
 
 										</div>
 									</li>
 
 									<li class="menu-list-item nav-item">
-										<a class="nav-link" href="contact.html">Contact</a>
+										<a class="nav-link" href="contact.html">@_phrase["General","Contact"]</a>
 									</li>
 								</ul>
 							</nav>
@@ -217,11 +204,19 @@
 											<img class="icon" src="~/assets/img/icon/account.svg" />
 										</a>
 										<ul class="dropdown-menu dropdown-menu-account">
-											<p class="text-center p-3">Hello, @currentUser.FirstName</p>
-											<li><a class="dropdown-item p-3" href="@Url.Action("Profile", "Account")">Your Account</a></li>
-											<li><a class="dropdown-item p-3" href="@Url.Action("Index", "Orders")">Your Orders</a></li>
-											<li><a class="dropdown-item p-3" href="@Url.Action("Index", "Cart")">Your Cart</a></li>
-											<li><a class="dropdown-item p-3" href="@Url.Action("Index", "Wishlist")">Your Wishlist</a></li>
+											<p class="text-center p-2">Hello, @currentUser.FirstName</p>
+											<li><hr class="dropdown-divider"></li>
+											@if (this.IsAdmin())
+											{
+												<li><a class="dropdown-item p-3" href="@Url.Action("Index", "Admin")">Admin CP</a></li>
+											}
+											else
+											{
+												<li><a class="dropdown-item p-3" href="@Url.Action("Profile", "Account")">Your Account</a></li>
+												<li><a class="dropdown-item p-3" href="@Url.Action("Index", "Orders")">Your Orders</a></li>
+												<li><a class="dropdown-item p-3" href="@Url.Action("Index", "Cart")">Your Cart</a></li>
+												<li><a class="dropdown-item p-3" href="@Url.Action("Index", "Wishlist")">Your Wishlist</a></li>
+											}
 											<li><a class="dropdown-item p-3" href="@Url.Action("Logout", "Account")">Sign Out</a></li>
 										</ul>
 									</div>
@@ -289,7 +284,7 @@
 										</span>
 									</h4>
 									<ul class="footer-menu list-unstyled mb-0 d-md-block">
-										<li class="footer-menu-item"><a href="about-us.html">About us</a></li>
+										<li class="footer-menu-item"><a href="about-us.html">@_phrase["General","AboutUs"]</a></li>
 										<li class="footer-menu-item"><a href="about-us.html">Press center</a></li>
 										<li class="footer-menu-item"><a href="blog.html">Our magazine</a></li>
 										<li class="footer-menu-item"><a href="about-us.html">Our group</a></li>

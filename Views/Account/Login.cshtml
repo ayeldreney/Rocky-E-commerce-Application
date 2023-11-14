@@ -1,7 +1,7 @@
 ﻿@model LoginViewModel
 
 @{
-	ViewData["Title"] = "Login";
+	ViewData["Title"] = _phrase["Account", "Login"];
 	ViewData["Active"] = "Login";
 	Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
@@ -11,7 +11,7 @@
 		<div class="container">
 			<form asp-action="Login" class="login-form common-form mx-auto">
 				<div class="section-header mb-3">
-					<h2 class="section-heading text-center">Login</h2>
+					<h2 class="section-heading text-center">@_phrase["Account", "Login"]</h2>
 				</div>
 				<div class="row">
 					<div asp-validation-summary="ModelOnly" class="col-12 text-danger"></div>
@@ -38,9 +38,9 @@
 						</div>
 					</div>
 					<div class="col-12 mt-3 my-2">
-						<a href="#" class="text_14">Forgot your password?</a>
-						<button type="submit" class="btn-primary d-block mt-4 btn-signin">SIGN IN</button>
-						<a rout href="@Url.Action("Register", "Account")" class="btn-secondary mt-2 btn-signin">CREATE AN ACCOUNT</a>
+						<a href="#" class="text_14">@_phrase["Account", "ForgotYourPassword"]</a>
+						<button type="submit" class="btn-primary d-block mt-4 btn-signin">@_phrase["Account", "SignIn"]</button>
+						<a rout href="@Url.Action("Register", "Account")" class="btn-secondary mt-2 btn-signin">@_phrase["Account", "CreateAnAccount"]</a>
 					</div>
 				</div>
 			</form>
