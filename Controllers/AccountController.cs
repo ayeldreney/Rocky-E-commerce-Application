@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 using Rocky.BLL.DTOs;
 using Rocky.BLL.Helpers;
 using Rocky.BLL.Services;
+using Rocky.Localizations;
 using Rocky.ViewModels;
 
 namespace Rocky.Controllers;
@@ -10,15 +12,17 @@ namespace Rocky.Controllers;
 public class AccountController : Controller,IDisposable
 {
 	AuthService authService;
+	Phrase _phrase;
 
-	public AccountController(AuthService _authService)
+	public AccountController(AuthService _authService, Phrase phrase)
 	{
 		authService = _authService;
+		_phrase = phrase;
 	}
 
 	public IActionResult Index()
 	{
-		return Content("");
+		return Content(_phrase["Account", "NotFoundMessage", "Hello bedo"]);
 	}
 
 	[HttpGet]
@@ -72,7 +76,7 @@ public class AccountController : Controller,IDisposable
 		var result = await authService.SignInAsync(credentials);
 		if (result == null)
 		{
-			ModelState.AddModelError("", "Username or password is invalid!");
+			ModelState.AddModelError("", _phrase["Account", "userNameOrPasswordInvalid"]);
 			LoginViewModel loginViewModel = ObjectMapper.Map<LoginCredentialsDto, LoginViewModel>(credentials);
 
 			return View(loginViewModel);

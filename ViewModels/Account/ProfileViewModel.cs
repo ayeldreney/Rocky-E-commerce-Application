@@ -16,7 +16,7 @@ public class ProfileViewModel
 	[RegularExpression(@"^[a-zA-Z0-9_]+@[a-zA-Z0-9_]+.[a-zA-Z]{2,4}$", ErrorMessage = "Email should be like john@doe.com")]
 	public string Email { get; set; } = string.Empty;
 
-	[StringLength(256)]
+	[StringLength(100)]
 	[DataType(DataType.Password)]
 	public string? Password { get; set; }
 
