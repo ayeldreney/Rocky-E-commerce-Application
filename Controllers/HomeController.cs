@@ -29,6 +29,24 @@ namespace Rocky.Controllers
             return View(homeViewModel);
         }
 
+
+        public IActionResult Details(int id) {
+
+            //exist in cart default is false;
+
+            DetailsViewModel detailsViewModel = new DetailsViewModel() {
+                Product = _db.Products.Include(_x => _x.Category).Where(i => i.Id == id).FirstOrDefault(),
+                ExistsInCart=false,
+
+            
+            };
+
+        return View();  
+        
+        }
+
+
+
         public IActionResult Privacy()
         {
             return View();
