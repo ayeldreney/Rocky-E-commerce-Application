@@ -120,6 +120,9 @@
   <data name="CreateAnAccount" xml:space="preserve">
     <value>CREATE AN ACCOUNT</value>
   </data>
+  <data name="CreateXl" xml:space="preserve">
+    <value>CREATE</value>
+  </data>
   <data name="emailAlreadyRegistered" xml:space="preserve">
     <value>Email is already registered</value>
   </data>
@@ -128,6 +131,9 @@
   </data>
   <data name="Login" xml:space="preserve">
     <value>Login</value>
+  </data>
+  <data name="SaveYourData" xml:space="preserve">
+    <value>Save Your Data</value>
   </data>
   <data name="SignIn" xml:space="preserve">
     <value>SIGN IN</value>

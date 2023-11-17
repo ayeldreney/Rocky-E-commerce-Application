@@ -10,21 +10,22 @@ namespace Rocky.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly ApplicationDBcontext _db;   
-        public HomeController(ILogger<HomeController> logger,ApplicationDBcontext applicationDBcontext)
+        private readonly ApplicationDBcontext _db;
+        public HomeController(ILogger<HomeController> logger, ApplicationDBcontext applicationDBcontext)
         {
             _logger = logger;
-            _db = applicationDBcontext; 
+            _db = applicationDBcontext;
 
         }
 
         public IActionResult Index()
         {
-            HomeViewModel homeViewModel = new HomeViewModel() {
+            HomeViewModel homeViewModel = new HomeViewModel()
+            {
                 Products = _db.Products.Include(x => x.Category).ToList(),
-                Categories = _db.Categories.ToList(), 
-            
-            }; 
+                Categories = _db.Categories.ToList(),
+
+            };
 
             return View(homeViewModel);
         }

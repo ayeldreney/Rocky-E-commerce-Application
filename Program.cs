@@ -1,7 +1,9 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Rocky.BLL.Constants;
 using Rocky.BLL.Helpers;
 using Rocky.BLL.Middlewares;
 using Rocky.BLL.Services;
@@ -9,7 +11,6 @@ using Rocky.DAL.Data;
 using Rocky.DAL.Models;
 using Rocky.Localizations;
 using System.Reflection;
-using System.Security.Claims;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,58 +23,82 @@ string? ConnectionString = builder.Configuration.GetConnectionString("Rockey");
 builder.Services.AddDbContext<ApplicationDBcontext>(options => options.UseSqlServer(ConnectionString));
 #endregion
 
-#region Localization
-builder.Services.AddLocalization(options => options.ResourcesPath = Rocky.BLL.Constants.General.LocalizationResourcesPath);
-
-builder.Services.AddMvc()
-	.AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
-	.AddDataAnnotationsLocalization(options => {
-		options.DataAnnotationLocalizerProvider = (type, factory) =>
-		{
-			var assemblyName = new AssemblyName(typeof(Phrase).GetTypeInfo().Assembly.FullName!);
-			return factory.Create("DataAnnotations", assemblyName.Name!);
-		};
-	});
-builder.Services.AddSingleton<Phrase>();
-
-#endregion
-
 #region Adding Identity Service
+
+builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
+{
+    options.Password.RequireUppercase = true;
+    options.Password.RequireLowercase = true;
+    options.Password.RequireNonAlphanumeric = true;
+    options.Password.RequiredLength = 6;
+    options.User.RequireUniqueEmail = true;
+
+    options.Lockout.MaxFailedAccessAttempts = AppSettings.UserSettings.MaxFailedAccessAttempts;
+    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(AppSettings.UserSettings.LockoutTimeSpanInMinutes);
+
+}).AddEntityFrameworkStores<ApplicationDBcontext>();
+
+#region Authentication
 builder.Services.AddAuthentication(options =>
 {
-	options.DefaultAuthenticateScheme = "Default";
-	options.DefaultChallengeScheme = "Default"; // what action to do when unauthorized
-}).AddJwtBearer("Default", options =>
+    options.DefaultAuthenticateScheme = "default";
+    options.DefaultChallengeScheme = "default";
+})
+.AddCookie(config =>
 {
-	var jwtOptions = builder.Configuration.GetSection("JWT");
-	string keyInStr = jwtOptions.GetValue<string>("Key")!;
-	byte[] keyInBytes = Encoding.ASCII.GetBytes(keyInStr);
-	var key = new SymmetricSecurityKey(keyInBytes);
+    config.Cookie.Name = AppSettings.UserSettings.TokenBearerCookieName;
+})
+.AddJwtBearer("default", options =>
+{
+    options.Events = new JwtBearerEvents()
+    {
+        OnMessageReceived = context =>
+        {
+            string? _token = "";
+            context.Request.Cookies.TryGetValue(AppSettings.UserSettings.TokenBearerCookieName, out _token);
+            context.Token = _token;
+            return Task.CompletedTask;
+        }
+    };
+    var jwtOptions = builder.Configuration.GetSection("JWT");
+    var key = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtOptions.GetValue<string>("Key")!));
 
-	options.TokenValidationParameters = new TokenValidationParameters
-	{
-		IssuerSigningKey = key,
-		ValidIssuer = jwtOptions.GetValue<string>("Issuer"),
-		ValidAudience = jwtOptions.GetValue<string>("Audience"),
-		ValidateIssuer = true,
-		ValidateAudience = true,
-	};
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = false,
+        ValidateAudience = false,
+        IssuerSigningKey = key,
+        ValidateLifetime = true,
+        ClockSkew = TimeSpan.Zero,
+    };
 });
+#endregion
+
 builder.Services.Configure<JWT>(builder.Configuration.GetSection("JWT"));
-
-builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDBcontext>();
-
-builder.Services.AddAuthorization(options =>
-{
-	options.AddPolicy("AdminPolicy", p => p.RequireClaim(ClaimTypes.Role, "Admin"));
-});
 
 builder.Services.AddTransient<AuthService>();
 
 #endregion
 
-var app = builder.Build();
+#region Localization
+builder.Services.AddLocalization(options => options.ResourcesPath = Rocky.BLL.Constants.AppSettings.LocalizationResourcesPath);
 
+builder.Services.AddMvc()
+    .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+    .AddDataAnnotationsLocalization(options =>
+    {
+        options.DataAnnotationLocalizerProvider = (type, factory) =>
+        {
+            var assemblyName = new AssemblyName(typeof(Phrase).GetTypeInfo().Assembly.FullName!);
+            return factory.Create("DataAnnotations", assemblyName.Name!);
+        };
+    });
+builder.Services.AddSingleton<Phrase>();
+
+#endregion
+
+
+var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
