@@ -45,14 +45,14 @@
 					<div class="col-lg-3 d-lg-block d-none">
 						<div class="announcement-call-wrapper">
 							<div class="announcement-call">
-								<a class="announcement-text text-white" href="tel:+1-078-2376">@_phrase["AppSettings", "callX", "+1 078 2376"]: </a>
+								<a class="announcement-text text-white" href="tel:+1-078-2376">@_phrase["General", "callX", "+1 078 2376"]</a>
 							</div>
 						</div>
 					</div>
 					<div class="col-lg-6 col-12">
 						<div class="announcement-text-wrapper d-flex align-items-center justify-content-center">
 							<p class="announcement-text text-white">
-								@_phrase["AppSettings", "blackFridaySale", "30"]
+								@_phrase["General", "BlackFridaySale", "30"]
 								</p>
 						</div>
 					</div>
@@ -65,7 +65,7 @@
 										<path d="M5 0C3.07227 0 1.5 1.57227 1.5 3.5C1.5 4.70508 2.11523 5.77539 3.04688 6.40625C1.26367 7.17188 0 8.94141 0 11H1C1 8.78516 2.78516 7 5 7C7.21484 7 9 8.78516 9 11H10C10 8.94141 8.73633 7.17188 6.95312 6.40625C7.88477 5.77539 8.5 4.70508 8.5 3.5C8.5 1.57227 6.92773 0 5 0ZM5 1C6.38672 1 7.5 2.11328 7.5 3.5C7.5 4.88672 6.38672 6 5 6C3.61328 6 2.5 4.88672 2.5 3.5C2.5 2.11328 3.61328 1 5 1Z"
 											  fill="#fff" />
 									</svg>
-									<span>@_phrase["AppSettings", "Login"]</span>
+									<span>@_phrase["General", "Login"]</span>
 								</a>
 								<span class="separator-login d-flex px-3">
 									<svg width="2" height="9" viewBox="0 0 2 9" fill="none"
@@ -128,7 +128,7 @@
 									<li class="menu-list-item nav-item has-dropdown @((string?)ViewData["Active"] == "Index" ? "active" : "")">
 										<div class="mega-menu-header">
 											<a class="nav-link" href="@Url.Action("Index", "Home")">
-												@_phrase["AppSettings","Home"]
+												@_phrase["General","Home"]
 											</a>
 										</div>
 									</li>
@@ -136,14 +136,14 @@
 									<li class="menu-list-item nav-item has-megamenu @((string?)ViewData["Active"] == "Login" ? "active" : "")">
 										<div class="mega-menu-header">
 											<a class="nav-link" href="@Url.Action("Login", "Account")">
-												@_phrase["AppSettings","Login"]
+												@_phrase["General","Login"]
 											</a>
 										</div>
 									</li>
 
 									<li class="menu-list-item nav-item has-dropdown @((string?)ViewData["Active"] == "Register" ? "active" : "")">
 										<div class="mega-menu-header">
-											<a class="nav-link" href="@Url.Action("Register", "Account")">@_phrase["AppSettings","Register"]</a>
+											<a class="nav-link" href="@Url.Action("Register", "Account")">@_phrase["General","Register"]</a>
 
 										</div>
 									</li>
@@ -151,14 +151,14 @@
 									<li class="menu-list-item nav-item has-dropdown">
 										<div class="mega-menu-header">
 											<a class="nav-link" href="about-us.html">
-												@_phrase["AppSettings","AboutUs"]
+												@_phrase["General","AboutUs"]
 											</a>
 
 										</div>
 									</li>
 
 									<li class="menu-list-item nav-item">
-										<a class="nav-link" href="contact.html">@_phrase["AppSettings","Contact"]</a>
+										<a class="nav-link" href="contact.html">@_phrase["General","Contact"]</a>
 									</li>
 								</ul>
 							</nav>
@@ -202,7 +202,19 @@
 								{
 									<div class="header-action-item ms-4 d-none d-lg-block dropdown">
 										<a href="#" class="" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
-											<img class="icon" src="~/assets/img/icon/account.svg" />
+											<svg width="22" height="22" viewBox="0 0 24 24" fill="none" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg">
+												<defs>
+													<style>
+														.cls-1 {
+															fill: none;
+															stroke: #020202;
+															stroke-miterlimit: 10;
+															stroke-width: 1.91px;
+														}</style>
+												</defs>
+												<circle class="cls-1" cx="12" cy="7.25" r="5.73" />
+												<path class="cls-1" d="M1.5,23.48l.37-2.05A10.3,10.3,0,0,1,12,13h0a10.3,10.3,0,0,1,10.13,8.45l.37,2.05" />
+											</svg>
 										</a>
 										<ul class="dropdown-menu dropdown-menu-account">
 											<p class="text-center p-2">Hello, @currentUser.FirstName</p>
@@ -224,7 +236,19 @@
 								} else {
 									<div class="header-action-item ms-4 d-none d-lg-block dropdown">
 										<a href="@Url.Action("Login", "Account")" class="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-											<img class="icon" src="~/assets/img/icon/account.svg" />
+											<svg width="22" height="22" viewBox="0 0 24 24" fill="none" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg">
+												<defs>
+													<style>
+														.cls-1 {
+															fill: none;
+															stroke: #020202;
+															stroke-miterlimit: 10;
+															stroke-width: 1.91px;
+														}</style>
+												</defs>
+												<circle class="cls-1" cx="12" cy="7.25" r="5.73" />
+												<path class="cls-1" d="M1.5,23.48l.37-2.05A10.3,10.3,0,0,1,12,13h0a10.3,10.3,0,0,1,10.13,8.45l.37,2.05" />
+											</svg>
 										</a>
 										<ul class="dropdown-menu dropdown-menu-account">
 											<li><a class="dropdown-item p-3" href="@Url.Action("Login", "Account")">Login</a></li>
@@ -285,7 +309,7 @@
 										</span>
 									</h4>
 									<ul class="footer-menu list-unstyled mb-0 d-md-block">
-										<li class="footer-menu-item"><a href="about-us.html">@_phrase["AppSettings","AboutUs"]</a></li>
+										<li class="footer-menu-item"><a href="about-us.html">@_phrase["General","AboutUs"]</a></li>
 										<li class="footer-menu-item"><a href="about-us.html">Press center</a></li>
 										<li class="footer-menu-item"><a href="blog.html">Our magazine</a></li>
 										<li class="footer-menu-item"><a href="about-us.html">Our group</a></li>

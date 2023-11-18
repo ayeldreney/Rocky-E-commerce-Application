@@ -1,0 +1,638 @@
+﻿@{
+	ViewData["Title"] = _phrase["General", "HomePageTitle"];
+	ViewData["Active"] = "Index";
+	Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<main id="MainContent" class="content-for-layout">
+	<!-- slideshow start -->
+	<div class="slideshow-section position-relative">
+		<div class="slideshow-active activate-slider" data-slick='{
+					"slidesToShow": 1,
+					"slidesToScroll": 1,
+					"dots": true,
+					"arrows": true,
+					"responsive": [
+						{
+						"breakpoint": 768,
+						"settings": {
+							"arrows": false
+						}
+						}
+					]
+				}'>
+			<div class="slide-item slide-item-bag position-relative">
+				<img class="slide-img d-none d-md-block w-100" src="~/assets/img/slideshow/sliderImg1.jpg" alt="slide-1">
+				<img class="slide-img d-md-none" src="~/assets/img/slideshow/f1-m.jpg" alt="slide-1">
+				<div class="content-absolute content-slide">
+					<div class="container height-inherit d-flex align-items-center justify-content-end">
+						<div class="content-box slide-content slide-content-1 py-4 ">
+							<h2 class="slide-heading heading_72 animate__animated animate__fadeInUp text-white" style="background-color: rgba(0, 0, 0, 0.5);"
+								data-animation="animate__animated animate__fadeInUp">
+								Construction Nation,<br>Best Construction Materials !
+							</h2>
+							<p class="slide-subheading heading_24 animate__animated animate__fadeInUp text-white" style="background-color: rgba(0, 0, 0, 0.5);"
+							   data-animation="animate__animated animate__fadeInUp">
+								Ready whenever you need!
+							</p>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="slide-item slide-item-bag position-relative">
+				<img class="slide-img d-none d-md-block w-100" src="~/assets/img/slideshow/sliderImg4.jpg" alt="slide-2">
+				<img class="slide-img d-md-none" src="~/assets/img/slideshow/f2-m.jpg" alt="slide-2">
+				<div class="content-absolute content-slide">
+					<div class="container height-inherit d-flex align-items-center justify-content-end">
+						<div class="content-box slide-content slide-content-1 py-4 text-center ">
+							<h2 class="slide-heading heading_72 animate__animated animate__fadeInUp text-white fw-bold opacity-100 " style="background-color: rgba(0, 0, 0, 0.5);"
+								data-animation="animate__animated animate__fadeInUp">
+								Innovate, sustain, construct!
+							</h2>
+							<p class="slide-subheading heading_24 animate__animated animate__fadeInUp text-white " style="background-color: rgba(0, 0, 0, 0.5);"
+							   data-animation="animate__animated animate__fadeInUp">
+								Unleash Your Passion!
+							</p>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="slide-item slide-item-bag position-relative">
+				<img class="slide-img d-none d-md-block w-100" src="~/assets/img/slideshow/sliderImg2.jpg" alt="slide-3">
+				<img class="slide-img d-md-none" src="~/assets/img/slideshow/f3-m.jpg" alt="slide-3">
+				<div class="content-absolute content-slide">
+					<div class="container height-inherit d-flex align-items-center justify-content-center ">
+						<div class="content-box slide-content slide-content-1 py-4 text-center">
+							<h2 class="slide-heading heading_72 animate__animated animate__fadeInUp text-white fw-bold" style="background-color: rgba(0, 0, 0, 0.5);"
+								data-animation="animate__animated animate__fadeInUp">
+								Build better with Construction Nation!
+							</h2>
+							<p class="slide-subheading heading_24 animate__animated animate__fadeInUp text-white fw-bold" style="background-color: rgba(0, 0, 0, 0.5);"
+							   data-animation="animate__animated animate__fadeInUp">
+								World-class building solutions!
+							</p>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="activate-arrows arrows-white fw-bolder"></div>
+		<div class="activate-dots dot-tools dots-white"></div>
+	</div>
+	<!-- slideshow end -->
+	<!-- trusted badge start -->
+	<div class="trusted-section mt-100 overflow-hidden">
+		<div class="trusted-section-inner">
+			<div class="container">
+				<div class="row justify-content-center trusted-row">
+					<div class="col-lg-4 col-md-6 col-12">
+						<div class="trusted-badge rounded p-0">
+							<div class="trusted-icon">
+								<img class="icon-trusted" src="~/assets/img/icon/dump-truck.png" alt="icon-1">
+							</div>
+							<div class="trusted-content">
+								<h2 class="heading_18 trusted-heading">Fatest Shipping Ever!</h2>
+								<p class="text_16 trusted-subheading trusted-subheading-2">Free shipping under certain conditions</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-6 col-12">
+						<div class="trusted-badge rounded p-0">
+							<div class="trusted-icon">
+								<img class="icon-trusted" src="~/assets/img/icon/workers.png" alt="icon-2">
+							</div>
+							<div class="trusted-content">
+								<h2 class="heading_18 trusted-heading">Customer Support 24/7</h2>
+								<p class="text_16 trusted-subheading trusted-subheading-2">
+									Instant access to
+									support
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-6 col-12">
+						<div class="trusted-badge rounded p-0">
+							<div class="trusted-icon">
+								<img class="icon-trusted" src="~/assets/img/icon/wheel-barrow.png" alt="icon-3">
+							</div>
+							<div class="trusted-content">
+								<h2 class="heading_18 trusted-heading">100% Highest Quality</h2>
+								<p class="text_16 trusted-subheading trusted-subheading-2">
+									We provide
+									the best Quality
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- trusted badge end -->
+	<!-- banner start -->
+	<div class="grid-banner mt-100 overflow-hidden">
+		<div class="collection-tab-inner mt-0">
+			<div class="container">
+				<div class="grid-container-2">
+					<span class="grid-item grid-item-1 position-relative rounded mt-0 d-flex" href="collection-left-sidebar.html"
+						  data-aos="fade-right" data-aos-duration="700">
+						<img class="banner-img rounded" src="~/assets/img/banner/b1.png" alt="banner-1">
+						<div class="content-absolute content-slide">
+							<div class="container height-inherit d-flex">
+								<div class="content-box banner-content p-4">
+									<h2 class="heading_34 primary-color text-white w-75" style="background-color: rgba(0, 0, 0, 0.5);"> Your trusted <br>construction partner</h2>
+
+								</div>
+							</div>
+						</div>
+					</span>
+					<a class="grid-item grid-item-2 position-relative rounded mt-0 d-flex" href="collection-left-sidebar.html"
+					   data-aos="fade-right" data-aos-duration="700">
+						<img class="banner-img rounded" src="~/assets/img/banner/b3.jpg" alt="banner-1">
+						<div class="content-absolute content-slide">
+							<div class="container height-inherit d-flex justify-content-end">
+								<div class="content-box banner-content p-4 text-end">
+									<h2 class="heading_34 primary-color text-white w-100 text-start" style="background-color: rgba(0, 0, 0, 0.5);"> Durable materials for any project</h2>
+
+								</div>
+							</div>
+						</div>
+					</a>
+					<a class="grid-item grid-item-3 position-relative rounded mt-0 d-flex" href="collection-left-sidebar.html"
+					   data-aos="fade-left" data-aos-duration="700">
+						<img class="banner-img rounded" src="~/assets/img/banner/b2.jpg" alt="banner-1">
+						<div class="content-absolute content-slide">
+							<div class="container height-inherit d-flex">
+								<div class="content-box banner-content p-4">
+									<h2 class="heading_34 text-white mt-5 border-5 " style="font-size:50px;background-color: rgba(0, 0, 0, 0.2);">Build with quality <br> and confidence</h2>
+
+								</div>
+							</div>
+						</div>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- banner end -->
+	<!--  من اول هنا  -->
+	<!-- collection start -->
+	<div class="featured-collection mt-100 overflow-hidden">
+		<div class="collection-tab-inner">
+			<div class="container">
+				<div class="section-header text-center">
+					<h2 class="section-heading primary-color">Featured Products</h2>
+				</div>
+				<div class="row">
+					<!-- card 1 -->
+					<div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-duration="700">
+						<div class="product-card">
+							<div class="product-card-img">
+								<a class="hover-switch" href="collection-left-sidebar.html">
+									<img class="secondary-img" src="~/assets/img/collection/cement.jpg"
+										 alt="product-img">
+									<img class="primary-img h-100 w-100" src="~/assets/img/collection/cement.jpg"
+										 alt="product-img">
+								</a>
+								<div class="product-badge">
+									<span class="badge-label badge-percentage rounded">-44%</span>
+								</div>
+								<div class="product-card-action product-card-action-2 justify-content-center">
+									@*<a href="#quickview-modal" class="action-card action-quickview"
+									   data-bs-toggle="modal">
+										<svg width="26" height="26" viewBox="0 0 26 26" fill="none"
+											 xmlns="http://www.w3.org/2000/svg">
+											<path d="M10 0C15.5117 0 20 4.48828 20 10C20 12.3945 19.1602 14.5898 17.75 16.3125L25.7188 24.2812L24.2812 25.7188L16.3125 17.75C14.5898 19.1602 12.3945 20 10 20C4.48828 20 0 15.5117 0 10C0 4.48828 4.48828 0 10 0ZM10 2C5.57031 2 2 5.57031 2 10C2 14.4297 5.57031 18 10 18C14.4297 18 18 14.4297 18 10C18 5.57031 14.4297 2 10 2ZM11 6V9H14V11H11V14H9V11H6V9H9V6H11Z"
+												  fill="#00234D" />
+										</svg>
+									</a>*@
+									<a href="#" class="action-card action-wishlist">
+										<svg class="icon icon-wishlist" width="26" height="22"
+											 viewBox="0 0 26 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M6.96429 0.000183105C3.12305 0.000183105 0 3.10686 0 6.84843C0 8.15388 0.602121 9.28455 1.16071 10.1014C1.71931 10.9181 2.29241 11.4425 2.29241 11.4425L12.3326 21.3439L13 22.0002L13.6674 21.3439L23.7076 11.4425C23.7076 11.4425 26 9.45576 26 6.84843C26 3.10686 22.877 0.000183105 19.0357 0.000183105C15.8474 0.000183105 13.7944 1.88702 13 2.68241C12.2056 1.88702 10.1526 0.000183105 6.96429 0.000183105ZM6.96429 1.82638C9.73912 1.82638 12.3036 4.48008 12.3036 4.48008L13 5.25051L13.6964 4.48008C13.6964 4.48008 16.2609 1.82638 19.0357 1.82638C21.8613 1.82638 24.1429 4.10557 24.1429 6.84843C24.1429 8.25732 22.4018 10.1584 22.4018 10.1584L13 19.4036L3.59821 10.1584C3.59821 10.1584 3.14844 9.73397 2.69866 9.07411C2.24888 8.41426 1.85714 7.55466 1.85714 6.84843C1.85714 4.10557 4.13867 1.82638 6.96429 1.82638Z"
+												  fill="#00234D" />
+										</svg>
+									</a>
+									<a href="#" class="action-card action-addtocart">
+										<svg class="icon icon-cart" width="24" height="26" viewBox="0 0 24 26"
+											 fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M12 0.000183105C9.25391 0.000183105 7 2.25409 7 5.00018V6.00018H2.0625L2 6.93768L1 24.9377L0.9375 26.0002H23.0625L23 24.9377L22 6.93768L21.9375 6.00018H17V5.00018C17 2.25409 14.7461 0.000183105 12 0.000183105ZM12 2.00018C13.6562 2.00018 15 3.34393 15 5.00018V6.00018H9V5.00018C9 3.34393 10.3438 2.00018 12 2.00018ZM3.9375 8.00018H7V11.0002H9V8.00018H15V11.0002H17V8.00018H20.0625L20.9375 24.0002H3.0625L3.9375 8.00018Z"
+												  fill="#00234D" />
+										</svg>
+									</a>
+								</div>
+							</div>
+							<div class="product-card-details">
+
+								<h3 class="product-card-title">
+									<a href="collection-left-sidebar.html">Cement</a>
+								</h3>
+								<div class="product-card-price">
+									<span class="card-price-regular">Price</span>
+									<span class="card-price-compare text-decoration-line-through">$1759</span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- card 2 -->
+					<div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-duration="700">
+						<div class="product-card">
+							<div class="product-card-img">
+								<a class="hover-switch" href="collection-left-sidebar.html">
+									<img class="secondary-img" src="~/assets/img/collection/sandBag.jpg">
+									<img class="primary-img" src="~/assets/img/collection/sandBag.jpg"
+										 alt="product-img">
+								</a>
+
+								<div class="product-card-action product-card-action-2 justify-content-center">
+									<a href="#quickview-modal" class="action-card action-quickview"
+									   data-bs-toggle="modal">
+										<svg width="26" height="26" viewBox="0 0 26 26" fill="none"
+											 xmlns="http://www.w3.org/2000/svg">
+											<path d="M10 0C15.5117 0 20 4.48828 20 10C20 12.3945 19.1602 14.5898 17.75 16.3125L25.7188 24.2812L24.2812 25.7188L16.3125 17.75C14.5898 19.1602 12.3945 20 10 20C4.48828 20 0 15.5117 0 10C0 4.48828 4.48828 0 10 0ZM10 2C5.57031 2 2 5.57031 2 10C2 14.4297 5.57031 18 10 18C14.4297 18 18 14.4297 18 10C18 5.57031 14.4297 2 10 2ZM11 6V9H14V11H11V14H9V11H6V9H9V6H11Z"
+												  fill="#00234D" />
+										</svg>
+									</a>
+
+									<a href="#" class="action-card action-wishlist">
+										<svg class="icon icon-wishlist" width="26" height="22"
+											 viewBox="0 0 26 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M6.96429 0.000183105C3.12305 0.000183105 0 3.10686 0 6.84843C0 8.15388 0.602121 9.28455 1.16071 10.1014C1.71931 10.9181 2.29241 11.4425 2.29241 11.4425L12.3326 21.3439L13 22.0002L13.6674 21.3439L23.7076 11.4425C23.7076 11.4425 26 9.45576 26 6.84843C26 3.10686 22.877 0.000183105 19.0357 0.000183105C15.8474 0.000183105 13.7944 1.88702 13 2.68241C12.2056 1.88702 10.1526 0.000183105 6.96429 0.000183105ZM6.96429 1.82638C9.73912 1.82638 12.3036 4.48008 12.3036 4.48008L13 5.25051L13.6964 4.48008C13.6964 4.48008 16.2609 1.82638 19.0357 1.82638C21.8613 1.82638 24.1429 4.10557 24.1429 6.84843C24.1429 8.25732 22.4018 10.1584 22.4018 10.1584L13 19.4036L3.59821 10.1584C3.59821 10.1584 3.14844 9.73397 2.69866 9.07411C2.24888 8.41426 1.85714 7.55466 1.85714 6.84843C1.85714 4.10557 4.13867 1.82638 6.96429 1.82638Z"
+												  fill="#00234D" />
+										</svg>
+									</a>
+
+									<a href="#" class="action-card action-addtocart">
+										<svg class="icon icon-cart" width="24" height="26" viewBox="0 0 24 26"
+											 fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M12 0.000183105C9.25391 0.000183105 7 2.25409 7 5.00018V6.00018H2.0625L2 6.93768L1 24.9377L0.9375 26.0002H23.0625L23 24.9377L22 6.93768L21.9375 6.00018H17V5.00018C17 2.25409 14.7461 0.000183105 12 0.000183105ZM12 2.00018C13.6562 2.00018 15 3.34393 15 5.00018V6.00018H9V5.00018C9 3.34393 10.3438 2.00018 12 2.00018ZM3.9375 8.00018H7V11.0002H9V8.00018H15V11.0002H17V8.00018H20.0625L20.9375 24.0002H3.0625L3.9375 8.00018Z"
+												  fill="#00234D" />
+										</svg>
+									</a>
+								</div>
+							</div>
+							<div class="product-card-details">
+
+								<h3 class="product-card-title">
+									<a href="collection-left-sidebar.html">Sand</a>
+								</h3>
+								<div class="product-card-price">
+									<span class="card-price-regular">Price</span>
+									<span class="card-price-compare text-decoration-line-through">$1759</span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- card 3 -->
+					<div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-duration="700">
+						<div class="product-card ">
+							<div class="product-card-img ">
+								<a class="hover-switch" href="collection-left-sidebar.html">
+									<img class="secondary-img " src="~/assets/img/collection/steel.png"
+										 alt="product-img">
+									<img class="primary-img" src="~/assets/img/collection/steel.png"
+										 alt="product-img">
+								</a>
+
+								<div class="product-badge">
+									<span class="badge-label badge-new rounded">New</span>
+								</div>
+
+								<div class="product-card-action product-card-action-2 justify-content-center">
+									<a href="#quickview-modal" class="action-card action-quickview"
+									   data-bs-toggle="modal">
+										<svg width="26" height="26" viewBox="0 0 26 26" fill="none"
+											 xmlns="http://www.w3.org/2000/svg">
+											<path d="M10 0C15.5117 0 20 4.48828 20 10C20 12.3945 19.1602 14.5898 17.75 16.3125L25.7188 24.2812L24.2812 25.7188L16.3125 17.75C14.5898 19.1602 12.3945 20 10 20C4.48828 20 0 15.5117 0 10C0 4.48828 4.48828 0 10 0ZM10 2C5.57031 2 2 5.57031 2 10C2 14.4297 5.57031 18 10 18C14.4297 18 18 14.4297 18 10C18 5.57031 14.4297 2 10 2ZM11 6V9H14V11H11V14H9V11H6V9H9V6H11Z"
+												  fill="#00234D" />
+										</svg>
+									</a>
+
+									<a href="#" class="action-card action-wishlist">
+										<svg class="icon icon-wishlist" width="26" height="22"
+											 viewBox="0 0 26 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M6.96429 0.000183105C3.12305 0.000183105 0 3.10686 0 6.84843C0 8.15388 0.602121 9.28455 1.16071 10.1014C1.71931 10.9181 2.29241 11.4425 2.29241 11.4425L12.3326 21.3439L13 22.0002L13.6674 21.3439L23.7076 11.4425C23.7076 11.4425 26 9.45576 26 6.84843C26 3.10686 22.877 0.000183105 19.0357 0.000183105C15.8474 0.000183105 13.7944 1.88702 13 2.68241C12.2056 1.88702 10.1526 0.000183105 6.96429 0.000183105ZM6.96429 1.82638C9.73912 1.82638 12.3036 4.48008 12.3036 4.48008L13 5.25051L13.6964 4.48008C13.6964 4.48008 16.2609 1.82638 19.0357 1.82638C21.8613 1.82638 24.1429 4.10557 24.1429 6.84843C24.1429 8.25732 22.4018 10.1584 22.4018 10.1584L13 19.4036L3.59821 10.1584C3.59821 10.1584 3.14844 9.73397 2.69866 9.07411C2.24888 8.41426 1.85714 7.55466 1.85714 6.84843C1.85714 4.10557 4.13867 1.82638 6.96429 1.82638Z"
+												  fill="#00234D" />
+										</svg>
+									</a>
+
+									<a href="#" class="action-card action-addtocart">
+										<svg class="icon icon-cart" width="24" height="26" viewBox="0 0 24 26"
+											 fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M12 0.000183105C9.25391 0.000183105 7 2.25409 7 5.00018V6.00018H2.0625L2 6.93768L1 24.9377L0.9375 26.0002H23.0625L23 24.9377L22 6.93768L21.9375 6.00018H17V5.00018C17 2.25409 14.7461 0.000183105 12 0.000183105ZM12 2.00018C13.6562 2.00018 15 3.34393 15 5.00018V6.00018H9V5.00018C9 3.34393 10.3438 2.00018 12 2.00018ZM3.9375 8.00018H7V11.0002H9V8.00018H15V11.0002H17V8.00018H20.0625L20.9375 24.0002H3.0625L3.9375 8.00018Z"
+												  fill="#00234D" />
+										</svg>
+									</a>
+								</div>
+							</div>
+							<div class="product-card-details">
+
+								<h3 class="product-card-title">
+									<a href="collection-left-sidebar.html">Steel</a>
+								</h3>
+								<div class="product-card-price">
+									<span class="card-price-regular">Price</span>
+									<span class="card-price-compare text-decoration-line-through">$1759</span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- card 4 -->
+					<div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-duration="700">
+						<div class="product-card">
+							<div class="product-card-img">
+								<a class="hover-switch" href="collection-left-sidebar.html">
+									<img class="secondary-img" src="~/assets/img/collection/Prairie-Ledge.jpg"
+										 alt="product-img">
+									<img class="primary-img" src="~/assets/img/collection/Prairie-Ledge.jpg"
+										 alt="product-img">
+								</a>
+
+								<div class="product-card-action product-card-action-2 justify-content-center">
+									@* <a href="#quickview-modal" class="action-card action-quickview"
+									   data-bs-toggle="modal">
+										<svg width="26" height="26" viewBox="0 0 26 26" fill="none"
+											 xmlns="http://www.w3.org/2000/svg">
+											<path d="M10 0C15.5117 0 20 4.48828 20 10C20 12.3945 19.1602 14.5898 17.75 16.3125L25.7188 24.2812L24.2812 25.7188L16.3125 17.75C14.5898 19.1602 12.3945 20 10 20C4.48828 20 0 15.5117 0 10C0 4.48828 4.48828 0 10 0ZM10 2C5.57031 2 2 5.57031 2 10C2 14.4297 5.57031 18 10 18C14.4297 18 18 14.4297 18 10C18 5.57031 14.4297 2 10 2ZM11 6V9H14V11H11V14H9V11H6V9H9V6H11Z"
+												  fill="#00234D" />
+										</svg>
+									</a> *@
+
+									<a href="#" class="action-card action-wishlist">
+										<svg class="icon icon-wishlist" width="26" height="22"
+											 viewBox="0 0 26 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M6.96429 0.000183105C3.12305 0.000183105 0 3.10686 0 6.84843C0 8.15388 0.602121 9.28455 1.16071 10.1014C1.71931 10.9181 2.29241 11.4425 2.29241 11.4425L12.3326 21.3439L13 22.0002L13.6674 21.3439L23.7076 11.4425C23.7076 11.4425 26 9.45576 26 6.84843C26 3.10686 22.877 0.000183105 19.0357 0.000183105C15.8474 0.000183105 13.7944 1.88702 13 2.68241C12.2056 1.88702 10.1526 0.000183105 6.96429 0.000183105ZM6.96429 1.82638C9.73912 1.82638 12.3036 4.48008 12.3036 4.48008L13 5.25051L13.6964 4.48008C13.6964 4.48008 16.2609 1.82638 19.0357 1.82638C21.8613 1.82638 24.1429 4.10557 24.1429 6.84843C24.1429 8.25732 22.4018 10.1584 22.4018 10.1584L13 19.4036L3.59821 10.1584C3.59821 10.1584 3.14844 9.73397 2.69866 9.07411C2.24888 8.41426 1.85714 7.55466 1.85714 6.84843C1.85714 4.10557 4.13867 1.82638 6.96429 1.82638Z"
+												  fill="#00234D" />
+										</svg>
+									</a>
+
+									<a href="#" class="action-card action-addtocart">
+										<svg class="icon icon-cart" width="24" height="26" viewBox="0 0 24 26"
+											 fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M12 0.000183105C9.25391 0.000183105 7 2.25409 7 5.00018V6.00018H2.0625L2 6.93768L1 24.9377L0.9375 26.0002H23.0625L23 24.9377L22 6.93768L21.9375 6.00018H17V5.00018C17 2.25409 14.7461 0.000183105 12 0.000183105ZM12 2.00018C13.6562 2.00018 15 3.34393 15 5.00018V6.00018H9V5.00018C9 3.34393 10.3438 2.00018 12 2.00018ZM3.9375 8.00018H7V11.0002H9V8.00018H15V11.0002H17V8.00018H20.0625L20.9375 24.0002H3.0625L3.9375 8.00018Z"
+												  fill="#00234D" />
+										</svg>
+									</a>
+								</div>
+							</div>
+
+							<div class="product-card-details">
+								<h3 class="product-card-title">
+									<a href="collection-left-sidebar.html">Rocks</a>
+								</h3>
+								<div class="product-card-price">
+									<span class="card-price-regular">$1529</span>
+									<span class="card-price-compare text-decoration-line-through">$1759</span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+					<!-- END OF CARDS -->
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<!-- collection end -->
+	<!--  لحد هنا-->
+	<!-- shop by category start -->
+	<div class="shop-category mt-100 overflow-hidden">
+		<div class="collection-tab-inner mt-0">
+			<div class="container">
+				<div class="section-header text-center">
+					<h2 class="section-heading primary-color">Examples Of What We Offer</h2>
+				</div>
+				<div class="shop-category-2 shop-category-inner">
+					<div class="scattered-item" data-aos="fade-left" data-aos-duration="700">
+						<div class="scattered-wrapper">
+							<div class="scattered-content">
+								<img class="scattered-img" src="~/assets/img/Examples/steel1.jpg" alt="img">
+							</div>
+							<div class="scattered-details">
+								<h2 class="scattered-heading text-white" style="background-color: rgba(0, 0, 0, 0.5);">Steel</h2>
+
+							</div>
+						</div>
+					</div>
+					<div class="scattered-item" data-aos="fade-right" data-aos-duration="700">
+						<div class="scattered-wrapper">
+							<div class="scattered-content">
+								<img class="scattered-img" src="~/assets/img/Examples/cement.jpg" alt="img">
+							</div>
+							<div class="scattered-details">
+								<h2 class="scattered-heading text-white" style="background-color: rgba(0, 0, 0, 0.5);">Cement</h2>
+
+							</div>
+						</div>
+					</div>
+					<div class="scattered-item" data-aos="fade-left" data-aos-duration="700">
+						<div class="scattered-wrapper">
+							<div class="scattered-content">
+								<img class="scattered-img" src="~/assets/img/Examples/sand.jpg" alt="img">
+							</div>
+							<div class="scattered-details">
+								<h2 class="scattered-heading text-white" style="background-color: rgba(0, 0, 0, 0.5);">Sand</h2>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- shop by category end -->
+	<!-- video start -->
+	<div class="video-section mt-100 overflow-hidden">
+		<div class="overlay-furniture section-spacing"
+			 style="background: url('./assets/img/video/homevideothumbnail.min.png') no-repeat scroll bottom center/cover">
+			<div class="container video-container">
+				<div class="row">
+					<div class="col-12">
+						<div class="video-tools d-flex align-items-center justify-content-center">
+							<div class="video-button-area">
+								<a class="video-button" href="#video-modal" data-bs-toggle="modal">
+									<svg width="22" height="26" viewBox="0 0 22 26" fill="none"
+										 xmlns="http://www.w3.org/2000/svg">
+										<path d="M21.5 12.134C22.1667 12.5189 22.1667 13.4811 21.5 13.866L2 25.1244C1.33333 25.5093 0.499999 25.0281 0.499999 24.2583L0.5 1.74167C0.5 0.971867 1.33333 0.490743 2 0.875643L21.5 12.134Z"
+											  fill="#FEFEFE" />
+									</svg>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" tabindex="-1" id="video-modal">
+			<div class="modal-dialog modal-dialog-centered modal-xl">
+				<div class="modal-content" style="background-color: #000;">
+					<div class="modal-header border-0">
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+								aria-label="Close" id="close"></button>
+					</div>
+					<div class="modal-body">
+						<video style="width: 100%;" controls>
+							<source src="~/assets/img/video/Construction.Commercial.Cinematic.Video.mp4" type="video/mp4">
+							<source src="movie.ogg" type="video/ogg">
+							Your browser does not support the video tag.
+						</video>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- video end -->
+	<!-- testimonial start -->
+	<div class="testimonial-section mt-100 overflow-hidden home-section">
+		<div class="testimonial-inner">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-5 col-md-12 col-12" data-aos="fade-right" data-aos-duration="700">
+						<div class="section-header">
+							<h2 class="section-heading primary-color">What customer say</h2>
+
+						</div>
+					</div>
+					<div class="col-lg-6 offset-lg-1 col-md-12 col-12" data-aos="fade-left"
+						 data-aos-duration="700">
+						<div class="testimonial-container position-relative">
+							<div class="testimonial-slideshow common-slider" data-slick='{
+											"slidesToShow": 1,
+											"slidesToScroll": 1,
+											"dots": false,
+											"arrows": true
+										}'>
+								<div class="testimonial-item">
+									<div class="testimonial-icon-wrap d-flex align-items-center">
+										<div class="testimonial-icon-quote">
+											<svg width="40" height="29" viewBox="0 0 40 29" fill="none"
+												 xmlns="http://www.w3.org/2000/svg">
+												<path d="M0 28.99L11.7 0H19.5L12.22 28.99H0ZM20.28 28.99L32.11 0H39.91L32.5 28.99H20.28Z"
+													  fill="#00234D" />
+											</svg>
+										</div>
+										<div class="testimonial-icon-star d-flex align-items-center ms-3">
+											<img src="~/assets/img/icon/star.png" alt="img">
+											<img src="~/assets/img/icon/star.png" alt="img">
+											<img src="~/assets/img/icon/star.png" alt="img">
+											<img src="~/assets/img/icon/star.png" alt="img">
+											<img src="~/assets/img/icon/star.png" alt="img">
+										</div>
+									</div>
+									<p class="testimonial-review my-4 text_16">
+										“ I bought some bricks and cement from Construction Nation and I was very impressed by their quality
+										and durability. They delivered on time and offered great customer service.
+										I highly recommend them for any construction project..”
+									</p>
+									<div class="testimonial-reviewer d-flex align-items-center">
+
+										<div class="reviewer-info ms-4">
+											<h4 class="reviewer-name heading_18 mb-2 primary-color">
+												James Brown
+											</h4>
+											<p class="reviewer-desig text_14 m-0">Executive, HII</p>
+										</div>
+									</div>
+								</div>
+								<div class="testimonial-item">
+									<div class="testimonial-icon-wrap d-flex align-items-center">
+										<div class="testimonial-icon-quote">
+											<svg width="40" height="29" viewBox="0 0 40 29" fill="none"
+												 xmlns="http://www.w3.org/2000/svg">
+												<path d="M0 28.99L11.7 0H19.5L12.22 28.99H0ZM20.28 28.99L32.11 0H39.91L32.5 28.99H20.28Z"
+													  fill="#00234D" />
+											</svg>
+										</div>
+										<div class="testimonial-icon-star d-flex align-items-center ms-3">
+											<img src="~/assets/img/icon/star.png" alt="img">
+											<img src="~/assets/img/icon/star.png" alt="img">
+											<img src="~/assets/img/icon/star.png" alt="img">
+											<img src="~/assets/img/icon/star.png" alt="img">
+											<img src="~/assets/img/icon/star.png" alt="img">
+										</div>
+									</div>
+									<p class="testimonial-review my-4 text_16">
+										“ Construction Nation is the best place to buy construction materials. They have a wide range of products, competitive prices and fast shipping. I used their materials to build a shed and it turned out great.
+										They are very reliable and trustworthy.”
+									</p>
+									<div class="testimonial-reviewer d-flex align-items-center">
+
+										<div class="reviewer-info ms-4">
+											<h4 class="reviewer-name heading_18 mb-2 primary-color">
+												Kevin Chen
+											</h4>
+											<p class="reviewer-desig text_14 m-0">Executive, KMM</p>
+										</div>
+									</div>
+								</div>
+								<div class="testimonial-item">
+									<div class="testimonial-icon-wrap d-flex align-items-center">
+										<div class="testimonial-icon-quote">
+											<svg width="40" height="29" viewBox="0 0 40 29" fill="none"
+												 xmlns="http://www.w3.org/2000/svg">
+												<path d="M0 28.99L11.7 0H19.5L12.22 28.99H0ZM20.28 28.99L32.11 0H39.91L32.5 28.99H20.28Z"
+													  fill="#00234D" />
+											</svg>
+										</div>
+										<div class="testimonial-icon-star d-flex align-items-center ms-3">
+											<img src="~/assets/img/icon/star.png" alt="img">
+											<img src="~/assets/img/icon/star.png" alt="img">
+											<img src="~/assets/img/icon/star.png" alt="img">
+											<img src="~/assets/img/icon/star.png" alt="img">
+											<img src="~/assets/img/icon/star.png" alt="img">
+										</div>
+									</div>
+									<p class="testimonial-review my-4 text_16">
+										“ I am very satisfied with my purchase from Construction Nation. They have everything you need for construction, from tools to materials. Their materials are high-quality and easy to use. They also have friendly and helpful staff who can answer any questions you have.
+										They are the best in the business.”
+									</p>
+									<div class="testimonial-reviewer d-flex align-items-center">
+
+										<div class="reviewer-info ms-4">
+											<h4 class="reviewer-name heading_18 mb-2 primary-color">
+												John Smith
+											</h4>
+											<p class="reviewer-desig text_14 m-0">Executive, JSM</p>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="activate-arrows show-arrows-always article-arrows arrows-white"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- testimonial end -->
+	<!-- single banner start -->
+	<div class="single-banner-section mt-100 overflow-hidden">
+		<div class="position-relative overlay">
+			<img class="single-banner-img" src="~/assets/img/banner/gravel-plant-4727654_1280.jpg" alt="slide-1">
+
+			<div class="content-absolute content-slide">
+				<div class="container height-inherit d-flex align-items-center justify-content-center">
+					<div class="content-box single-banner-content py-4 text-center" data-aos="fade-up"
+						 data-aos-duration="700">
+						<h2 class="single-banner-heading heading_42 text-white animate__animated animate__fadeInUp"
+							data-animation="animate__animated animate__fadeInUp" data-aos="fade-up"
+							data-aos-duration="700">
+							Ready to build the future ?
+						</h2>
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>

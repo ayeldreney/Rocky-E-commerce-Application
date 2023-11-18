@@ -181,7 +181,7 @@ public class AuthService
                     notBefore: DateTime.Now,
                     issuer: _jwt.Issuer,
                     audience: _jwt.Audience,
-                    expires: DateTime.Now.AddMinutes(1),
+                    expires: expire,
                     signingCredentials: signingCredentials);
 
         var tokenHandler = new JwtSecurityTokenHandler();
