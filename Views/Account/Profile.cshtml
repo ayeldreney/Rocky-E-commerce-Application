@@ -1,61 +1,97 @@
 ﻿@model Rocky.ViewModels.Account.ProfileViewModel
 
 @{
-    ViewData["Title"] = "Profile";
-    Layout = "~/Views/Shared/_MainLayout.cshtml";
+	ViewData["Title"] = "Profile";
+	Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+<partial name="Breadcrumb" view-data="ViewData" render-mode="ServerPrerendered" />
+@section Css {
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/css/intlTelInput.css">
+	<style>
+		.iti {
+			width: 100%;
+		}
+
+	</style>
 }
 
-<h1>Profile</h1>
+<main id="MainContent" class="content-for-layout">
+	<div class="login-page mt-4">
+		<div class="container">
+			@if (ViewBag.success != null && ViewBag.success)
+			{
+				@:<div class="text-success">Profile Updated Successfully!</div>
+			}
+			<h2 class="text-center">Profile</h2>
+			<div class="row mx-auto w-75">
+				<form asp-action="Profile" id="ProfileForm">
+					<div class="section-header mb-3">
+						<h3 class="section-sub-heading text-center">View & Update your data</h3>
+					</div>
+					<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+					<div class="form-group my-2">
+						<label asp-for="FirstName" class="control-label"></label>
+						<input asp-for="FirstName" class="form-control" />
+						<span asp-validation-for="FirstName" class="text-danger"></span>
+					</div>
+					<div class="form-group my-2">
+						<label asp-for="LastName" class="control-label"></label>
+						<input asp-for="LastName" class="form-control" />
+						<span asp-validation-for="LastName" class="text-danger"></span>
+					</div>
+					<div class="form-group my-2">
+						<label asp-for="Username" class="control-label"></label>
+						<input asp-for="Username" id="readOnlyUserName" class="form-control" name="readOnlyUserName" readonly />
+						@Html.Hidden("Username", Model.Username)
 
-<h4>ProfileViewModel</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Profile">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="FirstName" class="control-label"></label>
-                <input asp-for="FirstName" class="form-control" />
-                <span asp-validation-for="FirstName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LastName" class="control-label"></label>
-                <input asp-for="LastName" class="form-control" />
-                <span asp-validation-for="LastName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Username" class="control-label"></label>
-                <input asp-for="Username" class="form-control" />
-                <span asp-validation-for="Username" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Address" class="control-label"></label>
-                <input asp-for="Address" class="form-control" />
-                <span asp-validation-for="Address" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PhoneNumber" class="control-label"></label>
-                <input asp-for="PhoneNumber" class="form-control" />
-                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+					</div>
+					<div class="form-group my-2">
+						<label asp-for="Email" class="control-label"></label>
+						<input asp-for="Email" class="form-control" />
+						<span asp-validation-for="Email" class="text-danger"></span>
+					</div>
+					<div class="form-group my-2">
+						<label asp-for="Address" class="control-label"></label>
+						<input asp-for="Address" class="form-control" />
+						<span asp-validation-for="Address" class="text-danger"></span>
+					</div>
+					<div class="form-group my-2">
+						<label asp-for="PhoneNumber" class="control-label"></label>
+						<input asp-for="PhoneNumber" class="form-control" placeholder="" />
+						<span asp-validation-for="PhoneNumber" class="text-danger"></span>
+					</div>
+					<div class="form-group my-2">
+						<label asp-for="Password" class="control-label"></label>
+						<input asp-for="Password" class="form-control" />
+						<span asp-validation-for="Password" class="text-danger"></span>
+					</div>
+					<div class="form-group text-center">
+						<input type="submit" value="@_phrase["Account", "SaveYourData"]" class="btn btn-primary" />
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</main>
+@section Scripts{
+	<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+	<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+	<script src="~/lib/cn/js/intlTelInput.min.js"></script>
+	<script>
+		const input = document.querySelector("#PhoneNumber");
+		const iti = window.intlTelInput(input, {
+			initialCountry: "auto",
+			geoIpLookup: callback => {
+				fetch("https://ipapi.co/json")
+					.then(res => res.json())
+					.then(data => callback(data.country_code))
+					.catch(() => callback("us"));
+			},
+			nationalMode: false,
+			autoInsertDialCode: true,
+			preferredCountries: ['eg', 'gb'],
+			utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
+		});
+	</script>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
+}

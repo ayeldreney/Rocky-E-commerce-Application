@@ -117,6 +117,24 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Address" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email Address</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>First Name</value>
+  </data>
+  <data name="InvalidPassword" xml:space="preserve">
+    <value>Password you entered is not valid!</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Last Name</value>
+  </data>
+  <data name="MobilePhone" xml:space="preserve">
+    <value>Mobile Phone</value>
+  </data>
   <data name="NotFoundMessage" xml:space="preserve">
     <value>Sorry Your path is not right go back again</value>
   </data>
