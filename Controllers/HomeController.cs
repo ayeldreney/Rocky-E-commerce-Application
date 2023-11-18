@@ -18,17 +18,17 @@ namespace Rocky.Controllers
 
         }
 
-        public IActionResult Index()
+      public IActionResult Index()
+      {
+        HomeViewModel homeViewModel = new HomeViewModel()
         {
-            HomeViewModel homeViewModel = new HomeViewModel() {
-                Products = _db.Products.Include(x => x.Category).ToList(),
-                Categories = _db.Categories.ToList(), 
-            
-            }; 
+          Products = _db.Products.Include(x => x.Category).ToList(),
+          Categories = _db.Categories.ToList(),
 
-            return View(homeViewModel);
-        }
+        };
 
+        return View("Home", homeViewModel);
+      }
 
         public IActionResult Details(int id) {
 
@@ -45,8 +45,6 @@ namespace Rocky.Controllers
         
         }
 
-
-
         public IActionResult Privacy()
         {
             return View();
@@ -58,4 +56,25 @@ namespace Rocky.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
+
+		public ActionResult SearchAboutProduct(string searchQuery)
+		{
+			if (string.IsNullOrEmpty(searchQuery))
+			{
+				ModelState.AddModelError("searchQuery", "Please enter a search query.");
+				return View();
+			}
+			var filteredProducts = _db.Products.Include(p => p.Category).Where(p =>
+				p.Name.Contains(searchQuery, StringComparison.OrdinalIgnoreCase) ||
+				p.Category.Name.Contains(searchQuery, StringComparison.OrdinalIgnoreCase)
+			).ToList();
+
+			if (filteredProducts.Count() == 0)
+			{
+				ModelState.AddModelError("searchQuery", "No results found.");
+			}
+
+			return View(filteredProducts);
+		}
+	}
 }

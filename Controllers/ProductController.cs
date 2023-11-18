@@ -1,13 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using NuGet.Protocol;
-using Rocky.ViewModels;
-using Rocky.DAL.Models;
-using Rocky.DAL.Data;
 using Rocky.BLL.DTOs;
+using Rocky.DAL.Data;
+using Rocky.DAL.Models;
+using Rocky.ViewModels;
 
 namespace Rocky.Controllers
 {
@@ -38,7 +35,8 @@ namespace Rocky.Controllers
 
         //get UpSert
         [HttpGet]
-        public IActionResult UpSert(int? id) {
+        public IActionResult UpSert(int? id)
+        {
 
             /*  IEnumerable<SelectListItem> CategoryDropDown = _db.Category.Select(
               i=>new SelectListItem
@@ -54,7 +52,7 @@ namespace Rocky.Controllers
 
             ProductViewModel productVM = new ProductViewModel()
             {
-                Product = new Product() {},
+                Product = new Product() { },
                 CategorySelectList = _db.Categories.Select(i => new SelectListItem
                 {
                     Text = i.Name,
@@ -106,17 +104,17 @@ namespace Rocky.Controllers
                     {
                         Id = productVM.Product.Id,
                         Name = productVM.Product.Name,
-                        ShortDesc = productVM.Product.ShortDesc,    
+                        ShortDesc = productVM.Product.ShortDesc,
                         Description = productVM.Product.Description,
                         Price = productVM.Product.Price,
                         Image = productVM.Product.Image,
                         CategoryId = productVM.Product.CategoryId,
                     };
-		            _db.Products.Add(newProd);
-					_db.SaveChanges();
-					return RedirectToAction("Index");
-				}
-				else
+                    _db.Products.Add(newProd);
+                    _db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
                 {
                     //updating
                     var objFromDb = _db.Products.AsNoTracking().FirstOrDefault(u => u.Id == productVM.Product.Id);
@@ -145,32 +143,32 @@ namespace Rocky.Controllers
                     {
                         productVM.Product.Image = objFromDb.Image;
                     }
-					var newProd = new Product()
-					{
-						Id = productVM.Product.Id,
-						Name = productVM.Product.Name,
-                        ShortDesc = productVM.Product.ShortDesc,    
-						Description = productVM.Product.Description,
-						Price = productVM.Product.Price,
-						Image = productVM.Product.Image,
-						CategoryId = productVM.Product.CategoryId,
-					};
-					_db.Products.Update(newProd);
+                    var newProd = new Product()
+                    {
+                        Id = productVM.Product.Id,
+                        Name = productVM.Product.Name,
+                        ShortDesc = productVM.Product.ShortDesc,
+                        Description = productVM.Product.Description,
+                        Price = productVM.Product.Price,
+                        Image = productVM.Product.Image,
+                        CategoryId = productVM.Product.CategoryId,
+                    };
+                    _db.Products.Update(newProd);
                 }
 
                 _db.SaveChanges();
                 return RedirectToAction("Index");
             }
-			ProductViewModel productvM = new ProductViewModel()
-			{
-				Product = new Product(),
-				CategorySelectList = _db.Categories.Select(i => new SelectListItem
-				{
-					Text = i.Name,
-					Value = i.Id.ToString()
-				})
-			};
-			return View(productvM);
+            ProductViewModel productvM = new ProductViewModel()
+            {
+                Product = new Product(),
+                CategorySelectList = _db.Categories.Select(i => new SelectListItem
+                {
+                    Text = i.Name,
+                    Value = i.Id.ToString()
+                })
+            };
+            return View(productvM);
         }
 
         //GET - DELETE

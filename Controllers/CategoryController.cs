@@ -12,21 +12,22 @@ namespace Rocky.Controllers
 
         public CategoryController(ApplicationDBcontext applicationDBcontext)
         {
-            _context = applicationDBcontext;    
+            _context = applicationDBcontext;
         }
 
 
         public IActionResult Index()
         {
 
-            IEnumerable<Category> categories = _context.Set<Category>().AsNoTracking().ToList();        
+            IEnumerable<Category> categories = _context.Set<Category>().AsNoTracking().ToList();
             return View(categories);
         }
 
 
         //get create
         [HttpGet]
-        public IActionResult Create() {
+        public IActionResult Create()
+        {
 
             return View();
         }
@@ -35,15 +36,17 @@ namespace Rocky.Controllers
         //post create 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Category category) {
+        public IActionResult Create(Category category)
+        {
 
-            if (ModelState.IsValid) {
+            if (ModelState.IsValid)
+            {
                 _context.Set<Category>().Add(category);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
-            else { return View(category); }     
-           
+            else { return View(category); }
+
 
         }
 
@@ -51,13 +54,15 @@ namespace Rocky.Controllers
         [HttpGet]
         public IActionResult Edit(int? id)
         {
-            if (id is null || id is 0) {
-                return NotFound();  
+            if (id is null || id is 0)
+            {
+                return NotFound();
             }
 
             var obj = _context.Categories.Find(id);
 
-            if (obj is null) {
+            if (obj is null)
+            {
                 return NotFound();
             }
 
@@ -68,16 +73,18 @@ namespace Rocky.Controllers
         //post edit
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Category obj) {
+        public IActionResult Edit(Category obj)
+        {
 
-            if (ModelState.IsValid) { 
-            _context.Categories.Update(obj);
-            _context.SaveChanges();
-             return RedirectToAction("Index");    
+            if (ModelState.IsValid)
+            {
+                _context.Categories.Update(obj);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
             }
 
 
-        return View(obj);      
+            return View(obj);
         }
 
 
@@ -85,7 +92,7 @@ namespace Rocky.Controllers
 
         //get delete
         [HttpGet]
-      
+
         public IActionResult Delete(int? id)
         {
             if (id is null || id is 0)
@@ -113,16 +120,16 @@ namespace Rocky.Controllers
         public IActionResult DeletePost(int? id)
         {
             var obj = _context.Categories.Find(id);
-         
-            if(obj is null) return NotFound();  
 
-                _context.Categories.Remove(obj);
-                _context.SaveChanges();
-                return RedirectToAction("Index");
-          
+            if (obj is null) return NotFound();
+
+            _context.Categories.Remove(obj);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
 
 
-        
+
+
         }
 
 
