@@ -27,50 +27,50 @@ builder.Services.AddDbContext<ApplicationDBcontext>(options => options.UseSqlSer
 
 builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
 {
-    options.Password.RequireUppercase = true;
-    options.Password.RequireLowercase = true;
-    options.Password.RequireNonAlphanumeric = true;
-    options.Password.RequiredLength = 6;
-    options.User.RequireUniqueEmail = true;
+	options.Password.RequireUppercase = true;
+	options.Password.RequireLowercase = true;
+	options.Password.RequireNonAlphanumeric = true;
+	options.Password.RequiredLength = 6;
+	options.User.RequireUniqueEmail = true;
 
-    options.Lockout.MaxFailedAccessAttempts = AppSettings.UserSettings.MaxFailedAccessAttempts;
-    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(AppSettings.UserSettings.LockoutTimeSpanInMinutes);
+	options.Lockout.MaxFailedAccessAttempts = AppSettings.UserSettings.MaxFailedAccessAttempts;
+	options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(AppSettings.UserSettings.LockoutTimeSpanInMinutes);
 
 }).AddEntityFrameworkStores<ApplicationDBcontext>();
 
 #region Authentication
 builder.Services.AddAuthentication(options =>
 {
-    options.DefaultAuthenticateScheme = "default";
-    options.DefaultChallengeScheme = "default";
+	options.DefaultAuthenticateScheme = "default";
+	options.DefaultChallengeScheme = "default";
 })
 .AddCookie(config =>
 {
-    config.Cookie.Name = AppSettings.UserSettings.TokenBearerCookieName;
+	config.Cookie.Name = AppSettings.UserSettings.TokenBearerCookieName;
 })
 .AddJwtBearer("default", options =>
 {
-    options.Events = new JwtBearerEvents()
-    {
-        OnMessageReceived = context =>
-        {
-            string? _token = "";
-            context.Request.Cookies.TryGetValue(AppSettings.UserSettings.TokenBearerCookieName, out _token);
-            context.Token = _token;
-            return Task.CompletedTask;
-        }
-    };
-    var jwtOptions = builder.Configuration.GetSection("JWT");
-    var key = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtOptions.GetValue<string>("Key")!));
+	options.Events = new JwtBearerEvents()
+	{
+		OnMessageReceived = context =>
+		{
+			string? _token = "";
+			context.Request.Cookies.TryGetValue(AppSettings.UserSettings.TokenBearerCookieName, out _token);
+			context.Token = _token;
+			return Task.CompletedTask;
+		}
+	};
+	var jwtOptions = builder.Configuration.GetSection("JWT");
+	var key = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtOptions.GetValue<string>("Key")!));
 
-    options.TokenValidationParameters = new TokenValidationParameters
-    {
-        ValidateIssuer = false,
-        ValidateAudience = false,
-        IssuerSigningKey = key,
-        ValidateLifetime = true,
-        ClockSkew = TimeSpan.Zero,
-    };
+	options.TokenValidationParameters = new TokenValidationParameters
+	{
+		ValidateIssuer = false,
+		ValidateAudience = false,
+		IssuerSigningKey = key,
+		ValidateLifetime = true,
+		ClockSkew = TimeSpan.Zero,
+	};
 });
 #endregion
 
@@ -84,28 +84,29 @@ builder.Services.AddTransient<AuthService>();
 builder.Services.AddLocalization(options => options.ResourcesPath = Rocky.BLL.Constants.AppSettings.LocalizationResourcesPath);
 
 builder.Services.AddMvc()
-    .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
-    .AddDataAnnotationsLocalization(options =>
-    {
-        options.DataAnnotationLocalizerProvider = (type, factory) =>
-        {
-            var assemblyName = new AssemblyName(typeof(Phrase).GetTypeInfo().Assembly.FullName!);
-            return factory.Create("DataAnnotations", assemblyName.Name!);
-        };
-    });
+	.AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+	.AddDataAnnotationsLocalization(options =>
+	{
+		options.DataAnnotationLocalizerProvider = (type, factory) =>
+		{
+			var assemblyName = new AssemblyName(typeof(Phrase).GetTypeInfo().Assembly.FullName!);
+			return factory.Create("DataAnnotations", assemblyName.Name!);
+		};
+	});
 builder.Services.AddSingleton<Phrase>();
 
 #endregion
 
+builder.Services.AddScoped<CommonHelpers>();
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+	app.UseExceptionHandler("/Home/Error");
+	// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+	app.UseHsts();
 }
 
 app.UseHttpsRedirection();
@@ -123,8 +124,8 @@ app.UseAuthorization();
 #endregion
 
 app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+	name: "default",
+	pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
 

@@ -180,5 +180,6 @@
 
 document.querySelectorAll(".language-changer").forEach(i => i.addEventListener("click", function (e) {
     e.preventDefault();
-    document.cookie = "language=" + i.dataset.value;
+    document.cookie = "language=" + i.dataset.value + ";path=/";
+    console.log("Lang Called");
 }));

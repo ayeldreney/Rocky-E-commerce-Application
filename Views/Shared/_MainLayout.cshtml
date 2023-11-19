@@ -1,10 +1,12 @@
 ﻿@using Microsoft.AspNetCore.Identity
+@using Rocky.BLL.Constants
+@using Rocky.BLL.Languages;
 @inject UserManager<AppUser> UserManager
 @{
 	var currentUser = UserManager.GetUserAsync(User).Result;
 }
 <!doctype html>
-<html lang="en" dir="@(Rocky.BLL.Constants.AppSettings.isRightToLeft == false ? "ltr" : "rtl")" class="no-js">
+<html lang="en" dir="@(AppSettings.isRightToLeft == false ? "ltr" : "rtl")" @* class="no-js" *@>
 
 <head>
 	<title>Construction Nation</title>
@@ -12,27 +14,49 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	@* <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> *@
+
 	<meta name="description" content="meta description">
 	<link rel="shortcut icon" href="~/assets/img/favicon.png" type="image/x-icon">
 	<!-- fonts -->
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-		  rel="stylesheet">
+@* 	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> *@
+	@* <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+		  rel="stylesheet"> *@
 	<!-- all css -->
 	<link rel="stylesheet" href="~/assets/css/theme-default.css">
 	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
-	@if (Rocky.BLL.Constants.AppSettings.isRightToLeft == true)
+	@if (AppSettings.isRightToLeft)
 	{
-		@:<link rel="stylesheet" href="~/lib/bootstrap//dist/css/bootstrap.rtl.min.css" />
+		<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.rtl.min.css" />
 	}
 	<link rel="stylesheet" href="~/lib/cn/css/slick.css">
 	<link rel="stylesheet" href="~/lib/cn/css/lineawesome.css">
 	<link rel="stylesheet" href="~/lib/cn/css/aos.css">
 	<link rel="stylesheet" href="~/lib/cn/css/animate.css">
 	<link rel="stylesheet" href="~/lib/cn/css/fancybox.css" />
- 	<link rel="stylesheet" href="~/assets/css/style.css" />
+	<link rel="stylesheet" href="~/assets/css/style.css" />
+	@if (AppSettings.isRightToLeft)
+	{
+		<link rel="stylesheet" href="~/assets/css/style.rtl.css" />
+	}
 	<link rel="stylesheet" href="~/css/site.css" />
+	<link href="~/lib/cn/css/jquery.ui.min.css" rel="Stylesheet" />
+	 <style>
+		.ui-autocomplete {
+			z-index: 999999999999999999999 !important;
+		}
+
+		.ui-helper-hidden-accessible
+		{
+			z-index: 55345 !important;
+		}
+
+		.ui-front {
+			z-index: 9999;
+		}
+
+	</style>
 	@await RenderSectionAsync("Css", required: false)
 </head>
 
@@ -59,14 +83,22 @@
 					<div class="col-lg-3 d-lg-block d-none">
 						<div class="announcement-meta-wrapper d-flex align-items-center justify-content-end">
 							<div class="announcement-meta d-flex align-items-center">
-								<a class="announcement-login announcement-text text-white" href="@Url.Action("Login", "Account")">
-									<svg class="icon icon-user" width="24" height="24" viewBox="0 0 10 11" fill="none"
-										 xmlns="http://www.w3.org/2000/svg">
-										<path d="M5 0C3.07227 0 1.5 1.57227 1.5 3.5C1.5 4.70508 2.11523 5.77539 3.04688 6.40625C1.26367 7.17188 0 8.94141 0 11H1C1 8.78516 2.78516 7 5 7C7.21484 7 9 8.78516 9 11H10C10 8.94141 8.73633 7.17188 6.95312 6.40625C7.88477 5.77539 8.5 4.70508 8.5 3.5C8.5 1.57227 6.92773 0 5 0ZM5 1C6.38672 1 7.5 2.11328 7.5 3.5C7.5 4.88672 6.38672 6 5 6C3.61328 6 2.5 4.88672 2.5 3.5C2.5 2.11328 3.61328 1 5 1Z"
-											  fill="#fff" />
-									</svg>
-									<span>@_phrase["General", "Login"]</span>
-								</a>
+								@if(!this.IsAuthenticated())
+								{
+									<a class="announcement-login announcement-text text-white" href="@Url.Action("Login", "Account")">
+										<svg class="icon icon-user" width="24" height="24" viewBox="0 0 10 11" fill="none"
+											 xmlns="http://www.w3.org/2000/svg">
+											<path d="M5 0C3.07227 0 1.5 1.57227 1.5 3.5C1.5 4.70508 2.11523 5.77539 3.04688 6.40625C1.26367 7.17188 0 8.94141 0 11H1C1 8.78516 2.78516 7 5 7C7.21484 7 9 8.78516 9 11H10C10 8.94141 8.73633 7.17188 6.95312 6.40625C7.88477 5.77539 8.5 4.70508 8.5 3.5C8.5 1.57227 6.92773 0 5 0ZM5 1C6.38672 1 7.5 2.11328 7.5 3.5C7.5 4.88672 6.38672 6 5 6C3.61328 6 2.5 4.88672 2.5 3.5C2.5 2.11328 3.61328 1 5 1Z"
+												  fill="#fff" />
+										</svg>
+										<span>@_phrase["General", "Login"]</span>
+									</a>
+								} else
+								{
+									@:<span class="announcement-text text-white">
+									@:Welcome, @currentUser.FirstName
+									@:</span>
+								}
 								<span class="separator-login d-flex px-3">
 									<svg width="2" height="9" viewBox="0 0 2 9" fill="none"
 										 xmlns="http://www.w3.org/2000/svg">
@@ -76,8 +108,9 @@
 								<div class="currency-wrapper">
 									<button type="button" class="currency-btn btn-reset text-white"
 											data-bs-toggle="dropdown" aria-expanded="false">
-										<img class="flag" src="~/assets/img/flag/usd.jpg" alt="img">
-										<span>English US</span>
+										
+										<img class="flag" src="~/assets/img/flag/@AppSettings.Culture.SupportedCulturesDetailed[AppSettings.LocalizationCulture].FlagImageName" alt="img">
+										<span>@AppSettings.Culture.SupportedCulturesDetailed[AppSettings.LocalizationCulture].LangNameInNative</span>
 										<span>
 											<svg class="icon icon-dropdown" xmlns="http://www.w3.org/2000/svg"
 												 width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff"
@@ -88,18 +121,16 @@
 									</button>
 
 									<ul class="currency-list dropdown-menu dropdown-menu-end px-2">
-										<li class="currency-list-item ">
-											<a class="currency-list-option language-changer" href="#" data-value="en-US">
-												<img class="flag" src="~/assets/img/flag/usd.jpg" alt="img">
-												<span>English US</span>
-											</a>
-										</li>
-										<li class="currency-list-item ">
-											<a class="currency-list-option language-changer" href="#" data-value="ar-EG">
-												<img class="flag" src="~/assets/img/flag/cad.jpg" alt="img">
-												<span>Arabic EG</span>
-											</a>
-										</li>
+										@foreach (KeyValuePair<string, LanguageBase> lang in AppSettings.Culture.SupportedCulturesDetailed)
+										{
+											<li class="currency-list-item">
+												<a class="currency-list-option language-changer" href="#"
+													data-value="@lang.Value.Code">
+													<img class="flag" src="~/assets/img/flag/@lang.Value.FlagImageName" alt="img">
+													<span>@lang.Value.LangNameInNative</span>
+												</a>
+											</li>
+										}
 									</ul>
 								</div>
 							</div>
@@ -122,7 +153,7 @@
 								</a>
 							</div>
 						</div>
-						<div class="col-lg-6 d-lg-block d-none">
+						<div class="col-lg-7 d-lg-block d-none">
 							<nav class="site-navigation">
 								<ul class="main-menu list-unstyled justify-content-center">
 									<li class="menu-list-item nav-item has-dropdown @((string?)ViewData["Active"] == "Index" ? "active" : "")">
@@ -132,38 +163,71 @@
 											</a>
 										</div>
 									</li>
-
-									<li class="menu-list-item nav-item has-megamenu @((string?)ViewData["Active"] == "Login" ? "active" : "")">
-										<div class="mega-menu-header">
-											<a class="nav-link" href="@Url.Action("Login", "Account")">
-												@_phrase["General","Login"]
-											</a>
-										</div>
-									</li>
-
-									<li class="menu-list-item nav-item has-dropdown @((string?)ViewData["Active"] == "Register" ? "active" : "")">
-										<div class="mega-menu-header">
-											<a class="nav-link" href="@Url.Action("Register", "Account")">@_phrase["General","Register"]</a>
-
-										</div>
-									</li>
-
+									<li class="menu-list-item nav-item has-dropdown">
+											<div class="mega-menu-header">
+												<a class="nav-link" href="#">
+													@_phrase["General","Categories"]
+												</a>
+												<span class="open-submenu">
+													<svg class="icon icon-dropdown" xmlns="http://www.w3.org/2000/svg"
+														 width="24" height="24" viewBox="0 0 24 24" fill="none"
+														 stroke="currentColor" stroke-width="2" stroke-linecap="round"
+														 stroke-linejoin="round">
+														<polyline points="6 9 12 15 18 9"></polyline>
+													</svg>
+												</span>
+											</div>
+											<div class="submenu-transform submenu-transform-desktop">
+												<ul class="submenu list-unstyled">
+													@if (CommonHelpers.Categories != null)
+													@foreach (Category category in CommonHelpers.Categories)
+													{
+														<li class="menu-list-item nav-item-sub">
+																<a class="nav-link-sub nav-text-sub" href="@Url.Action("View", "Category", new { id = category.Id })">
+																@category.Name
+															</a>
+														</li>
+													}
+												</ul>
+											</div>
+										</li>
+									@if (!this.IsAuthenticated())
+									{
+										<li class="menu-list-item nav-item has-dropdown @((string?)ViewData["Active"] == "Register" ? "active" : "")">
+											<div class="mega-menu-header">
+												<a class="nav-link" href="@Url.Action("Register", "Account")">
+													@_phrase["General","Register"]
+												</a>
+											</div>
+										</li>
+									}
+									else
+									{
+										<li class="menu-list-item nav-item has-dropdown @((string?)ViewData["Active"] == "Register" ? "active" : "")">
+											<div class="mega-menu-header">
+												<a class="nav-link" href="@Url.Action("Services", "Home")">
+													@_phrase["General","OurServices"]
+												</a>
+											</div>
+										</li>
+									}
 									<li class="menu-list-item nav-item has-dropdown">
 										<div class="mega-menu-header">
-											<a class="nav-link" href="about-us.html">
+											<a class="nav-link" href="@Url.Action("Aboutus", "Index")">
 												@_phrase["General","AboutUs"]
 											</a>
-
 										</div>
 									</li>
 
 									<li class="menu-list-item nav-item">
-										<a class="nav-link" href="contact.html">@_phrase["General","Contact"]</a>
+										<a class="nav-link" href="@Url.Action("Contact", "Index" )">
+											@_phrase["General","Contact"]
+										</a>
 									</li>
 								</ul>
 							</nav>
 						</div>
-						<div class="col-lg-3 col-md-8 col-8">
+						<div class="col-lg-2 col-md-8 col-8">
 							<div class="header-action d-flex align-items-center justify-content-end">
 								<a class="header-action-item header-search" href="javascript:void(0)">
 									<svg class="icon icon-search" width="20" height="20" viewBox="0 0 20 20" fill="none"
@@ -262,7 +326,7 @@
 				</div>
 				<div class="search-wrapper">
 					<div class="container">
-						<form action="#" class="search-form d-flex align-items-center">
+						<form asp-action="Search" asp-controller="Home" method="get" class="search-form d-flex align-items-center">
 							<button type="submit" class="search-submit bg-transparent pl-0 text-start">
 								<svg class="icon icon-search" width="20" height="20" viewBox="0 0 20 20" fill="none"
 									 xmlns="http://www.w3.org/2000/svg">
@@ -271,7 +335,15 @@
 								</svg>
 							</button>
 							<div class="search-input mr-4">
-								<input type="text" placeholder="Search your products..." autocomplete="off">
+								
+								@if (ViewContext.RouteData.Values["Action"].ToString() == "Search" && ViewBag.searchQuery != null)
+								{
+									<input id="searchProducts" name="searchQuery" type="text" placeholder="Search your products..." autocomplete="off" value="@ViewBag.searchQuery" />
+								}
+								else
+								{
+									<input id="searchProducts" name="searchQuery" type="text" placeholder="Search your products..." autocomplete="off" value="" />
+								}
 							</div>
 							<div class="search-close">
 								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -455,12 +527,31 @@
 		<partial name="_MainDrawers" />
 
 		<!-- all js -->
-		<script src="~/lib/jquery/dist/jquery.min.js"></script>
+		<script src="@Url.Content("~/lib/jquery/dist/jquery.min.js")"></script>
 		<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 		<script src="~/lib/cn/js/slick.min.js"></script>
 		<script src="~/lib/cn/js/aos.min.js"></script>
 		<script src="~/lib/cn/js/fancybox.umd.js"></script>
 		<script src="~/assets/js/main.js"></script>
+		<script src="~/lib/cn/js/jquery-ui.js"></script>
+		@* <script src="http://code.jquery.com/jquery-migrate-3.0.0.min.js"></script> *@
+		<script>
+			$(document).ready(function () {
+				$('#searchProducts').autocomplete({
+					source: function (request, response) {
+						$.getJSON("@Url.Action("SearchApi", "Home")?q=" + request.term, function (data) {
+							response(data);
+						});
+					},
+					minLength: 2,
+					delay: 100
+				});
+			});
+			// document.addEventListener('DOMContentLoaded', e => {
+			// 	$('#searchProducts').autocomplete()
+			// }, false)
+
+		</script>
 		@await RenderSectionAsync("Scripts", required: false)
 	</div>
 </body>

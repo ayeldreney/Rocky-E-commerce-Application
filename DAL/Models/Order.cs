@@ -5,15 +5,15 @@ namespace Rocky.DAL.Models;
 
 public class Order
 {
-    [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int Id { get; set; }
+	[Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+	public int Id { get; set; }
 
-    [Required, ForeignKey("User")]
-    public string UserId { get; set; }
+	[Required, ForeignKey("User")]
+	public string UserId { get; set; }
 
-    [Timestamp]
-    public byte[] Timestamp { get; set; }
+	[Timestamp]
+	public byte[] Timestamp { get; set; }
 
-    public virtual AppUser User { get; set; }
-    public virtual IEnumerable<OrderLine> OrderLines { get; set; } = Enumerable.Empty<OrderLine>();
+	public virtual AppUser User { get; set; }
+	public virtual IEnumerable<OrderLine> OrderLines { get; set; } = Enumerable.Empty<OrderLine>();
 }

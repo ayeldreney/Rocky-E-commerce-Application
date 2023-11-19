@@ -2,6 +2,6 @@
 
 public class TokenDto
 {
-    public string Token { get; set; }
-    public DateTime ValidTo { get; internal set; }
+	public string Token { get; set; }
+	public DateTime ValidTo { get; internal set; }
 }

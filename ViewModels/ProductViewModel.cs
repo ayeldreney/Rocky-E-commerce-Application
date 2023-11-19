@@ -3,13 +3,13 @@ using Rocky.DAL.Models;
 
 namespace Rocky.ViewModels
 {
-    public class ProductViewModel
-    {
+	public class ProductViewModel
+	{
 
 
-        public Product Product { get; set; }
-        public IEnumerable<SelectListItem> CategorySelectList { get; set; }
+		public Product Product { get; set; }
+		public IEnumerable<SelectListItem> CategorySelectList { get; set; }
 
 
-    }
+	}
 }

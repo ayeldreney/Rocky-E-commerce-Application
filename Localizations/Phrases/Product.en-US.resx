@@ -117,4 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AlphaAZ" xml:space="preserve">
+    <value>Alphabetically A-Z</value>
+  </data>
+  <data name="AlphaZA" xml:space="preserve">
+    <value>Alphabetically Z-A</value>
+  </data>
+  <data name="DateNewOld" xml:space="preserve">
+    <value>Date, New to Old</value>
+  </data>
+  <data name="DateOldNew" xml:space="preserve">
+    <value>Date, Old to New</value>
+  </data>
+  <data name="PriceHighLow" xml:space="preserve">
+    <value>Price, High to Low</value>
+  </data>
+  <data name="PriceLowHigh" xml:space="preserve">
+    <value>Price, Low to High</value>
+  </data>
 </root>
