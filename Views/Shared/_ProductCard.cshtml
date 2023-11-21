@@ -31,9 +31,20 @@
 				<a href="@Url.Action("View", "Product", new { id = Model.Id })">@Model.Name</a>
 			</h3>
 			<div class="product-card-price">
-				<span class="card-price-regular">@Model.Price.ToString("C")</span>
+				<span class="card-price-regular">@Model.Price.ToString("C")
+					@if (!String.IsNullOrWhiteSpace(Model.Unit))
+					{
+						@:Per @Model.Unit
+					}
+				</span>
 				@* <span class="card-price-compare text-decoration-line-through">$1759</span> *@
 			</div>
+			@if (!String.IsNullOrWhiteSpace(Model.Vendor))
+			{
+				<div>
+					By @Model.Vendor
+				</div>
+			}
 		</div>
 	</div>
 </div>

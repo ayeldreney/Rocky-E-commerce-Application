@@ -21,12 +21,15 @@ public class Product
 
 	public string Image { get; set; } = string.Empty;
 
+	public string? Vendor { get; set; }
+
+	public string? Unit { get; set; }
+
 	[Display(Name = "Category Type")]
 	public int CategoryId { get; set; }
-
-//	public int VendorId { get; set; }
-
+	
 	[ForeignKey("CategoryId")]
 	public virtual Category Category { get; set; }
 
+	public virtual HashSet<Wishlist> Wishlists { get; set; } = new HashSet<Wishlist>();
 }

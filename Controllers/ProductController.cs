@@ -1,11 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Azure;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Rocky.BLL.Constants;
 using Rocky.BLL.DTOs;
+using Rocky.BLL.Helpers;
 using Rocky.DAL.Data;
 using Rocky.DAL.Models;
 using Rocky.ViewModels;
+using System.Globalization;
 
 namespace Rocky.Controllers
 {
@@ -30,6 +33,90 @@ namespace Rocky.Controllers
 			//};
 
 			return View(objList);
+		}
+
+		public IActionResult List(int? priceFrom, int? priceTo, string? categoryList, [FromQuery] int? page, [FromQuery] string? sortBy, string? order)
+		{
+			int[]? categories = categoryList.StringToIntArray();
+			if (priceFrom == null
+				&& priceTo == null
+				&& (categories == null || categories.Length == 0)
+			) return BadRequest();
+
+			IEnumerable<Product> query = _db.Products.AsEnumerable();
+
+			if (priceFrom > 0) query = query.Where(p => p.Price > priceFrom);
+			if (priceTo > 0) query = query.Where(p =>  p.Price < priceTo);
+			if (categories  != null && categories.Length > 0)
+			{
+				query = query.Where(p => categories.Contains(p.CategoryId));
+			}
+
+
+			if (page == null || page < 1)
+			{
+				page = 1;
+			}
+			var productsPerPage = AppSettings.ProductView.ProductsPerPage;
+
+			SortListBase? sort = AppSettings.ProductView.SortByList[0];
+			if (sortBy != null)
+			{
+				if (order == null || !new string[] { "ASC", "DESC" }.Contains(order))
+					order = "ASC";
+
+				for (int i = 0; i < AppSettings.ProductView.SortByList.Length; i++)
+				{
+					if (AppSettings.ProductView.SortByList[i].Column.ToLower() == sortBy.ToLower())
+					{
+						if (order == AppSettings.ProductView.SortByList[i].Order)
+						{
+							sort = AppSettings.ProductView.SortByList[i];
+							break;
+						}
+					}
+				}
+				ViewBag.sortBy = sort.Column;
+				ViewBag.order = order;
+			}
+
+			int productsCount = query.Count();
+			int totalPages = (int)Math.Ceiling((double)productsCount / productsPerPage);
+
+			if (page > totalPages) page = totalPages;
+
+			List<Product> Products;
+
+			if (sort.Order == "DESC")
+			{
+				Products = query.OrderByDescending(p => p.GetType().GetProperty(sort.Column)!.GetValue(p, null))
+					.Skip(((int)page - 1) * productsPerPage)
+					.Take(productsPerPage).ToList();
+			}
+			else
+			{
+				Products = query.OrderBy(p => p.GetType().GetProperty(sort.Column)!.GetValue(p, null))
+					.Skip(((int)page - 1) * productsPerPage)
+					.Take(productsPerPage).ToList();
+			}
+
+			ViewBag.priceFrom = priceFrom;
+			ViewBag.priceTo = priceTo;
+			ViewBag.categories = categories;
+
+			ProductListViewModel model = new ProductListViewModel()
+			{
+				Products = Products,
+				TotalPages = totalPages,
+				ProductsCount = productsCount,
+				CurrentPage = (int)page,
+				ProductsPerPage = productsPerPage,
+				NextPage = (page + 1 <= totalPages ? (int)page + 1 : 0),
+				PreviousPage = (page == 1 ? (int)0 : (int)page - 1),
+				OrderBy = sort.Phrase,
+			};
+
+			return View("ProductListView", model);
 		}
 
 		//get UpSert

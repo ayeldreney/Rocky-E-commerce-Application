@@ -1,5 +1,18 @@
-﻿@model ProductListViewModel
+﻿@using Microsoft.AspNetCore.Http
+@using Rocky.BLL.DTOs;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@model ProductListViewModel
 @{
+	string? sortBy = ViewBag.sortBy ?? null;
+	string? order = ViewBag.order ?? null;
+	int? priceFrom = ViewBag.priceFrom;
+	int? priceTo = ViewBag.priceTo;
+	int[]? categories = null;
+	if (ViewBag.categories != null && ViewBag.categories.Length > 0)
+	{
+		categories = ViewBag.categories;
+	}
+
 	ViewData["Title"] = _phrase["General", "HomePageTitle"];
 	Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
@@ -11,7 +24,7 @@
 				<div class="col-lg-9 col-md-12 col-12">
 					<div class="filter-sort-wrapper d-flex justify-content-between flex-wrap">
 						<div class="collection-title-wrap d-flex align-items-end">
-							<h2 class="collection-title heading_24 mb-0">All products</h2>
+							<h2 class="collection-title heading_24 mb-0">@(ViewBag.CategoryName != null ? ViewBag.CategoryName : "All") products</h2>
 							<p class="collection-counter text_16 mb-0 ms-2">(@Model.ProductsCount items)</p>
 						</div>
 						<div class="filter-sorting">
@@ -37,14 +50,16 @@
 								</ul>
 							</div>
 							<div class="filter-drawer-trigger mobile-filter d-flex align-items-center d-lg-none">
-								<span class="mobile-filter-icon me-2">
-									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-										 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-										 stroke-linecap="round" stroke-linejoin="round" class="icon icon-filter">
-										<polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
-									</svg>
-								</span>
-								<span class="mobile-filter-heading">Filter and Sorting</span>
+								<a href="#" onclick="event.preventDefault();">
+									<span class="mobile-filter-icon me-2">
+										<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+											 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+											 stroke-linecap="round" stroke-linejoin="round" class="icon icon-filter">
+											<polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+										</svg>
+									</span>
+									<span class="mobile-filter-heading">Filter and Sorting</span>
+								</a>
 							</div>
 						</div>
 					</div>
@@ -61,8 +76,16 @@
 						<ul class="pagination justify-content-center mt-100">
 							@if (Model.PreviousPage != 0)
 							{
+								var queryList = new
+								{
+									sortBy,
+									order,
+									priceFrom,
+									priceTo,
+									page = Model.PreviousPage,
+								};
 								<li class="page-item">
-									<a class="page-link" href="@Url.Action(null, null, new { page = Model.PreviousPage, sortBy = ViewBag.sortBy ?? null, order = ViewBag.order ?? null })">Previous</a>
+									<a class="page-link" href="@Url.Action(null, null, queryList)">Previous</a>
 								</li>
 							}
 							else
@@ -71,11 +94,15 @@
 									<a class="page-link">Previous</a>
 								</li>
 							}
-							@for (var i = 1; i <= Model.TotalPages; i++)
+							@{
+								int startPageShown = Math.Max(1, Model.CurrentPage - 5);
+								int endPageShown = Math.Min(Model.TotalPages, Model.CurrentPage + 5);
+							}
+							@for (var i = startPageShown; i <= endPageShown; i++)
 							{
 									@if (Model.CurrentPage == i)
 									{
-									<li class="page-item active" aria-current="page">
+										<li class="page-item active" aria-current="page">
 											<span class="page-link ">
 												@i
 											</span>
@@ -83,8 +110,16 @@
 									}
 									else
 									{
+									var queryList = new
+									{
+										sortBy,
+										order,
+										priceFrom,
+										priceTo,
+										page = i,
+									};
 										<li class="page-item">
-											<a class="page-link" href="@Url.Action(null, null, new { page = i, sortBy = ViewBag.sortBy ?? null, order = ViewBag.order ?? null })">
+										<a class="page-link" href="@Url.Action(null, null, queryList)">
 												@i
 											</a>
 										</li>
@@ -92,8 +127,16 @@
 							}
 							@if (Model.NextPage != 0)
 							{
+								var queryList = new
+								{
+									sortBy,
+									order,
+									priceFrom,
+									priceTo,
+									page = Model.NextPage,
+								};
 								<li class="page-item">
-									<a class="page-link" href="@Url.Action(null, null, new { page = Model.NextPage, sortBy = ViewBag.sortBy ?? null, order = ViewBag.order ?? null })">Next</a>
+									<a class="page-link" href="@Url.Action(null, null, queryList)">Next</a>
 								</li>
 							}
 							else
@@ -111,7 +154,7 @@
 				<div class="col-lg-3 col-md-12 col-12">
 					<div class="collection-filter filter-drawer">
 						<div class="filter-widget d-lg-none d-flex align-items-center justify-content-between">
-							<h5 class="heading_24">
+							<h4 class="heading_24">
 								Filter By</h4>
 								<button type="button" class="btn-close text-reset filter-drawer-trigger d-lg-none"></button>
 						</div>
@@ -136,7 +179,19 @@
 								@if (AppSettings.ProductView.SortByList != null)
 									@foreach (SortListBase sortList in AppSettings.ProductView.SortByList)
 										{
-											<li><a href="#" class="text_14">@_phrase["Product", sortList.Phrase]</a></li>
+											var sortingQueryList = new
+											{
+												sortBy = sortList.Column,
+												order = sortList.Order,
+												priceFrom,
+												priceTo,
+												categoryList = (categories != null && categories.Length > 0 ? string.Join(',', categories) : ViewBag.CategoryId)
+											};
+											<li>
+												<a href="@Url.Action(null, null, sortingQueryList)" class="text_14">
+													@_phrase["Product", sortList.Phrase]
+													</a>
+											</li>
 										}
 								</ul>
 							</div>
@@ -160,9 +215,23 @@
 										{
 											<li class="filter-item">
 												<label class="filter-label">
-													<input type="checkbox" class="form-check" />&nbsp;
-													<span class="filter-checkbox rounded me-2"></span>
-													<span class="filter-text" data-category-id="@category.Id">@category.Name</span>
+													@if (ViewBag.CategoryName == null)
+													{
+														<input type="checkbox" name="categories" data-category-id="@category.Id" class="form-check" @((ViewBag.CategoryId != null && category.Id == ViewBag.CategoryId) || (categories != null && categories.Contains(category.Id)) ? "checked" : "") />
+														@:&nbsp;
+														<span class="filter-checkbox rounded me-2"></span>
+													}
+													<span class="filter-text" data-category-id="@category.Id">
+														@if (ViewBag.CategoryName != null)
+														{
+															<a href="@Url.Action("View", "Category", new { id = category.Id })">
+																@category.Name
+															</a>
+														} else
+														{
+															@category.Name
+														}
+													</span>
 												</label>
 											</li>
 										}
@@ -184,16 +253,21 @@
 							<div id="filter-price" class="accordion-collapse collapse show">
 								<div class="filter-price d-flex align-items-center justify-content-between">
 									<div class="filter-field">
-										<input class="form-control" type="number" placeholder="$0" min="0"
-											   max="2000.00">
+										<input class="form-control" id="priceFrom" name="priceFrom" type="number" placeholder="$0" min="0"
+											   max="50000.00" value="@ViewBag.priceFrom" />
 									</div>
 									<div class="filter-separator px-3">To</div>
 									<div class="filter-field">
-										<input class="form-control" type="number" min="0" placeholder="$595.00"
-											   max="2000.00">
+										<input class="form-control" id="priceTo" name="priceTo" type="number" min="0" placeholder="$595.00"
+											   max="50000.00" value="@ViewBag.priceTo" />
 									</div>
 								</div>
 							</div>
+						</div>
+						<div class="d-flex justify-content-center" id="filter-button">
+							<button class="btn btn-primary">
+								Filter
+							</button>
 						</div>
 					</div>
 				</div>
@@ -202,3 +276,31 @@
 		</div>
 	</div>
 </main>
+@{
+	var FilterQueryList = new
+	{
+		sortBy,
+		order,
+		page = Model.CurrentPage,
+	};
+}
+
+@section Scripts
+{
+	<script type="text/javascript">
+		document.querySelector("#filter-button").addEventListener('click', (e) => {
+			let priceTo = document.querySelector("#priceTo").value;//[input name='priceTo']
+			let priceFrom = document.querySelector("#priceFrom").value;
+			let categories = [];
+			let catList = document.querySelectorAll('input[name=categories]:checked').forEach((e) => {
+				categories.push(e.getAttribute('data-category-id'));
+			});
+			let querystring = '';
+			let url = `@Url.Action(null, null, FilterQueryList)`.replace(/&amp;/g, '&');
+
+			window.location.href = decodeURI(url) +
+				`&priceTo=${priceTo}&priceFrom=${priceFrom}` +
+				`&categoryList=${categories.join(',')}`;
+		});
+	</script>
+}

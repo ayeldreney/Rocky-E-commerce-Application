@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Rocky.DAL.Data;
 
@@ -11,9 +12,11 @@ using Rocky.DAL.Data;
 namespace Rocky.Migrations
 {
     [DbContext(typeof(ApplicationDBcontext))]
-    partial class ApplicationDBcontextModelSnapshot : ModelSnapshot
+    [Migration("20231120154323_final")]
+    partial class final
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -155,21 +158,6 @@ namespace Rocky.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("ProductWishlist", b =>
-                {
-                    b.Property<int>("ProductsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("WishlistsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ProductsId", "WishlistsId");
-
-                    b.HasIndex("WishlistsId");
-
-                    b.ToTable("ProductWishlist");
-                });
-
             modelBuilder.Entity("Rocky.DAL.Models.AppUser", b =>
                 {
                     b.Property<string>("Id")
@@ -282,8 +270,7 @@ namespace Rocky.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId")
-                        .IsUnique();
+                    b.HasIndex("UserId");
 
                     b.ToTable("Carts");
                 });
@@ -464,25 +451,6 @@ namespace Rocky.Migrations
                     b.ToTable("UserReviews");
                 });
 
-            modelBuilder.Entity("Rocky.DAL.Models.Wishlist", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Wishlist");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -534,26 +502,11 @@ namespace Rocky.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ProductWishlist", b =>
-                {
-                    b.HasOne("Rocky.DAL.Models.Product", null)
-                        .WithMany()
-                        .HasForeignKey("ProductsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Rocky.DAL.Models.Wishlist", null)
-                        .WithMany()
-                        .HasForeignKey("WishlistsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Rocky.DAL.Models.Cart", b =>
                 {
                     b.HasOne("Rocky.DAL.Models.AppUser", "User")
-                        .WithOne("Cart")
-                        .HasForeignKey("Rocky.DAL.Models.Cart", "UserId")
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -582,7 +535,7 @@ namespace Rocky.Migrations
             modelBuilder.Entity("Rocky.DAL.Models.Order", b =>
                 {
                     b.HasOne("Rocky.DAL.Models.AppUser", "User")
-                        .WithMany("Orders")
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -618,27 +571,6 @@ namespace Rocky.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("Rocky.DAL.Models.Wishlist", b =>
-                {
-                    b.HasOne("Rocky.DAL.Models.AppUser", "User")
-                        .WithMany("Wishlists")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Rocky.DAL.Models.AppUser", b =>
-                {
-                    b.Navigation("Cart")
-                        .IsRequired();
-
-                    b.Navigation("Orders");
-
-                    b.Navigation("Wishlists");
                 });
 
             modelBuilder.Entity("Rocky.DAL.Models.Cart", b =>

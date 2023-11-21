@@ -13,4 +13,6 @@ public class Category
 	[Required]
 	[Range(1, int.MaxValue, ErrorMessage = "Display Order for category must be greater than 0")]
 	public int DisplayOrder { get; set; }
+
+	public virtual ICollection<Product> Products { get; set; }
 }

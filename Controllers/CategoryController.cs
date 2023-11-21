@@ -189,6 +189,11 @@ namespace Rocky.Controllers
 					.Skip(((int)page - 1) * productsPerPage)
 					.Take(productsPerPage).ToList();
 			}
+			var category = _context.Categories.Where(c => c.Id == id).FirstOrDefault();
+			ViewBag.CategoryName = category?.Name;
+			ViewBag.CategoryId = category?.Id;
+			ViewBag.priceTo = null;
+			ViewBag.priceFrom = null;
 
 			ProductListViewModel model = new ProductListViewModel()
 			{

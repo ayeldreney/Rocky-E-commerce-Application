@@ -58,7 +58,6 @@ public class HomeController : Controller
 		return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
 	}
 
-
 	public ActionResult Search(string searchQuery)
 	{
 		if (string.IsNullOrEmpty(searchQuery))
@@ -70,7 +69,7 @@ public class HomeController : Controller
 		List<Product> filteredProducts = _db.Products.Include(p => p.Category).AsEnumerable()
 		.Where(p =>
 			p.Name.IndexOf(searchQuery, StringComparison.OrdinalIgnoreCase) != -1
-		//	|| p.Category.Name.Contains(searchQuery, StringComparison.OrdinalIgnoreCase)
+			|| p.Category.Name.Contains(searchQuery)
 		).ToList();
 
 		if (filteredProducts.Count() == 0)
@@ -100,4 +99,5 @@ public class HomeController : Controller
 
 		return Json(filteredProducts);
 	}
+
 }

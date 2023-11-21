@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-
 namespace Rocky.BLL.Helpers;
 
 public class ObjectMapper

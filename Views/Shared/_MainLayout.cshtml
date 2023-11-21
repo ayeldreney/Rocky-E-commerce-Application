@@ -534,7 +534,7 @@
 		<script src="~/lib/cn/js/fancybox.umd.js"></script>
 		<script src="~/assets/js/main.js"></script>
 		<script src="~/lib/cn/js/jquery-ui.js"></script>
-		@* <script src="http://code.jquery.com/jquery-migrate-3.0.0.min.js"></script> *@
+		<script src="~/lib/cn/js/jquery.migrate.min.js"></script>
 		<script>
 			$(document).ready(function () {
 				$('#searchProducts').autocomplete({
@@ -550,7 +550,6 @@
 			// document.addEventListener('DOMContentLoaded', e => {
 			// 	$('#searchProducts').autocomplete()
 			// }, false)
-
 		</script>
 		@await RenderSectionAsync("Scripts", required: false)
 	</div>
