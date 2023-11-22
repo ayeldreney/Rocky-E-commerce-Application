@@ -27,9 +27,11 @@ public class Product
 
 	[Display(Name = "Category Type")]
 	public int CategoryId { get; set; }
-	
+
 	[ForeignKey("CategoryId")]
 	public virtual Category Category { get; set; }
 
 	public virtual HashSet<Wishlist> Wishlists { get; set; } = new HashSet<Wishlist>();
+
+	public virtual ICollection<UserReview> UserReviews { get; set; } = new HashSet<UserReview>();
 }

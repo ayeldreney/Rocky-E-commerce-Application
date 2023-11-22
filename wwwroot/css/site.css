@@ -2,3 +2,44 @@
 {
 	min-width: 250px;
 }
+
+.featured-card-container > div, .slick-slide > div
+{
+	width: 100%;
+	height: 100%;
+}
+
+.slick-slide {
+	min-height: 100%;
+	height: auto;
+	display: flex;
+	flex-direction: column;
+	align-self: stretch;
+}
+
+.slick-track {
+	display: flex;
+	justify-content: stretch;
+	align-items: stretch;
+}
+
+.product-card
+{
+	min-height: 100%!important;
+	height: 100%;
+}
+
+.product-card-img {
+	height: 70%;
+	min-height: 70%;
+}
+
+.product-card-img img
+{
+	width: 100%;
+	height: auto;
+}
+
+.product-card-details {
+	height: 30%;
+}

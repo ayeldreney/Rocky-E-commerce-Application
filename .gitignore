@@ -2,3 +2,5 @@ bin/
 obj/
 .vs/
 wwwroot/Images/product/
+/BLL/Helpers/JsonDataBase.cs
+/BLL/Helpers/LoremDataGenerator.cs

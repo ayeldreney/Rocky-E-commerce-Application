@@ -1,6 +1,5 @@
 ﻿
 using Rocky.BLL.Languages;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Rocky.BLL.Constants;
 
@@ -27,12 +26,12 @@ public class AppSettings
 
 		public static Dictionary<string, LanguageBase> SupportedCulturesDetailed = new Dictionary<string, LanguageBase>
 		{
-			{ "ar-EG",	new ArabicEG() },
-			{ "en-US",	new EnglishUS()	},
+			{ "ar-EG",  new ArabicEG() },
+			{ "en-US",  new EnglishUS() },
 		};
 	}
 
-	public static class ProductView
+	public static class Product
 	{
 		public static string ProductImagePath = @"/images/product/";
 		public static int ProductsPerPage = 8;

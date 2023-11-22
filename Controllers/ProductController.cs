@@ -1,5 +1,4 @@
-﻿using Azure;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Rocky.BLL.Constants;
@@ -8,7 +7,6 @@ using Rocky.BLL.Helpers;
 using Rocky.DAL.Data;
 using Rocky.DAL.Models;
 using Rocky.ViewModels;
-using System.Globalization;
 
 namespace Rocky.Controllers
 {
@@ -24,6 +22,7 @@ namespace Rocky.Controllers
 
 		public IActionResult Index()
 		{
+
 			IEnumerable<Product> objList = _db.Products.Include(u => u.Category);
 
 			//foreach(var obj in objList)
@@ -46,8 +45,8 @@ namespace Rocky.Controllers
 			IEnumerable<Product> query = _db.Products.AsEnumerable();
 
 			if (priceFrom > 0) query = query.Where(p => p.Price > priceFrom);
-			if (priceTo > 0) query = query.Where(p =>  p.Price < priceTo);
-			if (categories  != null && categories.Length > 0)
+			if (priceTo > 0) query = query.Where(p => p.Price < priceTo);
+			if (categories != null && categories.Length > 0)
 			{
 				query = query.Where(p => categories.Contains(p.CategoryId));
 			}
@@ -57,21 +56,21 @@ namespace Rocky.Controllers
 			{
 				page = 1;
 			}
-			var productsPerPage = AppSettings.ProductView.ProductsPerPage;
+			var productsPerPage = AppSettings.Product.ProductsPerPage;
 
-			SortListBase? sort = AppSettings.ProductView.SortByList[0];
+			SortListBase? sort = AppSettings.Product.SortByList[0];
 			if (sortBy != null)
 			{
 				if (order == null || !new string[] { "ASC", "DESC" }.Contains(order))
 					order = "ASC";
 
-				for (int i = 0; i < AppSettings.ProductView.SortByList.Length; i++)
+				for (int i = 0; i < AppSettings.Product.SortByList.Length; i++)
 				{
-					if (AppSettings.ProductView.SortByList[i].Column.ToLower() == sortBy.ToLower())
+					if (AppSettings.Product.SortByList[i].Column.ToLower() == sortBy.ToLower())
 					{
-						if (order == AppSettings.ProductView.SortByList[i].Order)
+						if (order == AppSettings.Product.SortByList[i].Order)
 						{
-							sort = AppSettings.ProductView.SortByList[i];
+							sort = AppSettings.Product.SortByList[i];
 							break;
 						}
 					}
@@ -119,6 +118,33 @@ namespace Rocky.Controllers
 			return View("ProductListView", model);
 		}
 
+		public async Task<IActionResult> Details(int id)
+		{
+			var product = _db.Products?.Include(p => p.Category).Include(p => p.UserReviews).Where(p => p.Id == id)?.FirstOrDefault();
+
+			if (product is null) return BadRequest();
+
+			var userRatingCount = product.UserReviews.Select(p => p.Rating).Count();
+			var userRatingSum = product.UserReviews.Select(p => p.Rating).Sum();
+			var userRating = (userRatingCount > 0 ? userRatingSum / userRatingCount : 0);
+			//exist in cart default is false;
+
+			var featured = await _db.Products!
+				.Where(p => p.CategoryId == product.CategoryId && p.Id != product.Id)
+				.OrderBy(p => Guid.NewGuid()).Take(5).ToListAsync();
+
+			DetailsViewModel detailsViewModel = new DetailsViewModel()
+			{
+				Product = product,
+				ExistsInCart = false,
+				UserRating = userRating,
+				UserRatingCount = userRatingCount,
+				FeaturedProducts = featured,
+			};
+
+			return View(detailsViewModel);
+		}
+
 		//get UpSert
 		[HttpGet]
 		public IActionResult UpSert(int? id)
@@ -134,7 +160,6 @@ namespace Rocky.Controllers
                ViewBag.CategoryDropDown = CategoryDropDown;        
 
                Product product = new Product();*/
-
 
 			ProductViewModel productVM = new ProductViewModel()
 			{
@@ -175,7 +200,7 @@ namespace Rocky.Controllers
 				if (productVM.Product.Id == 0)
 				{
 					//Creating
-					string upload = webRootPath + AppSettings.ProductView.ProductImagePath;
+					string upload = webRootPath + AppSettings.Product.ProductImagePath;
 					string fileName = Guid.NewGuid().ToString();
 					string extension = Path.GetExtension(files[0].FileName);
 
@@ -207,7 +232,7 @@ namespace Rocky.Controllers
 
 					if (files.Count > 0)
 					{
-						string upload = webRootPath + AppSettings.ProductView.ProductImagePath;
+						string upload = webRootPath + AppSettings.Product.ProductImagePath;
 						string fileName = Guid.NewGuid().ToString();
 						string extension = Path.GetExtension(files[0].FileName);
 
@@ -285,7 +310,7 @@ namespace Rocky.Controllers
 				return NotFound();
 			}
 
-			string upload = _webHostEnvironment.WebRootPath + AppSettings.ProductView.ProductImagePath;
+			string upload = _webHostEnvironment.WebRootPath + AppSettings.Product.ProductImagePath;
 			var oldFile = Path.Combine(upload, obj.Image);
 
 			if (System.IO.File.Exists(oldFile))

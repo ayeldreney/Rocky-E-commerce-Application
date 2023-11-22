@@ -91,7 +91,7 @@ public class AccountController : Controller
 
 
 	[Authorize]
-//	[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+	//	[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 	public IActionResult Logout()
 	{
 		authService.SignOut();

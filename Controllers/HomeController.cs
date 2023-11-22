@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Rocky.BLL.Helpers;
 using Rocky.DAL.Data;
 using Rocky.DAL.Models;
 using Rocky.ViewModels;
@@ -19,7 +18,7 @@ public class HomeController : Controller
 		_db = applicationDBcontext;
 
 	}
-	
+
 	public async Task<IActionResult> Index()
 	{
 		//HomeViewModel homeViewModel = new HomeViewModel()
@@ -95,7 +94,7 @@ public class HomeController : Controller
 			return Json(null);
 
 		var filteredProducts = _db.Products.Select(p => p.Name).AsEnumerable()
-		.Where(p =>	p.StartsWith(q, StringComparison.OrdinalIgnoreCase)).ToList();
+		.Where(p => p.StartsWith(q, StringComparison.OrdinalIgnoreCase)).ToList();
 
 		return Json(filteredProducts);
 	}
