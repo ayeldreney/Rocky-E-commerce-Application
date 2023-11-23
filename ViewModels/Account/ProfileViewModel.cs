@@ -23,7 +23,7 @@ public class ProfileViewModel
 	[DisplayName("Email")]
 	public string Email { get; set; } = string.Empty;
 
-	[Required(ErrorMessage = "You must enter your password to be able to confirm your changes")]
+	[Required(ErrorMessage = "PasswordFieldRequired")]
 	[StringLength(100)]
 	[DataType(DataType.Password)]
 	[DisplayName("Password")]
@@ -34,9 +34,9 @@ public class ProfileViewModel
 	[DisplayName("Address")]
 	public string Address { get; set; } = string.Empty;
 
-	[Required(ErrorMessage = "You must provide a phone number")]
+	[Required(ErrorMessage = "ProvidePhoneNumber")]
 	[DisplayName("MobilePhone")]
 	[DataType(DataType.PhoneNumber)]
-	[RegularExpression(@"^\+?([0-9]{1,3})[-. ]?([0-9]{3})[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid phone number")]
+	[RegularExpression(@"^\+?([0-9]{1,3})[-. ]?([0-9]{3})[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "InvalidPhoneNumber")]
 	public string PhoneNumber { get; set; } = string.Empty;
 }

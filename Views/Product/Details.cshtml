@@ -6,7 +6,17 @@
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 
 }
-
+@section Css{
+	<style>
+		.slick-slide {
+			min-height: 100%;
+			height: auto;
+			display: flex;
+			flex-direction: column;
+			align-self: stretch;
+		}
+	</style>
+}
 <main id="MainContent" class="content-for-layout">
 	<div class="product-page mt-100">
 		<div class="container">

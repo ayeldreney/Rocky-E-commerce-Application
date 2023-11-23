@@ -10,7 +10,7 @@ public class AnonymousOnlyAttribute : AuthorizeAttribute, IAuthorizationFilter
 		if (filterContext.HttpContext.User.Identity == null) return;
 		if (filterContext.HttpContext.User.Identity.IsAuthenticated)
 		{
-			//filterContext.HttpContext.Response.Redirect("/");
+			filterContext.HttpContext.Response.Redirect("/");
 		}
 	}
 }

@@ -67,7 +67,6 @@ public class AccountController : Controller
 		return View();
 	}
 
-
 	[AllowAnonymous]
 	[HttpPost]
 	public async Task<IActionResult> Login(LoginCredentialsDto credentials)
@@ -88,6 +87,27 @@ public class AccountController : Controller
 		}
 		return RedirectToAction("Index", "Home");
 	}
+
+	[AllowAnonymous]
+	[HttpPost]
+	[ValidateAntiForgeryToken]
+	public async Task<IActionResult> LoginApi(LoginCredentialsDto credentials)
+	{
+		var test = HttpContext.Request.QueryString;
+		if (!ModelState.IsValid)
+		{
+			return Json(false);
+		}
+
+		TokenDto? result = await authService.SignInAsync(credentials);
+		if (result == null)
+		{
+			return Json(false);
+		}
+
+		return Json(true);
+	}
+
 
 
 	[Authorize]
@@ -136,13 +156,13 @@ public class AccountController : Controller
 
 	[HttpPost("CheckPassword")]
 	[ValidateAntiForgeryToken]
-	public async Task<JsonResult> CheckPassword(string password)
+	public async Task<JsonResult> CheckPassword(string Password)
 	{
 		AppUser? user = await authService.GetCurrentUserAsync();
 
-		if (user != null && !string.IsNullOrEmpty(password))
+		if (user != null && !string.IsNullOrEmpty(Password))
 		{
-			bool isPasswordCorrect = await authService.CheckPasswordAsync(user, password);
+			bool isPasswordCorrect = await authService.CheckPasswordAsync(user, Password);
 			if (isPasswordCorrect) return Json(true);
 		}
 		return Json(false);

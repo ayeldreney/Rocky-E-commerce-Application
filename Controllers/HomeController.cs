@@ -79,7 +79,7 @@ public class HomeController : Controller
 		// In case of user make use of automcomplete to reach certain product
 		if (filteredProducts.Count() == 1 && filteredProducts.First().Name == searchQuery)
 		{
-			return RedirectToAction("View", "Product", new { id = filteredProducts.First().Id });
+			return RedirectToAction("Details", "Product", new { id = filteredProducts.First().Id });
 		}
 
 		ViewBag.searchQuery = searchQuery;

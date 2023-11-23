@@ -9,14 +9,6 @@
 	height: 100%;
 }
 
-.slick-slide {
-	min-height: 100%;
-	height: auto;
-	display: flex;
-	flex-direction: column;
-	align-self: stretch;
-}
-
 .slick-track {
 	display: flex;
 	justify-content: stretch;
@@ -42,4 +34,25 @@
 
 .product-card-details {
 	height: 30%;
+}
+
+.has-megamenu .mega-menu-header .nav-link
+{
+	display: block;
+	width: 100%;
+}
+
+.has-megamenu .mega-menu-header .open-submenu
+{
+	min-width: 100%;
+}
+
+.has-megamenu .icon-dropdown
+{
+	cursor: pointer;
+}
+
+.has-megamenu .btn-menu-back
+{
+	cursor: pointer;
 }

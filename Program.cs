@@ -98,7 +98,7 @@ builder.Services.AddSingleton<Phrase>();
 
 #endregion
 
-builder.Services.AddScoped<CommonHelpers>();
+builder.Services.AddTransient<CommonHelpers>();
 
 var app = builder.Build();
 

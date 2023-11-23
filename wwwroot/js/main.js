@@ -56,7 +56,8 @@
                     verticalSwiping: false,
                 }
             }
-        ]
+          ],
+         rtl: (isRtl == undefined || isRtl == false ? false : true)
       });
     }
   });
@@ -96,7 +97,8 @@
           appendDots: selectorAppendDots,
           appendArrows: selectorAppendArrows,
           prevArrow: selectorPrevArrow,
-          nextArrow: selectorNextArrow
+          nextArrow: selectorNextArrow,
+          rtl: (isRtl == undefined || isRtl == false ? false : true)
         });
     }
   })
@@ -181,5 +183,12 @@
 document.querySelectorAll(".language-changer").forEach(i => i.addEventListener("click", function (e) {
     e.preventDefault();
     document.cookie = "language=" + i.dataset.value + ";path=/";
-    console.log("Lang Called");
+    const toastLive = document.getElementById('liveToast');
+
+    if (toastLive != undefined)
+    {
+        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLive);
+        toastLive.querySelector('.toast-body').innerHTML = (phrase != undefined ? phrase["LangChanged"] : "Language Changed, Please Refresh Page!");
+        toastBootstrap.show();
+    }
 }));

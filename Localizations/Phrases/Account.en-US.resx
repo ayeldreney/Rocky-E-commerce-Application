@@ -132,6 +132,9 @@
   <data name="Login" xml:space="preserve">
     <value>Login</value>
   </data>
+  <data name="LoginSuccess" xml:space="preserve">
+    <value>You Logged In Successfully!</value>
+  </data>
   <data name="SaveYourData" xml:space="preserve">
     <value>Save Your Data</value>
   </data>

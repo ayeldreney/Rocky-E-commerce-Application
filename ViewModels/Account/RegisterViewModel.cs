@@ -14,7 +14,7 @@ public class RegisterViewModel
 	public string Username { get; set; } = string.Empty;
 
 	[Required]
-	[RegularExpression(@"^[a-zA-Z0-9_]+@[a-zA-Z0-9_]+.[a-zA-Z]{2,4}$", ErrorMessage = "Email should be like john@doe.com")]
+	[RegularExpression(@"^[a-zA-Z0-9_]+@[a-zA-Z0-9_]+.[a-zA-Z]{2,4}$", ErrorMessage = "InvalidEmailShouldBeLike")]
 	public string Email { get; set; }
 
 	[Required, StringLength(256)]

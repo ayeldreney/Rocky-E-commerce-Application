@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Localization;
 using System.Reflection;
+using System.Web;
 
 namespace Rocky.Localizations;
 public class Phrase
@@ -20,7 +21,9 @@ public class Phrase
 			try
 			{
 				_localizer = _factory.Create(baseResourceName, assemblyName.Name!);
-				return _localizer[key, arguments] ?? key;
+				string ph = _localizer[key, arguments] ?? key;
+				//ph = HttpUtility.HtmlDecode(ph);
+				return ph;
 			}
 			catch
 			{
