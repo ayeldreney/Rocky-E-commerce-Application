@@ -117,28 +117,43 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Email" xml:space="preserve">
-    <value>البريد الاكتروني</value>
+  <data name="AlphaAZ" xml:space="preserve">
+    <value>بالترتيب الابجدي</value>
   </data>
-  <data name="FirstName" xml:space="preserve">
-    <value>الاسم الاول</value>
+  <data name="AlphaZA" xml:space="preserve">
+    <value>بالترتيب الابجدي العكسي</value>
   </data>
-  <data name="LastName" xml:space="preserve">
-    <value>الاسم الاخير</value>
+  <data name="ByVendor" xml:space="preserve">
+    <value>بواسطة </value>
   </data>
-  <data name="NotFoundMessage" xml:space="preserve">
-    <value>Sorry Your path is not right go back again</value>
+  <data name="DateNewOld" xml:space="preserve">
+    <value>بالتاريخ من الاحدث للاقدم</value>
   </data>
-  <data name="Password" xml:space="preserve">
-    <value>الرقم السري</value>
+  <data name="DateOldNew" xml:space="preserve">
+    <value>بالتاريخ من الاقدم للاحدث</value>
   </data>
-  <data name="RemeberMe" xml:space="preserve">
-    <value>تذكرني ؟</value>
+  <data name="FilterBy" xml:space="preserve">
+    <value>تصفية حسب</value>
   </data>
-  <data name="UserName" xml:space="preserve">
-    <value>اسم المستخدم</value>
+  <data name="FilterPriceTo" xml:space="preserve">
+    <value>To</value>
   </data>
-  <data name="userNameRequired" xml:space="preserve">
-    <value>من فضلك ادخل الرقم السري</value>
+  <data name="Items" xml:space="preserve">
+    <value>عناصر</value>
+  </data>
+  <data name="PerUnit" xml:space="preserve">
+    <value>لكل </value>
+  </data>
+  <data name="PriceHighLow" xml:space="preserve">
+    <value>بالسعر من الاعلى الى الاقل</value>
+  </data>
+  <data name="PriceLowHigh" xml:space="preserve">
+    <value>بالسعر من الاقل للاعلى</value>
+  </data>
+  <data name="SortBy" xml:space="preserve">
+    <value>ترتيب حسب</value>
+  </data>
+  <data name="XProducts" xml:space="preserve">
+    <value>منتجات {0}</value>
   </data>
 </root>

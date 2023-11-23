@@ -123,4 +123,24 @@
 		});
 
 	</script>
+	<script>
+		async function get()
+		{
+			const res = await fetch("https://libretranslate.com/translate", {
+				method: "POST",
+				body: JSON.stringify({
+					q: "go",
+					source: "en",
+					target: "ar",
+					format: "text",
+					api_key: ""
+				}),
+				headers: { "Content-Type": "application/json" }
+			});
+
+			console.log(await res.json());
+		}
+		get();
+	</script>
+
 }

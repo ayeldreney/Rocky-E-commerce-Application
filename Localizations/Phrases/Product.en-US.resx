@@ -123,16 +123,34 @@
   <data name="AlphaZA" xml:space="preserve">
     <value>Alphabetically Z-A</value>
   </data>
+  <data name="ByVendor" xml:space="preserve">
+    <value>By </value>
+  </data>
   <data name="DateNewOld" xml:space="preserve">
     <value>Date, New to Old</value>
   </data>
   <data name="DateOldNew" xml:space="preserve">
     <value>Date, Old to New</value>
   </data>
+  <data name="FilterBy" xml:space="preserve">
+    <value>Filter By: </value>
+  </data>
+  <data name="Items" xml:space="preserve">
+    <value>Items</value>
+  </data>
+  <data name="PerUnit" xml:space="preserve">
+    <value>Per </value>
+  </data>
   <data name="PriceHighLow" xml:space="preserve">
     <value>Price, High to Low</value>
   </data>
   <data name="PriceLowHigh" xml:space="preserve">
     <value>Price, Low to High</value>
+  </data>
+  <data name="SortBy" xml:space="preserve">
+    <value>Sort By:</value>
+  </data>
+  <data name="XProducts" xml:space="preserve">
+    <value>{0} Products</value>
   </data>
 </root>

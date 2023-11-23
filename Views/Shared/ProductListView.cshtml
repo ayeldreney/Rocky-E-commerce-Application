@@ -26,14 +26,14 @@
 				<div class="col-lg-9 col-md-12 col-12">
 					<div class="filter-sort-wrapper d-flex justify-content-between flex-wrap">
 						<div class="collection-title-wrap d-flex align-items-end">
-							<h2 class="collection-title heading_24 mb-0">@(ViewBag.CategoryName != null ? ViewBag.CategoryName : "All") products</h2>
-							<p class="collection-counter text_16 mb-0 ms-2">(@Model.ProductsCount items)</p>
+							<h2 class="collection-title heading_24 mb-0">@_phrase["Product", "XProducts", (ViewBag.CategoryName != null ? ViewBag.CategoryName : "All")]</h2>
+							<p class="collection-counter text_16 mb-0 ms-2">(@Model.ProductsCount @_phrase["Product", "Items"])</p>
 						</div>
 						<div class="filter-sorting">
 							<div class="collection-sorting position-relative d-none d-lg-block">
 								<div class="sorting-header text_16 d-flex align-items-center justify-content-end">
-									<span class="sorting-title me-2">Sort by:</span>
-									<span class="active-sorting">@_phrase["Product",Model.OrderBy]</span>
+									<span class="sorting-title me-2"><strong>@_phrase["Product", "SortBy"]</strong></span>
+									<span class="active-sorting">@_phrase["Product", Model.OrderBy]</span>
 									<span class="sorting-icon">
 										<svg class="icon icon-down" xmlns="http://www.w3.org/2000/svg"
 											 width="24" height="24" viewBox="0 0 24 24" fill="none"

@@ -147,7 +147,10 @@
   <data name="Register" xml:space="preserve">
     <value>تسجيل عضوية جديدة</value>
   </data>
-  <data name="WelcomeX" xml:space="preserve">
+  <data name="String1" xml:space="preserve">
     <value />
+  </data>
+  <data name="WelcomeX" xml:space="preserve">
+    <value>مرحبا يا {0}</value>
   </data>
 </root>
