@@ -47,7 +47,15 @@
 									@if (AppSettings.Product.SortByList != null)
 										@foreach (SortListBase sortList in AppSettings.Product.SortByList)
 										{
-											<li><a href="?sortBy=@sortList.Column&order=@sortList.Order" class="text_14">@_phrase["Product", sortList.Phrase]</a></li>
+											var sortingQueryList = new
+											{
+												sortBy = sortList.Column,
+												order = sortList.Order,
+												priceFrom,
+												priceTo,
+												categoryList = (categories != null && categories.Count() > 0 ? string.Join(',', categories) : ViewBag.CategoryId)
+											};
+											<li><a href="@Url.Action(null, null, sortingQueryList)" class="text_14">@_phrase["Product", sortList.Phrase]</a></li>
 										}
 								</ul>
 							</div>
@@ -85,6 +93,7 @@
 									priceFrom,
 									priceTo,
 									page = Model.PreviousPage,
+									categoryList = (categories?.Count() > 0 ? string.Join(',', categories) : null)
 								};
 								<li class="page-item">
 									<a class="page-link" href="@Url.Action(null, null, queryList)">Previous</a>
@@ -119,6 +128,7 @@
 										priceFrom,
 										priceTo,
 										page = i,
+										categoryList = (categories?.Count() > 0 ? string.Join(',', categories) : null)
 									};
 										<li class="page-item">
 										<a class="page-link" href="@Url.Action(null, null, queryList)">
@@ -136,6 +146,7 @@
 									priceFrom,
 									priceTo,
 									page = Model.NextPage,
+									categoryList = (categories?.Count() > 0 ? string.Join(',', categories) : null)
 								};
 								<li class="page-item">
 									<a class="page-link" href="@Url.Action(null, null, queryList)">Next</a>
@@ -187,7 +198,7 @@
 												order = sortList.Order,
 												priceFrom,
 												priceTo,
-												categoryList = (categories != null && categories.Length > 0 ? string.Join(',', categories) : ViewBag.CategoryId)
+												categoryList = (categories != null && categories.Count() > 0 ? string.Join(',', categories) : ViewBag.CategoryId)
 											};
 											<li>
 												<a href="@Url.Action(null, null, sortingQueryList)" class="text_14">
@@ -217,14 +228,14 @@
 										{
 											<li class="filter-item">
 												<label class="filter-label">
-													@if (ViewBag.CategoryName == null)
+													@if (ViewBag.CategoryId == null)
 													{
 														<input type="checkbox" name="categories" data-category-id="@category.Id" class="form-check" @((ViewBag.CategoryId != null && category.Id == ViewBag.CategoryId) || (categories != null && categories.Contains(category.Id)) ? "checked" : "") />
 														@:&nbsp;
 														<span class="filter-checkbox rounded me-2"></span>
 													}
 													<span class="filter-text" data-category-id="@category.Id">
-														@if (ViewBag.CategoryName != null)
+														@if (ViewBag.CategoryId != null)
 														{
 															<a href="@Url.Action("View", "Category", new { id = category.Id })">
 																@category.Name
@@ -283,7 +294,8 @@
 	{
 		sortBy,
 		order,
-		page = Model.CurrentPage,
+//		page = Model.CurrentPage,
+//		categoryList = (categories?.Count() > 0 ? string.Join(',', categories) : null)
 	};
 }
 

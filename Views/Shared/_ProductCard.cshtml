@@ -34,7 +34,9 @@
 				<span class="card-price-regular">@Model.Price.ToString("C")
 					@if (!String.IsNullOrWhiteSpace(Model.Unit))
 					{
-						@_phrase["Product", "PerUnit"] @Model.Unit
+						var unit = Model.Unit.Trim();
+						@_phrase["Product", "PerUnit"]
+						@(unit == _phrase["Units", unit] ? unit : _phrase["Units", unit])
 					}
 				</span>
 				@* <span class="card-price-compare text-decoration-line-through">$1759</span> *@

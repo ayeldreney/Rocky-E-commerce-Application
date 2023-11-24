@@ -57,6 +57,7 @@ public class AuthService
 	/// </summary>
 	public async Task<AuthDto?> VerifyEmailAndUserName(RegisterDto model)
 	{
+		
 		AuthDto auth = new AuthDto();
 		bool emailExists = await CheckEmailExistsAsync(model.Email);
 		bool userNameExists = await CheckUsernameExistsAsync(model.Username);
@@ -66,7 +67,7 @@ public class AuthService
 			if (emailExists) auth.Errors.Add("Email", _phrase["Account", "emailAlreadyRegistered"]);
 			if (userNameExists) auth.Errors.Add("Username", _phrase["Account", "userAlreadyRegistered"]);
 		}
-		return null;
+		return auth;
 	}
 
 	/// <summary>

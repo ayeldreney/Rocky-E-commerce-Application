@@ -7,6 +7,7 @@ using Rocky.BLL.Helpers;
 using Rocky.DAL.Data;
 using Rocky.DAL.Models;
 using Rocky.ViewModels;
+using System.Linq;
 
 namespace Rocky.Controllers
 {
@@ -34,8 +35,12 @@ namespace Rocky.Controllers
 			return View(objList);
 		}
 
-		public IActionResult List(int? priceFrom, int? priceTo, string? categoryList, [FromQuery] int? page, [FromQuery] string? sortBy, string? order)
+		public IActionResult List(int? priceFrom, int? priceTo, string? categoryList, [FromQuery] int? page, [FromQuery] string? sortBy, string? order, int? categoryId)
 		{
+			if (categoryId != null && categoryList is null)
+			{
+				categoryList = categoryId.ToString();
+			}
 			int[]? categories = categoryList.StringToIntArray();
 			if (priceFrom == null
 				&& priceTo == null
@@ -50,7 +55,6 @@ namespace Rocky.Controllers
 			{
 				query = query.Where(p => categories.Contains(p.CategoryId));
 			}
-
 
 			if (page == null || page < 1)
 			{
@@ -102,6 +106,13 @@ namespace Rocky.Controllers
 			ViewBag.priceFrom = priceFrom;
 			ViewBag.priceTo = priceTo;
 			ViewBag.categories = categories;
+			if (categories.Count() == 1)
+			{
+		//		var theOnlyCategory = _db.Categories.Where(c => c.Id == categories[0]).FirstOrDefault();
+		//		ViewBag.CategoryName = theOnlyCategory.Name;
+		//		ViewBag.CategoryId = theOnlyCategory.Id;
+			}
+
 
 			ProductListViewModel model = new ProductListViewModel()
 			{

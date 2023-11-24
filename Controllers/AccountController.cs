@@ -167,4 +167,28 @@ public class AccountController : Controller
 		}
 		return Json(false);
 	}
+
+	public async Task<IActionResult> VerifyUserAndEmail(string? UserName, string? Email)
+	{
+		if (string.IsNullOrEmpty(UserName) && string.IsNullOrEmpty(Email))
+		{
+			return Json(null);
+		}
+		if (!string.IsNullOrEmpty(UserName))
+		{
+			if (await authService.CheckUsernameExistsAsync(UserName) == true)
+			{
+				return Json(false);	
+			}
+		}
+		if (!string.IsNullOrEmpty(Email))
+		{
+			if (await authService.CheckEmailExistsAsync(Email) == true)
+			{
+				return Json(false);
+			}
+		}
+
+		return Json(true);
+	}
 }

@@ -183,7 +183,7 @@
 												@foreach (Category category in CommonHelpers.Categories)
 												{
 													<li class="menu-list-item nav-item-sub">
-															<a class="nav-link-sub nav-text-sub" href="@Url.Action("View", "Category", new { id = category.Id })">
+															<a class="nav-link-sub nav-text-sub" href="@Url.Action("List", "Product", new { categoryId = category.Id })">
 															@category.Name
 														</a>
 													</li>
