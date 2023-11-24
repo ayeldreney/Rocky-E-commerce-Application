@@ -37,13 +37,17 @@ public class HomeController : Controller
 	{
 		//exist in cart default is false;
 
+		var product=_db.Products.Include(_x=>_x.Category).Where(p => p.Id == id).FirstOrDefault(); 
+		
+		if (product == null) return BadRequest();
+
 		DetailsViewModel detailsViewModel = new DetailsViewModel()
 		{
-			Product = _db.Products?.Include(_x => _x.Category)?.Where(i => i.Id == id)?.FirstOrDefault(),
+			Product = product,
 			ExistsInCart = false,
 		};
 
-		return View();
+		return View(detailsViewModel);
 
 	}
 
