@@ -35,7 +35,10 @@ public class AppSettings
 	public static class ProductView
 	{
 		public static string ProductImagePath = @"/images/product/";
-		public static int ProductsPerPage = 8;
+        public const string SessionCart = "ShoppingCartSession";
+        public const string AdminRole = "Admin";
+        public const string CustomerRole = "Customer";
+        public static int ProductsPerPage = 8;
 		public static SortListBase[] SortByList = new SortListBase[]
 		{
 			new SortListBase() { Phrase = "DateOldNew", Column = "Id", Order = "ASC" },
