@@ -24,7 +24,7 @@
 	@* <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
 		  rel="stylesheet"> *@
 	<!-- all css -->
-	<link rel="stylesheet" href="~/assets/css/theme-default.css">
+	<link rel="stylesheet" href="~/css/theme-default.css">
 	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
 	@if (AppSettings.isRightToLeft)
 	{
@@ -35,10 +35,10 @@
 	<link rel="stylesheet" href="~/lib/cn/css/aos.css">
 	<link rel="stylesheet" href="~/lib/cn/css/animate.css">
 	<link rel="stylesheet" href="~/lib/cn/css/fancybox.css" />
-	<link rel="stylesheet" href="~/assets/css/style.css" />
+	<link rel="stylesheet" href="~/css/style.css" />
 	@if (AppSettings.isRightToLeft)
 	{
-		<link rel="stylesheet" href="~/assets/css/style.rtl.css" />
+		<link rel="stylesheet" href="~/css/style.rtl.css" />
 	}
 	<link rel="stylesheet" href="~/css/site.css" />
 	<link href="~/lib/cn/css/jquery.ui.min.css" rel="Stylesheet" />
@@ -148,7 +148,7 @@
 					<div class="row align-items-center">
 						<div class="col-lg-3 col-md-4 col-4">
 							<div class="header-logo">
-								<a href="index.html" class="logo-main">
+								<a href="@Url.Action("Index", "Home")" class="logo-main">
 									<img src="~/assets/img/logo.png" loading="lazy" alt="Construction Nation">
 								</a>
 							</div>
@@ -164,33 +164,33 @@
 										</div>
 									</li>
 									<li class="menu-list-item nav-item has-dropdown">
-											<div class="mega-menu-header">
-												<a class="nav-link" href="#">
-													@_phrase["General","Categories"]
-												</a>
-												<span class="open-submenu">
-													<svg class="icon icon-dropdown" xmlns="http://www.w3.org/2000/svg"
-														 width="24" height="24" viewBox="0 0 24 24" fill="none"
-														 stroke="currentColor" stroke-width="2" stroke-linecap="round"
-														 stroke-linejoin="round">
-														<polyline points="6 9 12 15 18 9"></polyline>
-													</svg>
-												</span>
-											</div>
-											<div class="submenu-transform submenu-transform-desktop">
-												<ul class="submenu list-unstyled">
-													@if (CommonHelpers.Categories != null)
-													@foreach (Category category in CommonHelpers.Categories)
-													{
-														<li class="menu-list-item nav-item-sub">
-																<a class="nav-link-sub nav-text-sub" href="@Url.Action("View", "Category", new { id = category.Id })">
-																@category.Name
-															</a>
-														</li>
-													}
-												</ul>
-											</div>
-										</li>
+										<div class="mega-menu-header">
+											<a class="nav-link" href="#">
+												@_phrase["General","Categories"]
+											</a>
+											<span class="open-submenu">
+												<svg class="icon icon-dropdown" xmlns="http://www.w3.org/2000/svg"
+														width="24" height="24" viewBox="0 0 24 24" fill="none"
+														stroke="currentColor" stroke-width="2" stroke-linecap="round"
+														stroke-linejoin="round">
+													<polyline points="6 9 12 15 18 9"></polyline>
+												</svg>
+											</span>
+										</div>
+										<div class="submenu-transform submenu-transform-desktop">
+											<ul class="submenu list-unstyled">
+												@if (CommonHelpers.Categories != null)
+												@foreach (Category category in CommonHelpers.Categories)
+												{
+													<li class="menu-list-item nav-item-sub">
+															<a class="nav-link-sub nav-text-sub" href="@Url.Action("List", "Product", new { categoryId = category.Id })">
+															@category.Name
+														</a>
+													</li>
+												}
+											</ul>
+										</div>
+									</li>
 									@if (!this.IsAuthenticated())
 									{
 										<li class="menu-list-item nav-item has-dropdown @((string?)ViewData["Active"] == "Register" ? "active" : "")">
@@ -237,7 +237,7 @@
 									</svg>
 								</a>
 								<a class="header-action-item header-wishlist ms-4 d-none d-lg-block"
-								   href="wishlist.html">
+								   href="@Url.Action("Index", "Wishlist")">
 									<svg class="icon icon-wishlist" width="26" height="22" viewBox="0 0 26 22"
 										 fill="none" xmlns="http://www.w3.org/2000/svg">
 										<path d="M6.96429 0.000183105C3.12305 0.000183105 0 3.10686 0 6.84843C0 8.15388 0.602121 9.28455 1.16071 10.1014C1.71931 10.9181 2.29241 11.4425 2.29241 11.4425L12.3326 21.3439L13 22.0002L13.6674 21.3439L23.7076 11.4425C23.7076 11.4425 26 9.45576 26 6.84843C26 3.10686 22.877 0.000183105 19.0357 0.000183105C15.8474 0.000183105 13.7944 1.88702 13 2.68241C12.2056 1.88702 10.1526 0.000183105 6.96429 0.000183105ZM6.96429 1.82638C9.73912 1.82638 12.3036 4.48008 12.3036 4.48008L13 5.25051L13.6964 4.48008C13.6964 4.48008 16.2609 1.82638 19.0357 1.82638C21.8613 1.82638 24.1429 4.10557 24.1429 6.84843C24.1429 8.25732 22.4018 10.1584 22.4018 10.1584L13 19.4036L3.59821 10.1584C3.59821 10.1584 3.14844 9.73397 2.69866 9.07411C2.24888 8.41426 1.85714 7.55466 1.85714 6.84843C1.85714 4.10557 4.13867 1.82638 6.96429 1.82638Z"
@@ -281,7 +281,7 @@
 											</svg>
 										</a>
 										<ul class="dropdown-menu dropdown-menu-account">
-											<p class="text-center p-2">Hello, @currentUser.FirstName</p>
+											<p class="text-center p-2">@_phrase["General", "WelcomeX", currentUser.FirstName]</p>
 											<li><hr class="dropdown-divider"></li>
 											@if (this.IsAdmin())
 											{
@@ -289,8 +289,8 @@
 											}
 											else
 											{
-												<li><a class="dropdown-item p-3" href="@Url.Action("Profile", "Account")">Your Account</a></li>
-												<li><a class="dropdown-item p-3" href="@Url.Action("Index", "Orders")">Your Orders</a></li>
+												<li><a class="dropdown-item p-3" href="@Url.Action("Profile", "Account")">@_phrase["General", "YourAccount"]</a></li>
+												<li><a class="dropdown-item p-3" href="@Url.Action("Index", "Orders")">@_phrase["General", "YourOrders"]</a></li>
 												<li><a class="dropdown-item p-3" href="@Url.Action("Index", "Cart")">Your Cart</a></li>
 												<li><a class="dropdown-item p-3" href="@Url.Action("Index", "Wishlist")">Your Wishlist</a></li>
 											}
@@ -381,11 +381,10 @@
 										</span>
 									</h4>
 									<ul class="footer-menu list-unstyled mb-0 d-md-block">
-										<li class="footer-menu-item"><a href="about-us.html">@_phrase["General","AboutUs"]</a></li>
-										<li class="footer-menu-item"><a href="about-us.html">Press center</a></li>
-										<li class="footer-menu-item"><a href="blog.html">Our magazine</a></li>
-										<li class="footer-menu-item"><a href="about-us.html">Our group</a></li>
-										<li class="footer-menu-item"><a href="about-us.html">Work with us</a></li>
+										<li class="footer-menu-item"><a href="#">@_phrase["General","AboutUs"]</a></li>
+										<li class="footer-menu-item"><a href="#">Ask for service</a></li>
+										<li class="footer-menu-item"><a href="#">Our group</a></li>
+										<li class="footer-menu-item"><a href="#">Work with us</a></li>
 									</ul>
 								</div>
 							</div>
@@ -402,11 +401,11 @@
 										</span>
 									</h4>
 									<ul class="footer-menu list-unstyled mb-0 d-md-block">
-										<li class="footer-menu-item"><a href="about-us.html">Brand catalog</a></li>
-										<li class="footer-menu-item"><a href="about-us.html">Discount codes</a></li>
-										<li class="footer-menu-item"><a href="collection-left-sidebar.html">Furniture</a></li>
-										<li class="footer-menu-item"><a href="collection-left-sidebar.html">Sofa</a></li>
-										<li class="footer-menu-item"><a href="collection-left-sidebar.html">Chair</a></li>
+										<li class="footer-menu-item"><a href="@Url.Action("Aboutus", "Index")">Brand catalog</a></li>
+										<li class="footer-menu-item"><a href="@Url.Action("Aboutus", "Index")">Discount codes</a></li>
+										<li class="footer-menu-item"><a href="#">Furniture</a></li>
+										<li class="footer-menu-item"><a href="#">Sofa</a></li>
+										<li class="footer-menu-item"><a href="#">Chair</a></li>
 									</ul>
 								</div>
 							</div>
@@ -423,10 +422,10 @@
 										</span>
 									</h4>
 									<ul class="footer-menu list-unstyled mb-0 d-md-block">
-										<li class="footer-menu-item"><a href="faq.html">Chair</a></li>
-										<li class="footer-menu-item"><a href="about-us.html">Privacy policy</a></li>
-										<li class="footer-menu-item"><a href="about-us.html">Support</a></li>
-										<li class="footer-menu-item"><a href="contact.html">Contact</a></li>
+										<li class="footer-menu-item"><a href="#">Chair</a></li>
+										<li class="footer-menu-item"><a href="@Url.Action("Aboutus", "Index")">Privacy policy</a></li>
+										<li class="footer-menu-item"><a href="@Url.Action("Aboutus", "Index")">Support</a></li>
+										<li class="footer-menu-item"><a href="@Url.Action("Contact", "Index")">Contact</a></li>
 									</ul>
 								</div>
 							</div>
@@ -436,7 +435,8 @@
 										<a href="/"><img src="~/assets/img/logo-white.png" alt="construction nation"></a>
 									</h4>
 									<div class="footer-newsletter">
-										<p class="footer-text mb-3">Stay up to date with all the news.</p>
+
+@* 										<p class="footer-text mb-3">Stay up to date with all the news.</p>
 										<div class="newsletter-wrapper">
 											<form action="#" class="footer-newsletter-form d-flex align-items-center">
 												<input class="footer-newsletter-input bg-transparent" type="email"
@@ -447,8 +447,8 @@
 													UP
 												</button>
 											</form>
-										</div>
-										<div class="footer-social-wrapper">
+										</div> *@
+										<div class="footer-social-wrapper text-center d-flex justify-content-center">
 											<ul class="footer-social list-unstyled d-flex align-items-center flex-wrap mb-0">
 												<li class="footer-social-item">
 													<a href="#">
@@ -514,8 +514,8 @@
 				<div class="container">
 					<div class="footer-bottom-inner d-flex flex-wrap justify-content-md-between justify-content-center align-items-center">
 						<ul class="footer-bottom-menu list-unstyled d-flex flex-wrap align-items-center mb-0">
-							<li class="footer-menu-item"><a href="about-us.html">Privacy policy</a></li>
-							<li class="footer-menu-item"><a href="about-us.html">Terms & Conditions</a></li>
+							<li class="footer-menu-item"><a href="@Url.Action("Aboutus", "Index")">Privacy policy</a></li>
+							<li class="footer-menu-item"><a href="@Url.Action("Aboutus", "Index")">Terms & Conditions</a></li>
 						</ul>
 						<p class="copyright footer-text">©<span class="current-year"></span> CONSTRUCTION NATION</p>
 					</div>
@@ -525,14 +525,32 @@
 		<!-- footer end -->
 
 		<partial name="_MainDrawers" />
+		<div class="toast-container position-fixed bottom-0 end-0 p-3">
+			<div id="liveToast" class="toast align-items-center border-0" role="alert" aria-live="assertive" aria-atomic="true">
+				<div class="d-flex">
+					<div class="toast-body">
+				
+					</div>
+					<button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+				</div>
+
+			</div>
+		</div>
 
 		<!-- all js -->
+		<script>
+			var isRtl = @(AppSettings.isRightToLeft == false ? "false" : "true");
+			var phrase = [];
+			phrase["LangChanged"] = '@_phrase["General", "LanguageChangedSuccessfullyToast"]';
+			phrase['LoginSuccess'] = '@_phrase["Account", "LoginSuccess"]';
+		</script>
+		@await RenderSectionAsync("ScriptsBefore", required: false)
 		<script src="@Url.Content("~/lib/jquery/dist/jquery.min.js")"></script>
 		<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 		<script src="~/lib/cn/js/slick.min.js"></script>
 		<script src="~/lib/cn/js/aos.min.js"></script>
 		<script src="~/lib/cn/js/fancybox.umd.js"></script>
-		<script src="~/assets/js/main.js"></script>
+		<script src="~/js/main.js"></script>
 		<script src="~/lib/cn/js/jquery-ui.js"></script>
 		<script src="~/lib/cn/js/jquery.migrate.min.js"></script>
 		<script>

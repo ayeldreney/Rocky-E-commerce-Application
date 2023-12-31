@@ -7,7 +7,7 @@
 <main id="MainContent" class="content-for-layout">
 	<!-- slideshow start -->
 	<div class="slideshow-section position-relative">
-		<div class="slideshow-active activate-slider" data-slick='{
+		<div class="slideshow-active activate-slider" dir="@(AppSettings.isRightToLeft == false ? "ltr" : "rtl")" data-slick='{
 					"slidesToShow": 1,
 					"slidesToScroll": 1,
 					"dots": true,
@@ -27,13 +27,14 @@
 				<div class="content-absolute content-slide">
 					<div class="container height-inherit d-flex align-items-center justify-content-end">
 						<div class="content-box slide-content slide-content-1 py-4 ">
-							<h2 class="slide-heading heading_72 animate__animated animate__fadeInUp text-white" style="background-color: rgba(0, 0, 0, 0.5);"
+							<h3 class="slide-heading heading_72 animate__animated animate__fadeInUp text-white" style="background-color: rgba(0, 0, 0, 0.5);"
 								data-animation="animate__animated animate__fadeInUp">
-								Construction Nation,<br>Best Construction Materials !
-							</h2>
+								@_phrase["Home", "ConstructionNation"], <br />
+								@_phrase["Home", "BestMaterials"]
+							</h3>
 							<p class="slide-subheading heading_24 animate__animated animate__fadeInUp text-white" style="background-color: rgba(0, 0, 0, 0.5);"
 							   data-animation="animate__animated animate__fadeInUp">
-								Ready whenever you need!
+								@_phrase["Home", "ReadyWhateverYouNeed"]
 							</p>
 
 						</div>
@@ -48,11 +49,11 @@
 						<div class="content-box slide-content slide-content-1 py-4 text-center ">
 							<h2 class="slide-heading heading_72 animate__animated animate__fadeInUp text-white fw-bold opacity-100 " style="background-color: rgba(0, 0, 0, 0.5);"
 								data-animation="animate__animated animate__fadeInUp">
-								Innovate, sustain, construct!
+								@_phrase["Home", "InnovateSustainConstruct"]
 							</h2>
 							<p class="slide-subheading heading_24 animate__animated animate__fadeInUp text-white " style="background-color: rgba(0, 0, 0, 0.5);"
 							   data-animation="animate__animated animate__fadeInUp">
-								Unleash Your Passion!
+								@_phrase["Home", "UnleashYourPassion"]
 							</p>
 
 						</div>
@@ -67,11 +68,11 @@
 						<div class="content-box slide-content slide-content-1 py-4 text-center">
 							<h2 class="slide-heading heading_72 animate__animated animate__fadeInUp text-white fw-bold" style="background-color: rgba(0, 0, 0, 0.5);"
 								data-animation="animate__animated animate__fadeInUp">
-								Build better with Construction Nation!
+								@_phrase["Home", "BuildBetterWithUs"]
 							</h2>
 							<p class="slide-subheading heading_24 animate__animated animate__fadeInUp text-white fw-bold" style="background-color: rgba(0, 0, 0, 0.5);"
 							   data-animation="animate__animated animate__fadeInUp">
-								World-class building solutions!
+								@_phrase["Home", "WorldClassSolutions"]
 							</p>
 
 						</div>
@@ -95,7 +96,9 @@
 							</div>
 							<div class="trusted-content">
 								<h2 class="heading_18 trusted-heading">Fatest Shipping Ever!</h2>
-								<p class="text_16 trusted-subheading trusted-subheading-2">Free shipping under certain conditions</p>
+								<p class="text_16 trusted-subheading trusted-subheading-2">
+									@_phrase["Home", "FreeShippingUnderConditions"]
+								</p>
 							</div>
 						</div>
 					</div>
@@ -107,8 +110,7 @@
 							<div class="trusted-content">
 								<h2 class="heading_18 trusted-heading">Customer Support 24/7</h2>
 								<p class="text_16 trusted-subheading trusted-subheading-2">
-									Instant access to
-									support
+									@_phrase["Home", "InstantAccessToSupport"]
 								</p>
 							</div>
 						</div>
@@ -121,8 +123,7 @@
 							<div class="trusted-content">
 								<h2 class="heading_18 trusted-heading">100% Highest Quality</h2>
 								<p class="text_16 trusted-subheading trusted-subheading-2">
-									We provide
-									the best Quality
+									@_phrase["Home", "WeProvideBestQuality"]
 								</p>
 							</div>
 						</div>
@@ -137,38 +138,41 @@
 		<div class="collection-tab-inner mt-0">
 			<div class="container">
 				<div class="grid-container-2">
-					<span class="grid-item grid-item-1 position-relative rounded mt-0 d-flex" href="collection-left-sidebar.html"
+					<span class="grid-item grid-item-1 position-relative rounded mt-0 d-flex" href="#"
 						  data-aos="fade-right" data-aos-duration="700">
 						<img class="banner-img rounded" src="~/assets/img/banner/b1.png" alt="banner-1">
 						<div class="content-absolute content-slide">
 							<div class="container height-inherit d-flex">
 								<div class="content-box banner-content p-4">
-									<h2 class="heading_34 primary-color text-white w-75" style="background-color: rgba(0, 0, 0, 0.5);"> Your trusted <br>construction partner</h2>
-
+									<h2 class="heading_34 primary-color text-white w-75" style="background-color: rgba(0, 0, 0, 0.5);">
+										@Html.Raw(@_phrase["Home", "YourTrustedPartner"])
+									</h2>
 								</div>
 							</div>
 						</div>
 					</span>
-					<a class="grid-item grid-item-2 position-relative rounded mt-0 d-flex" href="collection-left-sidebar.html"
+					<a class="grid-item grid-item-2 position-relative rounded mt-0 d-flex" href="#"
 					   data-aos="fade-right" data-aos-duration="700">
 						<img class="banner-img rounded" src="~/assets/img/banner/b3.jpg" alt="banner-1">
 						<div class="content-absolute content-slide">
 							<div class="container height-inherit d-flex justify-content-end">
 								<div class="content-box banner-content p-4 text-end">
-									<h2 class="heading_34 primary-color text-white w-100 text-start" style="background-color: rgba(0, 0, 0, 0.5);"> Durable materials for any project</h2>
-
+									<h2 class="heading_34 primary-color text-white w-100 text-start" style="background-color: rgba(0, 0, 0, 0.5);">
+										Durable materials for any project
+									</h2>
 								</div>
 							</div>
 						</div>
 					</a>
-					<a class="grid-item grid-item-3 position-relative rounded mt-0 d-flex" href="collection-left-sidebar.html"
+					<a class="grid-item grid-item-3 position-relative rounded mt-0 d-flex" href="#"
 					   data-aos="fade-left" data-aos-duration="700">
 						<img class="banner-img rounded" src="~/assets/img/banner/b2.jpg" alt="banner-1">
 						<div class="content-absolute content-slide">
 							<div class="container height-inherit d-flex">
 								<div class="content-box banner-content p-4">
-									<h2 class="heading_34 text-white mt-5 border-5 " style="font-size:50px;background-color: rgba(0, 0, 0, 0.2);">Build with quality <br> and confidence</h2>
-
+									<h2 class="heading_34 text-white mt-5 border-5 " style="font-size:50px;background-color: rgba(0, 0, 0, 0.2);">
+										Build with quality <br> and confidence
+									</h2>
 								</div>
 							</div>
 						</div>
@@ -290,7 +294,7 @@
 	</div>
 	<!-- video end -->
 	<!-- testimonial start -->
-	<div class="testimonial-section mt-100 overflow-hidden home-section">
+	<div class="testimonial-section mt-100 overflow-hidden home-section" >
 		<div class="testimonial-inner">
 			<div class="container">
 				<div class="row">
@@ -335,9 +339,9 @@
 
 										<div class="reviewer-info ms-4">
 											<h4 class="reviewer-name heading_18 mb-2 primary-color">
-												James Brown
+												Bill Gates
 											</h4>
-											<p class="reviewer-desig text_14 m-0">Executive, HII</p>
+											<p class="reviewer-desig text_14 m-0">CEO, Microsoft</p>
 										</div>
 									</div>
 								</div>
@@ -366,9 +370,9 @@
 
 										<div class="reviewer-info ms-4">
 											<h4 class="reviewer-name heading_18 mb-2 primary-color">
-												Kevin Chen
+												Elon Musk
 											</h4>
-											<p class="reviewer-desig text_14 m-0">Executive, KMM</p>
+											<p class="reviewer-desig text_14 m-0">CEO, SpaceX</p>
 										</div>
 									</div>
 								</div>
@@ -397,9 +401,9 @@
 
 										<div class="reviewer-info ms-4">
 											<h4 class="reviewer-name heading_18 mb-2 primary-color">
-												John Smith
+												Jeff Bezos
 											</h4>
-											<p class="reviewer-desig text_14 m-0">Executive, JSM</p>
+											<p class="reviewer-desig text_14 m-0">CEO, Amazon</p>
 										</div>
 									</div>
 								</div>

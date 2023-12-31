@@ -1,0 +1,328 @@
+﻿@using Rocky.BLL.Constants;
+@model Rocky.ViewModels.DetailsViewModel
+
+@{
+    ViewData["Title"] = _phrase["General", "HomePageTitle"];
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+
+}
+@section Css{
+	<style>
+		.slick-slide {
+			min-height: 100%;
+			height: auto;
+			display: flex;
+			flex-direction: column;
+			align-self: stretch;
+		}
+	</style>
+}
+<main id="MainContent" class="content-for-layout">
+	<div class="product-page mt-100">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 col-md-12 col-12">
+					<div class="product-gallery product-gallery-vertical d-flex" style="width: 100%; height: 100%;">
+						<div class="product-img-large" style="width: 100%; height: 100%;">
+							<div class="img-large-slider common-slider" data-slick='{
+										"slidesToShow": 1,
+										"slidesToScroll": 1,
+										"dots": false,
+										"arrows": false,
+										"asNavFor": ".img-thumb-slider"
+									}' style="width: 100%; height: 100%;">
+								<div class="img-large-wrapper" style="width: 100%; height: 100%;">
+									<a href="@AppSettings.Product.ProductImagePath@Model.Product.Image" data-fancybox="gallery">
+										<img src="@AppSettings.Product.ProductImagePath@Model.Product.Image" alt="img" style="width: 100%; height: 100%;">
+									</a>
+								</div>
+							</div>
+						</div>
+						<div class="product-img-thumb">
+							<div class="img-thumb-slider common-slider" data-vertical-slider="true" data-slick='{
+										"slidesToShow": 1,
+										"slidesToScroll": 1,
+										"dots": false,
+										"arrows": true,
+										"infinite": false,
+										"speed": 300,
+										"cssEase": "ease",
+										"focusOnSelect": true,
+										"swipeToSlide": true,
+										"asNavFor": ".img-large-slider"
+									}'>
+								<div>
+									<div class="img-thumb-wrapper">
+										<img src="@AppSettings.Product.ProductImagePath@Model.Product.Image" alt="img">
+									</div>
+								</div>
+							</div>
+							<div class="activate-arrows show-arrows-always arrows-white d-none d-lg-flex justify-content-between mt-3"></div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6 col-md-12 col-12">
+					<div class="product-details ps-lg-4">
+						<div class="mb-3"><span class="product-availability">In Stock</span></div>
+						<h2 class="product-title mb-3">@Model.Product.Name</h2>
+						<div class="product-rating d-flex align-items-center mb-3">
+							<span class="star-rating">
+								@for(int i = 0; i < 5; i++)
+								{
+									if (Model.UserRating > i)
+									{
+										<svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M15.168 5.77344L10.082 5.23633L8 0.566406L5.91797 5.23633L0.832031 5.77344L4.63086 9.19727L3.57031 14.1992L8 11.6445L12.4297 14.1992L11.3691 9.19727L15.168 5.77344Z" fill="#FFAE00" />
+										</svg>
+									}
+									else
+									{
+										<svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M15.168 5.77344L10.082 5.23633L8 0.566406L5.91797 5.23633L0.832031 5.77344L4.63086 9.19727L3.57031 14.1992L8 11.6445L12.4297 14.1992L11.3691 9.19727L15.168 5.77344Z" fill="#B2B2B2" />
+										</svg>
+									}
+								}
+								
+							</span>
+							<span class="rating-count ms-2">(@Model.UserRatingCount)</span>
+						</div>
+						<div class="product-price-wrapper mb-4">
+							<span class="product-price regular-price">@Model.Product.Price.ToString("c")</span>
+							@* <del class="product-price compare-price ms-2">$32.00</del> *@
+						</div>
+						@if (!string.IsNullOrWhiteSpace(Model.Product.Unit))
+						{
+							<div class="product-sku product-meta mb-1">
+								<strong class="label">Unit:</strong> @Model.Product.Unit
+							</div>
+						}
+						@if (!string.IsNullOrWhiteSpace(Model.Product.Vendor))
+						{
+							<div class="product-vendor product-meta mb-3">
+								<strong class="label">Vendor:</strong> @Model.Product.Vendor
+							</div>
+						}
+
+
+
+
+						<div class="misc d-flex align-items-end justify-content-between mt-4">
+							<div class="quantity d-flex align-items-center justify-content-between">
+								<button class="qty-btn dec-qty"><img src="~/assets/img/icon/minus.svg" alt="minus"></button>
+								<input class="qty-input" type="number" name="qty" value="1" min="0">
+								<button class="qty-btn inc-qty"><img src="~/assets/img/icon/plus.svg" alt="plus"></button>
+							</div>
+@* 							<div class="message-popup d-flex align-items-center">
+								<span class="message-popup-icon">
+									<svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path d="M1.5 4.25V16.25H4.5V20.0703L5.71875 19.0859L9.25781 16.25H16.5V4.25H1.5ZM3 5.75H15V14.75H8.74219L8.53125 14.9141L6 16.9297V14.75H3V5.75ZM18 7.25V8.75H21V17.75H18V19.9297L15.2578 17.75H9.63281L7.75781 19.25H14.7422L19.5 23.0703V19.25H22.5V7.25H18Z" fill="black" />
+									</svg>
+								</span>
+								<span class="message-popup-text ms-2">Message</span>
+							</div> *@
+						</div>
+
+						<form class="product-form" action="#">
+							<div class="product-form-buttons d-flex align-items-center justify-content-between mt-4">
+								<button type="submit" class="position-relative btn-atc btn-add-to-cart loader">ADD TO CART</button>
+								<a href="@Url.Action("Wishlist", "Home")" class="product-wishlist">
+									<svg class="icon icon-wishlist" width="26" height="22" viewBox="0 0 26 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path d="M6.96429 0.000183105C3.12305 0.000183105 0 3.10686 0 6.84843C0 8.15388 0.602121 9.28455 1.16071 10.1014C1.71931 10.9181 2.29241 11.4425 2.29241 11.4425L12.3326 21.3439L13 22.0002L13.6674 21.3439L23.7076 11.4425C23.7076 11.4425 26 9.45576 26 6.84843C26 3.10686 22.877 0.000183105 19.0357 0.000183105C15.8474 0.000183105 13.7944 1.88702 13 2.68241C12.2056 1.88702 10.1526 0.000183105 6.96429 0.000183105ZM6.96429 1.82638C9.73912 1.82638 12.3036 4.48008 12.3036 4.48008L13 5.25051L13.6964 4.48008C13.6964 4.48008 16.2609 1.82638 19.0357 1.82638C21.8613 1.82638 24.1429 4.10557 24.1429 6.84843C24.1429 8.25732 22.4018 10.1584 22.4018 10.1584L13 19.4036L3.59821 10.1584C3.59821 10.1584 3.14844 9.73397 2.69866 9.07411C2.24888 8.41426 1.85714 7.55466 1.85714 6.84843C1.85714 4.10557 4.13867 1.82638 6.96429 1.82638Z" fill="#00234D"></path>
+									</svg>
+								</a>
+							</div>
+							<div class="buy-it-now-btn mt-2">
+								<button type="submit" class="position-relative btn-atc btn-buyit-now">BUY IT NOW</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<!-- product tab start -->
+	<div class="product-tab-section mt-100" data-aos="fade-up" data-aos-duration="700">
+		<div class="container">
+			<div class="tab-list product-tab-list">
+				<nav class="nav product-tab-nav">
+					<a class="product-tab-link tab-link active" href="#pdescription" data-bs-toggle="tab">Description</a>
+					<a class="product-tab-link tab-link" href="#pshipping" data-bs-toggle="tab">Shipping & Returns</a>
+					<a class="product-tab-link tab-link" href="#preview" data-bs-toggle="tab">Reviews</a>
+				</nav>
+			</div>
+			<div class="tab-content product-tab-content">
+				<div id="pdescription" class="tab-pane fade show active">
+					<div class="row">
+						<div class="col-lg-7 col-md-12 col-12">
+							<div class="desc-content">
+								@Model.Product.ShortDesc?.TextToHtml()
+							</div>
+						</div>
+						<div class="col-lg-5 col-md-12 col-12">
+							<div class="desc-img">
+								<img src="@AppSettings.Product.ProductImagePath@Model.Product.Image" alt="img">
+							</div>
+						</div>
+						<div class="col-lg-12 col-md-12 col-12">
+							<div class="desc-content mt-4">
+								@Model.Product.Description?.TextToHtml()
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="pshipping" class="tab-pane fade">
+					<div class="desc-content">
+						<h4 class="heading_18 mb-3">Returns within Egypt</h4>
+						<p class="text_16 mb-4">The Egyptian law states that when an order is being returned, it is mandatory for the company to refund the product price and shipping costs charged for the original shipment. Meaning: one shipping fee is paid by us.</p>
+						<p class="text_16 mb-4">Standard Shipping: If you placed an order using "standard shipping" and you want to return it, you will be refunded the product price and initial shipping costs. However, the return shipping costs will be paid by you.</p>
+						<p class="text_16">Free Shipping: If you placed an order using "free shipping" and you want to return it, you will be refunded the product price, but since we paid for the initial shipping, you will pay for the return.</p>
+					</div>
+				</div>
+				<div id="preview" class="tab-pane fade">
+					<div class="review-area accordion-parent">
+						<h4 class="heading_18 mb-3">Customer Reviews</h4>
+						<div class="review-header d-flex justify-content-between align-items-center">
+						@if (Model.UserRatingCount < 1)
+						{
+							<p class="text_16">No reviews yet.</p>
+						} else {
+							<p class="text_16">Reviews</p>
+						}
+							@if (this.IsAuthenticated())
+							{
+								<button class="text_14 bg-transparent text-decoration-underline write-btn" type="button">Write a review</button>
+							}
+							
+						</div>
+						@if (this.IsAuthenticated())
+						{
+							<div class="review-form-area accordion-child">
+								<form action="#">
+									<fieldset>
+										<label class="label">Rating</label>
+										<div class="star-rating">
+
+											@for (int i = 0; i < 5; i++)
+											{
+												<svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+													<path d="M15.168 5.77344L10.082 5.23633L8 0.566406L5.91797 5.23633L0.832031 5.77344L4.63086 9.19727L3.57031 14.1992L8 11.6445L12.4297 14.1992L11.3691 9.19727L15.168 5.77344Z" fill="#B2B2B2" />
+												</svg>
+											}
+										</div>
+									</fieldset>
+									<fieldset>
+										<label class="label">Body of Review (2000)</label>
+										<textarea cols="30" rows="10" placeholder="Write your comments here"></textarea>
+									</fieldset>
+
+									<button type="submit" class="position-relative review-submit-btn">SUBMIT</button>
+								</form>
+							</div>
+						}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- product tab end -->
+	<!-- you may also like start -->
+	<div class="featured-collection-section mt-100 home-section overflow-hidden">
+		<div class="container">
+			<div class="section-header">
+				<h2 class="section-heading">You may also like</h2>
+			</div>
+
+			<div class="product-container position-relative">
+				<div class="common-slider" data-slick='{
+						"slidesToShow": 3,
+						"slidesToScroll": 1,
+						"dots": false,
+						"arrows": true,
+						"responsive": [
+						{
+							"breakpoint": 1281,
+							"settings": {
+							"slidesToShow": 3
+							}
+						},
+						{
+							"breakpoint": 768,
+							"settings": {
+							"slidesToShow": 2
+							}
+						}
+						]
+					}'>
+						@for (int i = 0; i < 5; i++)
+						{
+						<div style="featured-card-container">
+							<partial name="_ProductCard" for="@Model.FeaturedProducts[i]" />
+						</div> 
+						}
+
+				</div>
+				<div class="activate-arrows show-arrows-always article-arrows arrows-white"></div>
+			</div>
+		</div>
+	</div>
+	<!-- you may also lik end -->
+</main>
+@* 
+<div class="">
+    <form method="post">
+
+        <div class="container backgroundWhite pt-4">
+            <div class="card" style="border:1px solid #000000; ">
+                <div class="card-header bg-dark text-light ml-0 row container" style="border-radius: 0px;">
+                    <div class="col-12 col-md-6">
+                        <h1 class="text-white">@Model.Product.Name</h1>
+                    </div>
+                    <div class="col-12 col-md-6 text-md-right">
+                        <h1 class="text-warning"> @((Model.Product.Price).ToString("c"))</h1>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="container rounded p-2">
+                        <div class="row">
+                            <div class="col-12 col-lg-4 p-1 text-center">
+                                <img src="@AppSettings.Product.ProductImagePath@Model.Product.Image" style="width: 100%" class="rounded" />
+                            </div>
+                            <div class="col-12 col-lg-8">
+                                <div class="row pl-3">
+
+                                    <div class="col-12">
+                                        <span class="badge p-3 border" style="background-color:lavenderblush">@Model.Product.Category.Name</span>
+                                        <span class="badge p-3 border" style="background-color:azure">ApplicationType.Name</span>
+                                        <h3 class="text-success"></h3>
+
+                                        <p class="text-secondary">@Html.Raw(Model.Product.Description)</p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer bg-dark">
+                    <div class="row">
+                        <div class="col-12 col-md-6 pb-1 ">
+                            <a asp-action="Index" class="btn btn-success btn-square form-control btn-lg" style="height:50px;">Back</a>
+                        </div>
+                        <div class="col-12 col-md-6 ">
+
+                            @if (Model.ExistsInCart)
+                            {
+                                <a asp-action="RemoveFromCart" asp-route-id="@Model.Product.Id" class="btn btn-warning btn-square form-control btn-lg" style="height:50px;">Remove From Cart</a>
+
+                            }else{
+                            <button type="submit" class="btn btn-info form-control btn-lg" style="height:50px;">Add to Cart</button>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div> *@

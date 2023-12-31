@@ -21,7 +21,7 @@ public class HomeController : Controller
 		_db = applicationDBcontext;
 
 	}
-	
+
 	public async Task<IActionResult> Index()
 	{
 		//HomeViewModel homeViewModel = new HomeViewModel()
@@ -143,7 +143,7 @@ public class HomeController : Controller
 		// In case of user make use of automcomplete to reach certain product
 		if (filteredProducts.Count() == 1 && filteredProducts.First().Name == searchQuery)
 		{
-			return RedirectToAction("View", "Product", new { id = filteredProducts.First().Id });
+			return RedirectToAction("Details", "Product", new { id = filteredProducts.First().Id });
 		}
 
 		ViewBag.searchQuery = searchQuery;
@@ -158,7 +158,7 @@ public class HomeController : Controller
 			return Json(null);
 
 		var filteredProducts = _db.Products.Select(p => p.Name).AsEnumerable()
-		.Where(p =>	p.StartsWith(q, StringComparison.OrdinalIgnoreCase)).ToList();
+		.Where(p => p.StartsWith(q, StringComparison.OrdinalIgnoreCase)).ToList();
 
 		return Json(filteredProducts);
 	}

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Rocky.DAL.Models;
@@ -14,7 +15,7 @@ public class Cart
 	[Timestamp]
 	public int Timestamp { get; set; }
 
-	public virtual IEnumerable<CartItem> Items { get; set; } = Enumerable.Empty<CartItem>();
+	public virtual HashSet<CartItem> Items { get; set; } = new HashSet<CartItem>();
 
 	public virtual AppUser User { get; set; }
 }

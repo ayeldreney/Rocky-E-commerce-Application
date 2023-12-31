@@ -6,11 +6,23 @@
 	Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 <partial name="Breadcrumb" view-data="ViewData" render-mode="ServerPrerendered" />
+
+<style>
+	#loginMsg
+	{
+		-webkit-transition: all 0.5s ease;
+		-moz-transition: all 0.5s ease;
+		-o-transition: all 0.5s ease;
+		transition: all 0.5s ease;
+	}
+</style>
+
 <main id="MainContent" class="content-for-layout">
 	<div class="login-page mt-5">
 		<div class="container">
-			<form asp-action="Login" class="login-form common-form mx-auto">
-				<div class="section-header mb-3">
+			<div class="mb-2 text-center" id="loginMsg"></div>
+			<form asp-action="Login" class="login-form common-form mx-auto" id="LoginForm">
+				<div class="section-header my-3">
 					<h2 class="section-heading text-center">@_phrase["Account", "Login"]</h2>
 				</div>
 				<div class="row">
@@ -39,11 +51,96 @@
 					</div>
 					<div class="col-12 mt-3 my-2">
 						<a href="#" class="text_14">@_phrase["Account", "ForgotYourPassword"]</a>
-						<button type="submit" class="btn-primary d-block mt-4 btn-signin">@_phrase["Account", "SignIn"]</button>
+						<button type="submit" class="btn-primary d-block mt-4 btn-signin" id="login_button">@_phrase["Account", "SignIn"]</button>
 						<a rout href="@Url.Action("Register", "Account")" class="btn-secondary mt-2 btn-signin">@_phrase["Account", "CreateAnAccount"]</a>
 					</div>
 				</div>
+				@Html.AntiForgeryToken()
 			</form>
 		</div>
 	</div>
 </main>
+
+@section Scripts 
+{
+	<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+	<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+	<script src="~/lib/cn/js/intlTelInput.min.js"></script>
+	<script>//				contentType: "application/x-www-form-urlencoded",
+		$("#login_button").click(function (e)
+		{
+			let formData = {
+				'UserName': $("input[name='UserName']").val(),
+				'Password': $("input[name='Password']").val(),
+				'RememberMe': $("input[name='RememberMe']").val(),
+			};
+
+			formData = $("#LoginForm").serialize();
+
+			e.preventDefault();
+			$.ajax({
+				url: '@Url.Action("LoginApi", "Account")',
+				type: 'POST',
+				headers:
+				{
+					RequestVerificationToken: $('input:hidden[name="__RequestVerificationToken"]').val()
+				},
+				cache: false,
+				data: formData,
+				processData: true,
+				success: function (result)
+				{
+					if (result === true)
+					{
+						$(".login-form").fadeOut(1000);
+						$('#loginMsg')
+							.html(`<h4 class="text-success">@Html.Raw(_phrase["Account", "LoginSuccess"])</h4>`)
+							.hide()
+							.fadeIn(1000);
+						setTimeout(() => {
+							$('#loginMsg').addClass("alert alert-success");
+						}, 1000)
+					}
+					else
+					{
+						$('#loginMsg')
+							.html(`<h4 class="text-danger">@Html.Raw(_phrase["Account", "userNameOrPasswordInvalid"])</h4>`)
+							.hide()
+							.fadeIn(1000);
+						console.log(result)
+					}
+				},
+				error: function (errors)
+				{
+					$(".login-form").trigger('submit');
+					console.log(errors)
+				}
+
+			});
+
+			//if if omit this line then the return url will be pouplated otherwise, it will be null
+			return false;
+		});
+
+	</script>
+	<script>
+		async function get()
+		{
+			const res = await fetch("https://libretranslate.com/translate", {
+				method: "POST",
+				body: JSON.stringify({
+					q: "go",
+					source: "en",
+					target: "ar",
+					format: "text",
+					api_key: ""
+				}),
+				headers: { "Content-Type": "application/json" }
+			});
+
+			console.log(await res.json());
+		}
+		get();
+	</script>
+
+}

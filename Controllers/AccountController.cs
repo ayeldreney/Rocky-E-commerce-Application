@@ -67,7 +67,6 @@ public class AccountController : Controller
 		return View();
 	}
 
-
 	[AllowAnonymous]
 	[HttpPost]
 	public async Task<IActionResult> Login(LoginCredentialsDto credentials)
@@ -89,9 +88,30 @@ public class AccountController : Controller
 		return RedirectToAction("Index", "Home");
 	}
 
+	[AllowAnonymous]
+	[HttpPost]
+	[ValidateAntiForgeryToken]
+	public async Task<IActionResult> LoginApi(LoginCredentialsDto credentials)
+	{
+		var test = HttpContext.Request.QueryString;
+		if (!ModelState.IsValid)
+		{
+			return Json(false);
+		}
+
+		TokenDto? result = await authService.SignInAsync(credentials);
+		if (result == null)
+		{
+			return Json(false);
+		}
+
+		return Json(true);
+	}
+
+
 
 	[Authorize]
-//	[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+	//	[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 	public IActionResult Logout()
 	{
 		authService.SignOut();
@@ -136,15 +156,39 @@ public class AccountController : Controller
 
 	[HttpPost("CheckPassword")]
 	[ValidateAntiForgeryToken]
-	public async Task<JsonResult> CheckPassword(string password)
+	public async Task<JsonResult> CheckPassword(string Password)
 	{
 		AppUser? user = await authService.GetCurrentUserAsync();
 
-		if (user != null && !string.IsNullOrEmpty(password))
+		if (user != null && !string.IsNullOrEmpty(Password))
 		{
-			bool isPasswordCorrect = await authService.CheckPasswordAsync(user, password);
+			bool isPasswordCorrect = await authService.CheckPasswordAsync(user, Password);
 			if (isPasswordCorrect) return Json(true);
 		}
 		return Json(false);
+	}
+
+	public async Task<IActionResult> VerifyUserAndEmail(string? UserName, string? Email)
+	{
+		if (string.IsNullOrEmpty(UserName) && string.IsNullOrEmpty(Email))
+		{
+			return Json(null);
+		}
+		if (!string.IsNullOrEmpty(UserName))
+		{
+			if (await authService.CheckUsernameExistsAsync(UserName) == true)
+			{
+				return Json(false);	
+			}
+		}
+		if (!string.IsNullOrEmpty(Email))
+		{
+			if (await authService.CheckEmailExistsAsync(Email) == true)
+			{
+				return Json(false);
+			}
+		}
+
+		return Json(true);
 	}
 }

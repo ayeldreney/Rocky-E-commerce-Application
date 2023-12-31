@@ -126,8 +126,14 @@
   <data name="FirstName" xml:space="preserve">
     <value>First Name</value>
   </data>
+  <data name="InvalidEmailShouldBeLike" xml:space="preserve">
+    <value>Email should be like john@doe.com</value>
+  </data>
   <data name="InvalidPassword" xml:space="preserve">
     <value>Password you entered is not valid!</value>
+  </data>
+  <data name="InvalidPhoneNumber" xml:space="preserve">
+    <value>Not a valid phone number</value>
   </data>
   <data name="LastName" xml:space="preserve">
     <value>Last Name</value>
@@ -140,6 +146,12 @@
   </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>
+  </data>
+  <data name="PasswordFieldRequired" xml:space="preserve">
+    <value>You must enter your password to be able to confirm your changes</value>
+  </data>
+  <data name="ProvidePhoneNumber" xml:space="preserve">
+    <value>You must provide a phone number</value>
   </data>
   <data name="RemeberMe" xml:space="preserve">
     <value>Remeber Me?</value>

@@ -2,7 +2,7 @@
 <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-duration="700">
 	<div class="product-card">
 		<div class="product-card-img">
-			<a class="hover-switch" href="collection-left-sidebar.html">
+			<a class="hover-switch" href="@Url.Action("Details", "Product", new { id = Model.Id })">
 				<img class="secondary-img" src="~/Images/product/@Model.Image"
 					 alt="product-img">
 				<img class="primary-img" src="~/Images/product/@Model.Image"
@@ -28,13 +28,15 @@
 		</div>
 		<div class="product-card-details">
 			<h3 class="product-card-title">
-				<a href="@Url.Action("View", "Product", new { id = Model.Id })">@Model.Name</a>
+				<a href="@Url.Action("Details", "Product", new { id = Model.Id })">@Model.Name</a>
 			</h3>
 			<div class="product-card-price">
 				<span class="card-price-regular">@Model.Price.ToString("C")
 					@if (!String.IsNullOrWhiteSpace(Model.Unit))
 					{
-						@:Per @Model.Unit
+						var unit = Model.Unit.Trim();
+						@_phrase["Product", "PerUnit"]
+						@(unit == _phrase["Units", unit] ? unit : _phrase["Units", unit])
 					}
 				</span>
 				@* <span class="card-price-compare text-decoration-line-through">$1759</span> *@
@@ -42,7 +44,7 @@
 			@if (!String.IsNullOrWhiteSpace(Model.Vendor))
 			{
 				<div>
-					By @Model.Vendor
+					@_phrase["Product", "ByVendor"] @Model.Vendor
 				</div>
 			}
 		</div>

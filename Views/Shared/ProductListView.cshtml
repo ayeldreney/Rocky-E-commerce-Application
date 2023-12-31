@@ -1,6 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Http
 @using Rocky.BLL.DTOs;
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
 @model ProductListViewModel
 @{
 	string? sortBy = ViewBag.sortBy ?? null;
@@ -16,6 +17,7 @@
 	ViewData["Title"] = _phrase["General", "HomePageTitle"];
 	Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
+
 <main id="MainContent" class="content-for-layout">
 	<div class="collection mt-100">
 		<div class="container">
@@ -24,14 +26,14 @@
 				<div class="col-lg-9 col-md-12 col-12">
 					<div class="filter-sort-wrapper d-flex justify-content-between flex-wrap">
 						<div class="collection-title-wrap d-flex align-items-end">
-							<h2 class="collection-title heading_24 mb-0">@(ViewBag.CategoryName != null ? ViewBag.CategoryName : "All") products</h2>
-							<p class="collection-counter text_16 mb-0 ms-2">(@Model.ProductsCount items)</p>
+							<h2 class="collection-title heading_24 mb-0">@_phrase["Product", "XProducts", (ViewBag.CategoryName != null ? ViewBag.CategoryName : "All")]</h2>
+							<p class="collection-counter text_16 mb-0 ms-2">(@Model.ProductsCount @_phrase["Product", "Items"])</p>
 						</div>
 						<div class="filter-sorting">
 							<div class="collection-sorting position-relative d-none d-lg-block">
 								<div class="sorting-header text_16 d-flex align-items-center justify-content-end">
-									<span class="sorting-title me-2">Sort by:</span>
-									<span class="active-sorting">@_phrase["Product",Model.OrderBy]</span>
+									<span class="sorting-title me-2"><strong>@_phrase["Product", "SortBy"]</strong></span>
+									<span class="active-sorting">@_phrase["Product", Model.OrderBy]</span>
 									<span class="sorting-icon">
 										<svg class="icon icon-down" xmlns="http://www.w3.org/2000/svg"
 											 width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -42,10 +44,18 @@
 									</span>
 								</div>
 								<ul class="sorting-lists list-unstyled m-0">
-									@if (AppSettings.ProductView.SortByList != null)
-										@foreach (SortListBase sortList in AppSettings.ProductView.SortByList)
+									@if (AppSettings.Product.SortByList != null)
+										@foreach (SortListBase sortList in AppSettings.Product.SortByList)
 										{
-											<li><a href="?sortBy=@sortList.Column&order=@sortList.Order" class="text_14">@_phrase["Product", sortList.Phrase]</a></li>
+											var sortingQueryList = new
+											{
+												sortBy = sortList.Column,
+												order = sortList.Order,
+												priceFrom,
+												priceTo,
+												categoryList = (categories != null && categories.Count() > 0 ? string.Join(',', categories) : ViewBag.CategoryId)
+											};
+											<li><a href="@Url.Action(null, null, sortingQueryList)" class="text_14">@_phrase["Product", sortList.Phrase]</a></li>
 										}
 								</ul>
 							</div>
@@ -67,7 +77,7 @@
 						<div class="row">
 							@foreach(Product product in Model.Products)
 							{
-								<partial name="_ProductCard" for="@product" render-mode="ServerPrerendered" />
+								<partial name="_ProductCard" for="@product" render-mode="Server" />
 							}
 						</div>
 					</div>
@@ -83,6 +93,7 @@
 									priceFrom,
 									priceTo,
 									page = Model.PreviousPage,
+									categoryList = (categories?.Count() > 0 ? string.Join(',', categories) : null)
 								};
 								<li class="page-item">
 									<a class="page-link" href="@Url.Action(null, null, queryList)">Previous</a>
@@ -117,6 +128,7 @@
 										priceFrom,
 										priceTo,
 										page = i,
+										categoryList = (categories?.Count() > 0 ? string.Join(',', categories) : null)
 									};
 										<li class="page-item">
 										<a class="page-link" href="@Url.Action(null, null, queryList)">
@@ -134,6 +146,7 @@
 									priceFrom,
 									priceTo,
 									page = Model.NextPage,
+									categoryList = (categories?.Count() > 0 ? string.Join(',', categories) : null)
 								};
 								<li class="page-item">
 									<a class="page-link" href="@Url.Action(null, null, queryList)">Next</a>
@@ -176,8 +189,8 @@
 							</div>
 							<div id="filter-mobile-sort" class="accordion-collapse collapse show">
 								<ul class="sorting-lists-mobile list-unstyled m-0">
-								@if (AppSettings.ProductView.SortByList != null)
-									@foreach (SortListBase sortList in AppSettings.ProductView.SortByList)
+								@if (AppSettings.Product.SortByList != null)
+									@foreach (SortListBase sortList in AppSettings.Product.SortByList)
 										{
 											var sortingQueryList = new
 											{
@@ -185,7 +198,7 @@
 												order = sortList.Order,
 												priceFrom,
 												priceTo,
-												categoryList = (categories != null && categories.Length > 0 ? string.Join(',', categories) : ViewBag.CategoryId)
+												categoryList = (categories != null && categories.Count() > 0 ? string.Join(',', categories) : ViewBag.CategoryId)
 											};
 											<li>
 												<a href="@Url.Action(null, null, sortingQueryList)" class="text_14">
@@ -215,14 +228,14 @@
 										{
 											<li class="filter-item">
 												<label class="filter-label">
-													@if (ViewBag.CategoryName == null)
+													@if (ViewBag.CategoryId == null)
 													{
 														<input type="checkbox" name="categories" data-category-id="@category.Id" class="form-check" @((ViewBag.CategoryId != null && category.Id == ViewBag.CategoryId) || (categories != null && categories.Contains(category.Id)) ? "checked" : "") />
 														@:&nbsp;
 														<span class="filter-checkbox rounded me-2"></span>
 													}
 													<span class="filter-text" data-category-id="@category.Id">
-														@if (ViewBag.CategoryName != null)
+														@if (ViewBag.CategoryId != null)
 														{
 															<a href="@Url.Action("View", "Category", new { id = category.Id })">
 																@category.Name
@@ -281,7 +294,8 @@
 	{
 		sortBy,
 		order,
-		page = Model.CurrentPage,
+//		page = Model.CurrentPage,
+//		categoryList = (categories?.Count() > 0 ? string.Join(',', categories) : null)
 	};
 }
 

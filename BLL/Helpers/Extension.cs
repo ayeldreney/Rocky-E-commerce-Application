@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Razor;
-using System.Collections.Specialized;
+using System.Web;
 
 namespace Rocky.BLL.Helpers;
 
@@ -56,5 +56,19 @@ public static class Extension
 				myIntegers.Add(currentInt);
 		});
 		return myIntegers.ToArray();
+	}
+
+	public static string TextToHtml(this string text)
+	{
+		if (text == null)
+		{
+			return String.Empty;
+		}
+		text = HttpUtility.HtmlEncode(text);
+		text = text.Replace("\r\n", "\r");
+		text = text.Replace("\n", "\r");
+		text = text.Replace("\r", "<br>\r\n");
+		text = text.Replace("  ", " &nbsp;");
+		return text;
 	}
 }

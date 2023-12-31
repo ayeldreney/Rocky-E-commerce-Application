@@ -117,52 +117,43 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AboutUs" xml:space="preserve">
-    <value>About Us</value>
+  <data name="AlphaAZ" xml:space="preserve">
+    <value>بالترتيب الابجدي</value>
   </data>
-  <data name="BlackFridaySale" xml:space="preserve">
-    <value>Black Friday Sale - {0}% Off</value>
+  <data name="AlphaZA" xml:space="preserve">
+    <value>بالترتيب الابجدي العكسي</value>
   </data>
-  <data name="callX" xml:space="preserve">
-    <value>Call: {0}</value>
+  <data name="ByVendor" xml:space="preserve">
+    <value>بواسطة </value>
   </data>
-  <data name="Categories" xml:space="preserve">
-    <value>Categories</value>
+  <data name="DateNewOld" xml:space="preserve">
+    <value>بالتاريخ من الاحدث للاقدم</value>
   </data>
-  <data name="Contact" xml:space="preserve">
-    <value>Contact</value>
+  <data name="DateOldNew" xml:space="preserve">
+    <value>بالتاريخ من الاقدم للاحدث</value>
   </data>
-  <data name="Home" xml:space="preserve">
-    <value>Home</value>
+  <data name="FilterBy" xml:space="preserve">
+    <value>تصفية حسب</value>
   </data>
-  <data name="LanguageChangedSuccessfullyToast" xml:space="preserve">
-    <value>Language Changed Successfully, Please Refresh Page!</value>
+  <data name="FilterPriceTo" xml:space="preserve">
+    <value>To</value>
   </data>
-  <data name="Login" xml:space="preserve">
-    <value>Login</value>
+  <data name="Items" xml:space="preserve">
+    <value>عناصر</value>
   </data>
-  <data name="Register" xml:space="preserve">
-    <value>Register</value>
+  <data name="PerUnit" xml:space="preserve">
+    <value>لكل </value>
   </data>
-  <data name="Save" xml:space="preserve">
-    <value>Save</value>
+  <data name="PriceHighLow" xml:space="preserve">
+    <value>بالسعر من الاعلى الى الاقل</value>
   </data>
-  <data name="Signout" xml:space="preserve">
-    <value>Sign out</value>
+  <data name="PriceLowHigh" xml:space="preserve">
+    <value>بالسعر من الاقل للاعلى</value>
   </data>
-  <data name="WelcomeX" xml:space="preserve">
-    <value>Welcome {0}</value>
+  <data name="SortBy" xml:space="preserve">
+    <value>ترتيب حسب</value>
   </data>
-  <data name="YourAccount" xml:space="preserve">
-    <value>Your Account</value>
-  </data>
-  <data name="YourCart" xml:space="preserve">
-    <value>Your Cart</value>
-  </data>
-  <data name="YourOrders" xml:space="preserve">
-    <value>Your Orders</value>
-  </data>
-  <data name="YourWishlist" xml:space="preserve">
-    <value>Your Wishlist</value>
+  <data name="XProducts" xml:space="preserve">
+    <value>منتجات {0}</value>
   </data>
 </root>

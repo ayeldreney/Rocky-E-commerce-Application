@@ -4,8 +4,6 @@ using Rocky.BLL.Constants;
 using Rocky.DAL.Data;
 using Rocky.DAL.Models;
 using Rocky.ViewModels;
-using System.Linq;
-using System.Reflection;
 
 namespace Rocky.Controllers
 {
@@ -144,21 +142,21 @@ namespace Rocky.Controllers
 			{
 				page = 1;
 			}
-			var productsPerPage = AppSettings.ProductView.ProductsPerPage;
+			var productsPerPage = AppSettings.Product.ProductsPerPage;
 
-			SortListBase? sort = AppSettings.ProductView.SortByList[0];
+			SortListBase? sort = AppSettings.Product.SortByList[0];
 			if (sortBy != null)
 			{
 				if (order == null || !new string[] { "ASC", "DESC" }.Contains(order))
 					order = "ASC";
 
-				for (int i = 0; i < AppSettings.ProductView.SortByList.Length; i++)
+				for (int i = 0; i < AppSettings.Product.SortByList.Length; i++)
 				{
-					if (AppSettings.ProductView.SortByList[i].Column.ToLower() == sortBy.ToLower())
+					if (AppSettings.Product.SortByList[i].Column.ToLower() == sortBy.ToLower())
 					{
-						if (order == AppSettings.ProductView.SortByList[i].Order)
+						if (order == AppSettings.Product.SortByList[i].Order)
 						{
-							sort = AppSettings.ProductView.SortByList[i];
+							sort = AppSettings.Product.SortByList[i];
 							break;
 						}
 					}
@@ -200,10 +198,10 @@ namespace Rocky.Controllers
 				Products = Products,
 				TotalPages = totalPages,
 				ProductsCount = productsCount,
-				CurrentPage = (int) page,
+				CurrentPage = (int)page,
 				ProductsPerPage = productsPerPage,
-				NextPage = (page + 1 <= totalPages ? (int) page + 1 : 0),
-				PreviousPage = (page == 1 ? (int) 0 : (int)page - 1),
+				NextPage = (page + 1 <= totalPages ? (int)page + 1 : 0),
+				PreviousPage = (page == 1 ? (int)0 : (int)page - 1),
 				OrderBy = sort.Phrase,
 			};
 

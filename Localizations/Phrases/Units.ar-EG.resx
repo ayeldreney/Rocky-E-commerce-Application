@@ -117,52 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AboutUs" xml:space="preserve">
-    <value>About Us</value>
+  <data name="Bag" xml:space="preserve">
+    <value>شيكارة</value>
   </data>
-  <data name="BlackFridaySale" xml:space="preserve">
-    <value>Black Friday Sale - {0}% Off</value>
+  <data name="Nos" xml:space="preserve">
+    <value>قطعة</value>
   </data>
-  <data name="callX" xml:space="preserve">
-    <value>Call: {0}</value>
+  <data name="Piece" xml:space="preserve">
+    <value>قطعة</value>
   </data>
-  <data name="Categories" xml:space="preserve">
-    <value>Categories</value>
+  <data name="Sft" xml:space="preserve">
+    <value>متر مربع</value>
   </data>
-  <data name="Contact" xml:space="preserve">
-    <value>Contact</value>
+  <data name="tin" xml:space="preserve">
+    <value>علبة</value>
   </data>
-  <data name="Home" xml:space="preserve">
-    <value>Home</value>
-  </data>
-  <data name="LanguageChangedSuccessfullyToast" xml:space="preserve">
-    <value>Language Changed Successfully, Please Refresh Page!</value>
-  </data>
-  <data name="Login" xml:space="preserve">
-    <value>Login</value>
-  </data>
-  <data name="Register" xml:space="preserve">
-    <value>Register</value>
-  </data>
-  <data name="Save" xml:space="preserve">
-    <value>Save</value>
-  </data>
-  <data name="Signout" xml:space="preserve">
-    <value>Sign out</value>
-  </data>
-  <data name="WelcomeX" xml:space="preserve">
-    <value>Welcome {0}</value>
-  </data>
-  <data name="YourAccount" xml:space="preserve">
-    <value>Your Account</value>
-  </data>
-  <data name="YourCart" xml:space="preserve">
-    <value>Your Cart</value>
-  </data>
-  <data name="YourOrders" xml:space="preserve">
-    <value>Your Orders</value>
-  </data>
-  <data name="YourWishlist" xml:space="preserve">
-    <value>Your Wishlist</value>
+  <data name="ton" xml:space="preserve">
+    <value>طن</value>
   </data>
 </root>

@@ -82,6 +82,7 @@ builder.Services.AddTransient<AuthService>();
 #endregion
 
 #region Localization
+
 builder.Services.AddLocalization(options => options.ResourcesPath = Rocky.BLL.Constants.AppSettings.LocalizationResourcesPath);
 
 builder.Services.AddMvc()

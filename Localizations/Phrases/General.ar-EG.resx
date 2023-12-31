@@ -120,11 +120,14 @@
   <data name="AboutUs" xml:space="preserve">
     <value>من نحن</value>
   </data>
-  <data name="blackFridaySale" xml:space="preserve">
+  <data name="BlackFridaySale" xml:space="preserve">
     <value>عروض الجمعة البيضاء - خصم يصل الى {0}%</value>
   </data>
   <data name="callX" xml:space="preserve">
     <value>اتصل على: {0}</value>
+  </data>
+  <data name="Categories" xml:space="preserve">
+    <value>الاقسام</value>
   </data>
   <data name="Contact" xml:space="preserve">
     <value>التواصل معنا</value>
@@ -132,10 +135,22 @@
   <data name="Home" xml:space="preserve">
     <value>الرئيسية</value>
   </data>
+  <data name="LanguageChangedSuccessfullyToast" xml:space="preserve">
+    <value>تم تغيير اللغة بنجاح, من فضلك قم بتحديث الصفحة.</value>
+  </data>
   <data name="Login" xml:space="preserve">
     <value>تسجيل الدخول</value>
   </data>
+  <data name="OurServices" xml:space="preserve">
+    <value>خدماتنا</value>
+  </data>
   <data name="Register" xml:space="preserve">
     <value>تسجيل عضوية جديدة</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="WelcomeX" xml:space="preserve">
+    <value>مرحبا يا {0}</value>
   </data>
 </root>

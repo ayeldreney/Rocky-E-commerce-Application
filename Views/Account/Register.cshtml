@@ -1,7 +1,7 @@
 ﻿@model Rocky.ViewModels.Account.RegisterViewModel
 
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = _phrase["General", "Register"];
     ViewData["Active"] = "Register"; //UI Use: To make navbar item active with ui custom color
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
@@ -12,7 +12,7 @@
         <div class="container">
              <form asp-action="Register" class="login-form common-form mx-auto">
                 <div class="section-header mb-3">
-                    <h2 class="section-heading text-center">Register</h2>
+                    <h2 class="section-heading text-center">@_phrase["General", "Register"]</h2>
                 </div>
                 <div class="row">
                     <div class="col-12">
